@@ -25,7 +25,13 @@ public class ProgPane extends JPanel {
                     g.drawRect(x, y, size, size);
                     x += size;
                 }
+
                 y += size;
+
+                // how to colour grid boxes http://www.javased.com/index.php?post=2374295
+                // g.setColor(Color.green) changes grid colour ;
+               //  g2d.setColor(Color.magenta) does nothing;
+
             }
             g2d.dispose();
         }

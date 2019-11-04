@@ -20,7 +20,7 @@ public class TheGrid extends JFrame {
                     ex.printStackTrace();
                 }
 
-                JFrame frame = new JFrame("Testing");
+                JFrame frame = new JFrame("Simulation 1.0");
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.add(new ProgPane());
                 frame.pack();
