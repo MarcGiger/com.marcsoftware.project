@@ -1,53 +1,40 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class TheGrid extends JFrame {
-    // getting inputs from https://stackoverflow.com/questions/34036216/drawing-java-grid-using-swing
-    // getting inputs from https://docs.oracle.com/javase/7/docs/api/java/awt/GridLayout.html
+public class TheGrid extends JPanel {
 
+        public TheGrid() {
+        }
 
-    public static void main(String[] args) {
-        new TheGrid();
-    }
+        @Override
+        public Dimension getPreferredSize() {
+            return new Dimension(200, 200);
+        }
 
-    public TheGrid() {
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
-                    ex.printStackTrace();
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            Graphics2D g2d = (Graphics2D) g.create();
+            int size = Math.min(getWidth() - 4, getHeight() - 4) / 10;
+            int width = getWidth() - (size * 2);
+            int height = getHeight() - (size * 2);
+
+            int y = (getHeight() - (size * 10)) / 2;
+            for (int horz = 0; horz < 10; horz++) {
+                int x = (getWidth() - (size * 10)) / 2;
+                for (int vert = 0; vert < 10; vert++) {
+                    g.drawRect(x, y, size, size);
+                    x += size;
                 }
 
-                JFrame frame = new JFrame("Simulation 1.0");
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.add(new ProgPane());
-                frame.pack();
-                frame.setLocationRelativeTo(null);
-                frame.setVisible(true);
+                y += size;
+
+                // how to colour grid boxes http://www.javased.com/index.php?post=2374295
+                // g.setColor(Color.green) changes grid colour ;
+               //  g2d.setColor(Color.magenta) does nothing;
+
             }
-        });
+            g2d.dispose();
+        }
 
     }
-}
 
-
-/**
- * setSize(500, 500);
- * setVisible(true);
- * }
- * <p>
- * public void paint(Graphics g) {
- * for (int x = 30; x <= 300; x += 30)
- * for (int y = 30; y <= 300; y += 30)
- * g.drawRect(x, y, 30, 30);
- * <p>
- * }
- * <p>
- * public static void main(String args[]) {
- * TheGrid application = new TheGrid();
- * application.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
- * }
- * }
-*/

@@ -1,4 +1,4 @@
-public class Shark {
+public class Shark extends Animal {
     private static int numOfSharks;
 
 
