@@ -25,8 +25,6 @@ public class Model {
             for (int j = 0; j < column; j++) {
                 if (rand.nextInt(5) < 1) {
                     animal[i][j] = new Fish();
-                } else {
-                    animal[i][j] = null;
                 }
             }
         }
@@ -36,8 +34,6 @@ public class Model {
                 if (rand.nextInt(30) < 1) {
                     animal[i][j] = new Shark();
 
-                } else {
-                    animal[i][j] = null;
                 }
             }
         }

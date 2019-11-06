@@ -39,7 +39,7 @@ public class Gui extends JFrame {
 
         this.setVisible(true);
 //populating the grid with animals
-       /* for (int i = 0; i < width; i++) {
+      /*  for (int i = 0; i < width; i++) {
             for (int j = 0; j < column; j++) {
                 if (rand.nextInt(5) < 1) {
                     fish[i][j] = new Fish();
@@ -80,10 +80,10 @@ public class Gui extends JFrame {
             for (int i = 0; i < width; i++) {
                 for (int j = 0; j < column; j++) {
                     g.setColor(WATER_COLOR);
-                    if ( model.animal[i][j] != null) {
+                    if ( fish[i][j] != null) {
                         g.setColor(FISH_COLOR);
                     }
-                    if (model.animal[i][j] != null) {
+                    if (shark[i][j] != null) {
                         g.setColor(SHARK_COLOR);
                     }
                     g.fillRect(SPACING + i * 80, SPACING + j * 80 + 80, 80 - 2 * SPACING, 80 - 2 * SPACING);
