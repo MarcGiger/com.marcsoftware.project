@@ -3,9 +3,18 @@ import Project.Gui;
 public class VisualisationProgramme {
 
     public static void main(String[] args) {
-
-      Gui i1 = new Gui();
-
+        new VisualisationProgramme();
     }
+
+
+    private static final int WIDTH = 16;
+    private static final int COLUMN = 9;
+    private Gui gui;
+
+public VisualisationProgramme(){
+    gui = new Gui(WIDTH,COLUMN);
+}
+
+
 
 }
