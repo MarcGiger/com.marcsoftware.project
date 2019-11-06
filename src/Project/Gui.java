@@ -30,7 +30,7 @@ public class Gui extends JFrame {
         this.setResizable(false);
         this.width = width;
         this.column = column;
-
+        model = new Model(width, column);
         // centering a JFrame from: https://stackoverflow.com/questions/2442599/how-to-set-jframe-to-appear-centered-regardless-of-monitor-resolution
         // sometimes causes troubles while starting...
         // Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -59,6 +59,7 @@ public class Gui extends JFrame {
                 }
             }
         }*/
+
         Board board = new Board();
         this.setContentPane(board);
 
@@ -80,10 +81,10 @@ public class Gui extends JFrame {
             for (int i = 0; i < width; i++) {
                 for (int j = 0; j < column; j++) {
                     g.setColor(WATER_COLOR);
-                    if ( fish[i][j] != null) {
+                    if ((model.getObject(i, j) instanceof Fish)) {
                         g.setColor(FISH_COLOR);
                     }
-                    if (shark[i][j] != null) {
+                    if (model.getObject(i, j) instanceof Shark) {
                         g.setColor(SHARK_COLOR);
                     }
                     g.fillRect(SPACING + i * 80, SPACING + j * 80 + 80, 80 - 2 * SPACING, 80 - 2 * SPACING);
