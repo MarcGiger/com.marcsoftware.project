@@ -4,5 +4,5 @@ public class Simulation {
 
 }
 /*
-public Simulation
+Simulation of animal stock
 */

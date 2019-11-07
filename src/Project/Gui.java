@@ -36,6 +36,10 @@ public class Gui extends JFrame {
         board = new Board();
         this.setContentPane(board);
 
+        redraw = new JButton("Redraw");
+        redraw.addActionListener(new RedrawHandler());
+
+        // redraw.setVisible(true); why redundant
 
 
     }
@@ -47,6 +51,8 @@ public class Gui extends JFrame {
             g.setColor(BACKGROUND_COLOR);
             g.fillRect(0, 0, 1280, 800);
 
+            add(redraw);
+            redraw.setBounds(getWidth() / 2 - 50, 10, 95, 40);
 
             for (int i = 0; i < width; i++) {
                 for (int j = 0; j < column; j++) {
@@ -61,10 +67,7 @@ public class Gui extends JFrame {
                 }
             }
 
-            redraw = new JButton("Redraw");
-            redraw.setBounds(getWidth() / 2 - 50, 10, 95, 40);
-            redraw.addActionListener(new RedrawHandler());
-            this.add(redraw);
+
 
         }
         public void resetBoard(){
@@ -84,6 +87,7 @@ public class Gui extends JFrame {
             JOptionPane.showMessageDialog(null, "You clicked Redraw!");
             model.resetAnimal();
             model.placeAnimal();
+            // for testing purposes
             model.tellMeWhatsInside();
 
             board.resetBoard();
