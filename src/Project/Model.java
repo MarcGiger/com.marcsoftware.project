@@ -6,8 +6,6 @@ public class Model {
 
     public Animal[][] animal;
     private int width, column;
-    //not needed private Fish fish;
-    //not needed private Shark shark;
     private Random rand;
 
     public Model(int width, int column) {

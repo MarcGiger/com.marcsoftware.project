@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Random;
+
 
 public class Gui extends JFrame {
 
@@ -33,21 +33,12 @@ public class Gui extends JFrame {
 
         this.setVisible(true);
 
-        Board board = new Board();
+        board = new Board();
         this.setContentPane(board);
 
-        redraw = new JButton("Redraw");
-        redraw.setBounds(getWidth() / 2 - 50, 10, 95, 40);
-        redraw.addActionListener(new RedrawHandler());
-        this.add(redraw);
+
 
     }
-
-    public void redrawVisualisation(){
-        board = null;
-        board = new Board();
-    }
-
 
     private class Board extends JPanel {
 
@@ -55,6 +46,7 @@ public class Gui extends JFrame {
         public void paintComponent(Graphics g) {
             g.setColor(BACKGROUND_COLOR);
             g.fillRect(0, 0, 1280, 800);
+
 
             for (int i = 0; i < width; i++) {
                 for (int j = 0; j < column; j++) {
@@ -68,7 +60,21 @@ public class Gui extends JFrame {
                     g.fillRect(SPACING + i * 80, SPACING + j * 80 + 80, 80 - 2 * SPACING, 80 - 2 * SPACING);
                 }
             }
+
+            redraw = new JButton("Redraw");
+            redraw.setBounds(getWidth() / 2 - 50, 10, 95, 40);
+            redraw.addActionListener(new RedrawHandler());
+            this.add(redraw);
+
         }
+        public void resetBoard(){
+            //https://stackoverflow.com/questions/47545250/java-repaint-gridlayout
+            removeAll();
+            revalidate();
+            repaint();
+            System.out.println("new drawn");
+        }
+
 
     }
 
@@ -79,7 +85,9 @@ public class Gui extends JFrame {
             model.resetAnimal();
             model.placeAnimal();
             model.tellMeWhatsInside();
-            redrawVisualisation();
+
+            board.resetBoard();
+
 
         }
 
