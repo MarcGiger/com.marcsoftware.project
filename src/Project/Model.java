@@ -16,7 +16,7 @@ public class Model {
         animal = new Animal[width][column];
         rand = new Random();
         placeAnimal();
-         tellMeWhatsInside();
+        tellMeWhatsInside();
     }
 
     public Animal[][] getAnimal() {
@@ -47,28 +47,35 @@ public class Model {
         return a1 = animal[i][j];
     }
 
+    public void resetAnimal() {
+        Fish.reSetSumOfFishSwarms();
+        Shark.reSetSumOfSharks();
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < column; j++) {
+                animal[i][j] = null;
+            }
+        }
+    }
 
-
-
- //This method is for testing purposes. Is the populating of the grid working?
+    //This method is for testing purposes. Is the populating of the grid working?
 
     public void tellMeWhatsInside() {
         Animal a1 = null;
 
-System.out.println("Test");
+        System.out.println("Test");
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < column; j++) {
 
                 a1 = animal[i][j];
 
                 if (a1 instanceof Fish)
-                System.out.println("blubb");
+                    System.out.println("blubb");
                 if (a1 instanceof Shark)
                     System.out.println("rawwwr");
                 else System.out.println("blue water");
-             }
+            }
         }
-        System.out.println("Fish: "+Fish.getSumOfFishSwarms()+"\nSharks: "+Shark.getNumOfSharks());
+        System.out.println("Fish: " + Fish.getSumOfFishSwarms() + "\nSharks: " + Shark.getNumOfSharks());
 
     }
 

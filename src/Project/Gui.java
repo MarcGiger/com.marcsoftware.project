@@ -12,17 +12,12 @@ public class Gui extends JFrame {
     private int width, column;
     private Model model;
     private Board board;
-    //private Object[][] fish = new Object[16][9];
-    //private Object[][] shark = new Object[16][9];
-
     private JButton redraw;
-
     private static final Color BACKGROUND_COLOR = Color.lightGray;
     private static final Color WATER_COLOR = Color.blue;
     private static final Color SHARK_COLOR = Color.red;
     private static final Color FISH_COLOR = new Color(0, 100, 0);
 
-    Random rand = new Random();
 
     public Gui(int width, int column) {
         this.setTitle("Visualisation");
@@ -33,13 +28,10 @@ public class Gui extends JFrame {
         this.column = column;
         model = new Model(width, column);
 
-
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
 
-
         this.setVisible(true);
-
 
         Board board = new Board();
         this.setContentPane(board);
@@ -48,7 +40,6 @@ public class Gui extends JFrame {
         redraw.setBounds(getWidth() / 2 - 50, 10, 95, 40);
         redraw.addActionListener(new RedrawHandler());
         this.add(redraw);
-
 
     }
 
@@ -80,7 +71,6 @@ public class Gui extends JFrame {
         }
 
     }
-
 
     private class RedrawHandler implements ActionListener {
 

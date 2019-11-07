@@ -1,18 +1,18 @@
 package Project;
 
-import Project.Animal;
-
 public class Shark extends Animal {
-    private static int numOfSharks;
+    private static int sumOfSharks;
 
-    public Shark(){
+    public Shark() {
         super();
-        this.numOfSharks++;
+        this.sumOfSharks++;
+    }
+
+    public static void reSetSumOfSharks() {
+        Shark.sumOfSharks = 0;
     }
 
     public static int getNumOfSharks() {
-        return numOfSharks;
+        return sumOfSharks;
     }
-
-
 }

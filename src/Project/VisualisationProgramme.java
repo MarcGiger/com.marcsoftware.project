@@ -9,9 +9,9 @@ public class VisualisationProgramme {
     private Gui gui;
 
 
-public VisualisationProgramme(){
-    gui = new Gui(WIDTH,COLUMN);
-}
+    public VisualisationProgramme() {
+        gui = new Gui(WIDTH, COLUMN);
+    }
 
     public static void main(String[] args) {
         new VisualisationProgramme();
