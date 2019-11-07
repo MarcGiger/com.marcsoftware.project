@@ -11,6 +11,7 @@ public class Gui extends JFrame {
     private final int SPACING = 1;
     private int width, column;
     private Model model;
+    private Board board;
     //private Object[][] fish = new Object[16][9];
     //private Object[][] shark = new Object[16][9];
 
@@ -38,28 +39,7 @@ public class Gui extends JFrame {
 
 
         this.setVisible(true);
-//populating the grid with animals
-        /*
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < column; j++) {
-                if (rand.nextInt(5) < 1) {
-                    fish[i][j] = new Fish();
-                } else {
-                    fish[i][j] = null;
-                }
-            }
-        }
 
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < column; j++) {
-                if (rand.nextInt(30) < 1) {
-                    shark[i][j] = new Shark();
-
-                } else {
-                    shark[i][j] = null;
-                }
-            }
-        }*/
 
         Board board = new Board();
         this.setContentPane(board);
@@ -71,31 +51,14 @@ public class Gui extends JFrame {
 
 
     }
-/*
-    protected class Board extends JPanel {
 
-        @Override
-        public void paintComponent(Graphics g) {
-            g.setColor(BACKGROUND_COLOR);
-            g.fillRect(0, 0, 1280, 800);
+    public void redrawVisualisation(){
+        board = null;
+        board = new Board();
+    }
 
-            for (int i = 0; i < width; i++) {
-                for (int j = 0; j < column; j++) {
-                    g.setColor(WATER_COLOR);
-                    if (fish[i][j] != null)
-                     {
-                        g.setColor(FISH_COLOR);
-                    }
-                    if (shark[i][j] != null) {
-                        g.setColor(SHARK_COLOR);
-                    }
-                    g.fillRect(SPACING + i * 80, SPACING + j * 80 + 80, 80 - 2 * SPACING, 80 - 2 * SPACING);
-                }
-            }
-        }
-    }*/
 
-    protected class Board extends JPanel {
+    private class Board extends JPanel {
 
         @Override
         public void paintComponent(Graphics g) {
@@ -115,6 +78,7 @@ public class Gui extends JFrame {
                 }
             }
         }
+
     }
 
 
@@ -122,7 +86,10 @@ public class Gui extends JFrame {
 
         public void actionPerformed(ActionEvent e) {
             JOptionPane.showMessageDialog(null, "You clicked Redraw!");
-
+            model.resetAnimal();
+            model.placeAnimal();
+            model.tellMeWhatsInside();
+            redrawVisualisation();
 
         }
 
