@@ -11,8 +11,8 @@ public class Gui extends JFrame {
     private final int SPACING = 1;
     private int width, column;
     private Model model;
-    private Object[][] fish = new Object[16][9];
-    private Object[][] shark = new Object[16][9];
+    //private Object[][] fish = new Object[16][9];
+    //private Object[][] shark = new Object[16][9];
 
     private JButton redraw;
 
@@ -31,15 +31,16 @@ public class Gui extends JFrame {
         this.width = width;
         this.column = column;
         model = new Model(width, column);
-        // centering a JFrame from: https://stackoverflow.com/questions/2442599/how-to-set-jframe-to-appear-centered-regardless-of-monitor-resolution
-        // sometimes causes troubles while starting...
-        // Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-        //this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
+
+
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
 
 
         this.setVisible(true);
 //populating the grid with animals
-      /*  for (int i = 0; i < width; i++) {
+        /*
+        for (int i = 0; i < width; i++) {
             for (int j = 0; j < column; j++) {
                 if (rand.nextInt(5) < 1) {
                     fish[i][j] = new Fish();
@@ -70,6 +71,29 @@ public class Gui extends JFrame {
 
 
     }
+/*
+    protected class Board extends JPanel {
+
+        @Override
+        public void paintComponent(Graphics g) {
+            g.setColor(BACKGROUND_COLOR);
+            g.fillRect(0, 0, 1280, 800);
+
+            for (int i = 0; i < width; i++) {
+                for (int j = 0; j < column; j++) {
+                    g.setColor(WATER_COLOR);
+                    if (fish[i][j] != null)
+                     {
+                        g.setColor(FISH_COLOR);
+                    }
+                    if (shark[i][j] != null) {
+                        g.setColor(SHARK_COLOR);
+                    }
+                    g.fillRect(SPACING + i * 80, SPACING + j * 80 + 80, 80 - 2 * SPACING, 80 - 2 * SPACING);
+                }
+            }
+        }
+    }*/
 
     protected class Board extends JPanel {
 
@@ -93,14 +117,14 @@ public class Gui extends JFrame {
         }
     }
 
-    private class RedrawHandler implements ActionListener {
 
+    private class RedrawHandler implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
             JOptionPane.showMessageDialog(null, "You clicked Redraw!");
 
 
-        } // end actionPerformed
+        }
 
     }
 }
