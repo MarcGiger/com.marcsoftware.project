@@ -100,7 +100,7 @@ public class Gui extends JFrame {
                     if (model.getObject(i, j) instanceof Shark) {
                         g.setColor(SHARK_COLOR);
                     }
-                    // SPACING + j * 80 + 65 (65 is for JButton and JLabel)
+                    // SPACING + j * 80 + 60 (60 is for JButton and JLabel)
                     g.fillRect(SPACING + i * 80, SPACING + j * 80 + 60, 80 - 2 * SPACING, 80 - 2 * SPACING);
                 }
             }
