@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.ImageObserver;
 
 
 public class Gui extends JFrame {
@@ -12,8 +13,11 @@ public class Gui extends JFrame {
     private int width, column;
     private Model model;
     private Board board;
-    private JButton redraw;
-    private JLabel sharks,fish;
+    private JButton reset;
+    private JLabel sharksLabel, fishLabel;
+    private JMenuBar menuBar;
+    private JMenu menu;
+    private JMenuItem i1, i2, i3, i4, i5;
     private static final Color BACKGROUND_COLOR = Color.lightGray;
     private static final Color WATER_COLOR = Color.blue;
     private static final Color SHARK_COLOR = Color.red;
@@ -22,7 +26,7 @@ public class Gui extends JFrame {
 
     public Gui(int width, int column) {
         this.setTitle("Visualisation");
-        this.setSize(1286, 829);
+        this.setSize(1296, 843);
         this.setDefaultCloseOperation(Gui.EXIT_ON_CLOSE);
         this.setResizable(false);
         this.width = width;
@@ -30,6 +34,7 @@ public class Gui extends JFrame {
 
         model = new Model(width, column);
 
+        // https://stackoverflow.com/questions/20680060/location-of-jframe-in-middle-of-the-window causes problems on my laptop but works fine on school pc...
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
 
@@ -37,12 +42,27 @@ public class Gui extends JFrame {
         board = new Board();
         this.setContentPane(board);
 
-        redraw = new JButton("Redraw");
-        redraw.addActionListener(new RedrawHandler());
+        reset = new JButton("Reset");
+        reset.addActionListener(new ResetHandler());
 
-        sharks = new JLabel();
-        fish = new JLabel();
+        sharksLabel = new JLabel();
+        fishLabel = new JLabel();
 
+        //https://www.geeksforgeeks.org/java-swing-jmenubar/
+        //after adding Menu l needed to adapt g.fillRect
+        menuBar = new JMenuBar();
+        menu = new JMenu("Menu");
+        i1 = new JMenuItem("Save current stats");
+        i2 = new JMenuItem("Load stats");
+        i3 = new JMenuItem("Dummy 1");
+        i4 = new JMenuItem("Dummy 2");
+        i5 = new JMenuItem("Dummy 3");
+        menuBar.add(menu);
+        menu.add(i1);
+        menu.add(i2);
+        menu.add(i3);
+        menu.add(i4);
+        menu.add(i5);
         // redraw.setVisible(true); why redundant
         // this.setVisible(true); why position not important
     }
@@ -52,19 +72,24 @@ public class Gui extends JFrame {
         @Override
         public void paintComponent(Graphics g) {
             g.setColor(BACKGROUND_COLOR);
-            g.fillRect(0, 0, 1280, 800);
+            g.fillRect(0, 0, 1280, 880);
+
+            //Menu
+            setJMenuBar(menuBar);
+
 
             //JButton
-            add(redraw);
-            redraw.setBounds(getWidth() / 2 - 50, 10, 95, 40);
+            add(reset);
+            reset.setBounds(getWidth() / 2 - 50, 10, 95, 35);
 
             //JLabel
-            add(sharks);
-            sharks.setBounds(10,0,100,100);
-            sharks.setText("Sharks: "+Shark.getNumOfSharks());
-            add(fish);
-            fish.setBounds(10,15,100,100);
-            fish.setText("Fish: "+Fish.getSumOfFishSwarms());
+            add(sharksLabel);
+            sharksLabel.setBounds(10, -30, 100, 100);
+            sharksLabel.setText("Sharks: " + Shark.getNumOfSharks());
+            add(fishLabel);
+            fishLabel.setBounds(10, -15, 100, 100);
+            fishLabel.setText("Fish: " + Fish.getSumOfFishSwarms());
+
 
             for (int i = 0; i < width; i++) {
                 for (int j = 0; j < column; j++) {
@@ -75,7 +100,8 @@ public class Gui extends JFrame {
                     if (model.getObject(i, j) instanceof Shark) {
                         g.setColor(SHARK_COLOR);
                     }
-                    g.fillRect(SPACING + i * 80, SPACING + j * 80 + 80, 80 - 2 * SPACING, 80 - 2 * SPACING);
+                    // SPACING + j * 80 + 65 (65 is for JButton and JLabel)
+                    g.fillRect(SPACING + i * 80, SPACING + j * 80 + 60, 80 - 2 * SPACING, 80 - 2 * SPACING);
                 }
             }
         }
@@ -89,10 +115,10 @@ public class Gui extends JFrame {
         }
     }
 
-    private class RedrawHandler implements ActionListener {
+    private class ResetHandler implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
-            JOptionPane.showMessageDialog(null, "You clicked Redraw!");
+            JOptionPane.showMessageDialog(null, "You clicked Reset!");
             model.resetAnimal();
             model.placeAnimal();
             // for testing purposes
