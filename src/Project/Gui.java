@@ -51,6 +51,7 @@ public class Gui extends JFrame {
         //https://www.geeksforgeeks.org/java-swing-jmenubar/
         //after adding Menu l needed to adapt g.fillRect
         menuBar = new JMenuBar();
+        menuBar.setBackground(Color.lightGray);
         menu = new JMenu("Menu");
         i1 = new JMenuItem("Save current stats");
         i2 = new JMenuItem("Load stats");
@@ -75,6 +76,7 @@ public class Gui extends JFrame {
             g.fillRect(0, 0, 1280, 880);
 
             //Menu
+
             setJMenuBar(menuBar);
 
 
@@ -84,10 +86,10 @@ public class Gui extends JFrame {
 
             //JLabel
             add(sharksLabel);
-            sharksLabel.setBounds(10, -30, 100, 100);
+            sharksLabel.setBounds(8, -30, 100, 100);
             sharksLabel.setText("Sharks: " + Shark.getNumOfSharks());
             add(fishLabel);
-            fishLabel.setBounds(10, -15, 100, 100);
+            fishLabel.setBounds(8, -15, 100, 100);
             fishLabel.setText("Fish: " + Fish.getSumOfFishSwarms());
 
 
