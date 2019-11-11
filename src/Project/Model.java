@@ -23,7 +23,7 @@ public class Model implements Serializable {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < column; j++) {
                 if (rand.nextInt(5) < 1) {
-                    animal[i][j] = new Fish();
+                    animal[i][j] = new Fish(); // place Fish-Object in animal Array
                 }
             }
         }
@@ -31,7 +31,7 @@ public class Model implements Serializable {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < column; j++) {
                 if (rand.nextInt(50) < 1 && !(animal[i][j] instanceof Fish)) {
-                    animal[i][j] = new Shark();
+                    animal[i][j] = new Shark(); // place Shark-Object in animal Array
                 }
             }
         }
@@ -41,10 +41,9 @@ public class Model implements Serializable {
         }
     }
 
-    // lets the animal swim
+    // lets the animal swim (not codded yet)
     public void moveAnimal() {
     }
-
 
     public Animal getObject(int i, int j) {
         Animal a1;
@@ -56,13 +55,12 @@ public class Model implements Serializable {
         Shark.reSetSumOfSharks();
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < column; j++) {
-                animal[i][j] = null;
+                animal[i][j] = null; // emptying the Array
             }
         }
     }
 
     //This method is for testing purposes. Is the populating of the grid working?
-
     public void tellMeWhatsInside() {
         Animal a1;
 
