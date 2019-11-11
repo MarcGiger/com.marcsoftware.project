@@ -1,8 +1,9 @@
 package Project;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Model {
+public class Model implements Serializable {
 
     public Animal[][] animal;
     private int width, column;
@@ -17,9 +18,6 @@ public class Model {
         tellMeWhatsInside();
     }
 
-    public Animal[][] getAnimal() {
-        return animal;
-    }
 
     public void placeAnimal() {
         for (int i = 0; i < width; i++) {
@@ -41,9 +39,12 @@ public class Model {
         if (Shark.getNumOfSharks() == 0) {
             animal[width - 1][column - 1] = new Shark();
         }
-
-
     }
+
+    // lets the animal swim
+    public void moveAnimal() {
+    }
+
 
     public Animal getObject(int i, int j) {
         Animal a1;
@@ -78,7 +79,7 @@ public class Model {
                 else System.out.println("blue water");
             }
         }
-        System.out.println("Fish: " + Fish.getSumOfFishSwarms() + "\nSharks: " + Shark.getNumOfSharks()+"\nBlue Water: "+(16*9-Fish.getSumOfFishSwarms()-Shark.getNumOfSharks()));
+        System.out.println("Fish: " + Fish.getSumOfFishSwarms() + "\nSharks: " + Shark.getNumOfSharks() + "\nBlue Water: " + (16 * 9 - Fish.getSumOfFishSwarms() - Shark.getNumOfSharks()));
 
     }
 
