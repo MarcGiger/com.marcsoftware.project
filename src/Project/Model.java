@@ -12,6 +12,8 @@ public class Model implements Serializable {
     private File inFile;
     private FileOutputStream outFileStream;
     private OutputStream outObjectStream;
+    private FileInputStream inFileStream;
+    private ObjectInputStream inObjectStream;
 
     public Model(int width, int column) throws IOException {
         this.width = width;
@@ -72,9 +74,9 @@ public class Model implements Serializable {
     }
 
     public void saveModel() throws IOException {
-        FileOutputStream outFileStream = new FileOutputStream(outFile);
-        ObjectOutputStream outObjectStream = new ObjectOutputStream(outFileStream);
-        outObjectStream.writeObject(animal);
+        outFileStream = new FileOutputStream(outFile);
+        outObjectStream = new ObjectOutputStream(outFileStream);
+         ((ObjectOutputStream) outObjectStream).writeObject(animal);
         outObjectStream.close();
         System.out.println("saved");
 
@@ -82,9 +84,10 @@ public class Model implements Serializable {
 
     public void loadModel() throws IOException {
         inFile = new File("Model.ser");
-        FileInputStream inFileStream = new FileInputStream(inFile);
-        ObjectInputStream inObjectStream = new ObjectInputStream(inFileStream);
-        //inObjectStream.close();
+        inFileStream = new FileInputStream(inFile);
+        inObjectStream = new ObjectInputStream(inFileStream);
+        animal = (Animal[][]) inObjectStream.readObject( );
+        inObjectStream.close();
         System.out.println("loaded");
     }
 
