@@ -7,14 +7,20 @@ public class Shark extends Animal implements Colourful {
 
     public Shark() {
         super();
-        this.sumOfSharks++;
+        sumOfSharks++;
     }
 
     public static void reSetSumOfSharks() {
-        Shark.sumOfSharks = 0;
+        sumOfSharks = 0;
     }
 
     public static int getNumOfSharks() {
         return sumOfSharks;
+    }
+
+
+    @Override
+    public Color getColor() {
+        return Color.red;
     }
 }

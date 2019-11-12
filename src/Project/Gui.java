@@ -91,13 +91,18 @@ public class Gui extends JFrame {
 
             for (int i = 0; i < width; i++) {
                 for (int j = 0; j < column; j++) {
-                    g.setColor(WATER_COLOR);
+                    g.getColor();
                     if ((model.getObject(i, j) instanceof Fish)) {
-                        g.setColor(FISH_COLOR);
+                        g.setColor(((Colorful) model.getObject(i, j)).getColor());
                     }
                     if (model.getObject(i, j) instanceof Shark) {
-                        g.setColor(SHARK_COLOR);
+                        g.setColor(((Colorful) model.getObject(i, j)).getColor());
                     }
+                    if (model.getObject(i, j) instanceof Water) {
+                        g.setColor(((Colorful) model.getObject(i, j)).getColor());
+                    }
+
+
                     // SPACING + j * 80 + 60 (60 is for JButton and JLabel)
                     g.fillRect(SPACING + i * 80, SPACING + j * 80 + 60, 80 - 2 * SPACING, 80 - 2 * SPACING);
                 }

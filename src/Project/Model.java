@@ -6,7 +6,6 @@ import java.util.Random;
 public class Model implements Serializable {
 
     public Animal[][] animal;
-    public Animal[][] animalTwo;
     private int width, column;
     private Random rand;
     private File outFile;
@@ -122,9 +121,14 @@ public class Model implements Serializable {
         inFile = new File("Model.ser");
         inFileStream = new FileInputStream(inFile);
         inObjectStream = new ObjectInputStream(inFileStream);
-        animalTwo = (Animal[][]) inObjectStream.readObject();
+        try {
+            animal = (Animal[][]) inObjectStream.readObject();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        inFileStream.close();
         inObjectStream.close();
-        animal = animalTwo;
+
         System.out.println("loaded");
     }
 
