@@ -1,6 +1,6 @@
 package Project;
 
-import java.io.Serializable;
+import java.io.*;
 import java.util.Random;
 
 public class Model implements Serializable {
@@ -8,13 +8,22 @@ public class Model implements Serializable {
     public Animal[][] animal;
     private int width, column;
     private Random rand;
+    private File outFile;
+    private File inFile;
+    private FileOutputStream outFileStream;
+    private OutputStream outObjectStream;
 
-    public Model(int width, int column) {
+    public Model(int width, int column) throws IOException {
         this.width = width;
         this.column = column;
         animal = new Animal[width][column];
         rand = new Random();
         placeAnimal();
+        tellMeWhatsInside();
+
+        outFile = new File("sample.data");
+        saveModel();
+        loadModel();
         tellMeWhatsInside();
     }
 
@@ -58,6 +67,23 @@ public class Model implements Serializable {
                 animal[i][j] = null; // emptying the Array
             }
         }
+    }
+
+    public void saveModel() throws IOException {
+        FileOutputStream outFileStream = new FileOutputStream(outFile);
+        ObjectOutputStream outObjectStream = new ObjectOutputStream(outFileStream);
+        outObjectStream.writeObject(animal);
+        outObjectStream.close();
+        System.out.println("saved");
+
+    }
+
+    public void loadModel() throws IOException {
+        inFile = new File("sample.data");
+        FileInputStream inFileStream = new FileInputStream(inFile);
+        ObjectInputStream inObjectStream = new ObjectInputStream(inFileStream);
+        inObjectStream.close();
+        System.out.println("loaded");
     }
 
     //This method is for testing purposes. Is the populating of the grid working?

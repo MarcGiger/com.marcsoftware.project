@@ -1,6 +1,8 @@
 package Project;
 
-public abstract class Animal {
+import java.io.Serializable;
+
+public abstract class Animal implements Serializable {
     private boolean alive;
 
     public Animal() {

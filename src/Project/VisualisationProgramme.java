@@ -1,6 +1,7 @@
 package Project;
 
 import java.awt.*;
+import java.io.IOException;
 
 public class VisualisationProgramme {
 
@@ -9,12 +10,14 @@ public class VisualisationProgramme {
     private Gui gui;
 
 
-    public VisualisationProgramme() {
+    public VisualisationProgramme() throws IOException {
         gui = new Gui(WIDTH, COLUMN);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+
         new VisualisationProgramme();
+
     }
 
 

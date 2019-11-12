@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.ImageObserver;
+import java.io.IOException;
 
 
 public class Gui extends JFrame {
@@ -24,7 +25,7 @@ public class Gui extends JFrame {
     private static final Color FISH_COLOR = new Color(0, 100, 0);
 
 
-    public Gui(int width, int column) {
+    public Gui(int width, int column) throws IOException {
         this.setTitle("Visualisation");
         this.setSize(1296, 843);
         this.setDefaultCloseOperation(Gui.EXIT_ON_CLOSE);
