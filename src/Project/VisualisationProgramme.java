@@ -15,10 +15,6 @@ public class VisualisationProgramme {
     }
 
     public static void main(String[] args) throws IOException {
-
         new VisualisationProgramme();
-
     }
-
-
 }

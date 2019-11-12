@@ -11,7 +11,7 @@ import java.awt.*;
  */
 public class Fish extends Animal implements Colourful {
     // The amount of Fish swarms.
-    private static int sumOfFishSwarms;
+    private static int sumOfFishSwarms = 0;
 
     /**
      * Creates a Fish swarm.
@@ -40,7 +40,7 @@ public class Fish extends Animal implements Colourful {
 
     @Override
     public Color getColor() {
-        return Color.getHSBColor(0, 100, 0);
+        return new Color(0, 100, 0);
     }
 }
 

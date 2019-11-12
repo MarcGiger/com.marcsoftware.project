@@ -93,13 +93,13 @@ public class Gui extends JFrame {
                 for (int j = 0; j < column; j++) {
                     g.getColor();
                     if ((model.getObject(i, j) instanceof Fish)) {
-                        g.setColor(((Colorful) model.getObject(i, j)).getColor());
+                        g.setColor(((Colourful) model.getObject(i, j)).getColor());
                     }
                     if (model.getObject(i, j) instanceof Shark) {
-                        g.setColor(((Colorful) model.getObject(i, j)).getColor());
+                        g.setColor(((Colourful) model.getObject(i, j)).getColor());
                     }
                     if (model.getObject(i, j) instanceof Water) {
-                        g.setColor(((Colorful) model.getObject(i, j)).getColor());
+                        g.setColor(((Colourful) model.getObject(i, j)).getColor());
                     }
 
 
