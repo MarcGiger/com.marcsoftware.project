@@ -20,9 +20,9 @@ public class Gui extends JFrame {
     private JMenu menu;
     private JMenuItem i1, i2, i3, i4, i5;
     private static final Color BACKGROUND_COLOR = Color.lightGray;
-    private static final Color WATER_COLOR = Color.blue;
-    private static final Color SHARK_COLOR = Color.red;
-    private static final Color FISH_COLOR = new Color(0, 100, 0);
+    //private static final Color WATER_COLOR = Color.blue;
+    //private static final Color SHARK_COLOR = Color.red;
+    //private static final Color FISH_COLOR = new Color(0, 100, 0);
 
 
     public Gui(int width, int column) throws IOException {
