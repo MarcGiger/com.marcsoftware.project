@@ -21,7 +21,7 @@ public class Gui extends JFrame {
     private static final Color BACKGROUND_COLOR = Color.lightGray;
 
 
-    public Gui(int width, int column) throws IOException, ClassNotFoundException {
+    public Gui(int width, int column) throws IOException {
         this.setTitle("Visualisation");
         this.setSize(1296, 843);
         this.setDefaultCloseOperation(Gui.EXIT_ON_CLOSE);

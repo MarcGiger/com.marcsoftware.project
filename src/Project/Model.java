@@ -22,12 +22,13 @@ public class Model implements Serializable {
         animal = new Animal[width][column];
         rand = new Random();
         placeAnimal();
-        tellMeWhatsInside();
+
 
         outFile = new File("Model.ser");
         saveModel();
         placeAnimal();
         tellMeWhatsInside();
+
         loadModel();
         tellMeWhatsInside();
     }
