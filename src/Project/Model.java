@@ -21,8 +21,10 @@ public class Model implements Serializable {
         placeAnimal();
         tellMeWhatsInside();
 
-        outFile = new File("sample.data");
+        outFile = new File("Model.ser");
         saveModel();
+        placeAnimal();
+        tellMeWhatsInside();
         loadModel();
         tellMeWhatsInside();
     }
@@ -79,10 +81,10 @@ public class Model implements Serializable {
     }
 
     public void loadModel() throws IOException {
-        inFile = new File("sample.data");
+        inFile = new File("Model.ser");
         FileInputStream inFileStream = new FileInputStream(inFile);
         ObjectInputStream inObjectStream = new ObjectInputStream(inFileStream);
-        inObjectStream.close();
+        //inObjectStream.close();
         System.out.println("loaded");
     }
 
