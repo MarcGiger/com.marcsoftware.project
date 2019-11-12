@@ -6,6 +6,7 @@ import java.util.Random;
 public class Model implements Serializable {
 
     public Animal[][] animal;
+    public Animal[][] animalTwo;
     private int width, column;
     private Random rand;
     private File outFile;
@@ -76,7 +77,7 @@ public class Model implements Serializable {
     public void saveModel() throws IOException {
         outFileStream = new FileOutputStream(outFile);
         outObjectStream = new ObjectOutputStream(outFileStream);
-         ((ObjectOutputStream) outObjectStream).writeObject(animal);
+        ((ObjectOutputStream) outObjectStream).writeObject(animal);
         outObjectStream.close();
         System.out.println("saved");
 
@@ -86,8 +87,9 @@ public class Model implements Serializable {
         inFile = new File("Model.ser");
         inFileStream = new FileInputStream(inFile);
         inObjectStream = new ObjectInputStream(inFileStream);
-        animal = (Animal[][]) inObjectStream.readObject( );
+        animalTwo = (Animal[][]) inObjectStream.readObject();
         inObjectStream.close();
+        animal = animalTwo;
         System.out.println("loaded");
     }
 
