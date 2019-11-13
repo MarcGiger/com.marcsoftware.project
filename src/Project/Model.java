@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class Model implements Serializable {
 
-    public Animal[][] animal;
+    private Animal[][] animal;
     private int width, column;
     private Random rand;
     private File outFile;
@@ -24,10 +24,9 @@ public class Model implements Serializable {
         placeAnimal();
         tellMeWhatsInside();
 
-
+/*
         saveModel();
         resetAnimal();
-
 
         //tellMeWhatsInside();
 
@@ -38,7 +37,7 @@ public class Model implements Serializable {
             System.out.println("it didnt work");
         }
         tellMeWhatsInside();
-
+*/
 
     }
 
