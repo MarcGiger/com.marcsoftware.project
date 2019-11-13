@@ -1,8 +1,5 @@
 package Project;
 
-import java.awt.*;
-import java.io.IOException;
-
 public class VisualisationProgramme {
 
     private static final int WIDTH = 16;
@@ -10,11 +7,11 @@ public class VisualisationProgramme {
     private Gui gui;
 
 
-    public VisualisationProgramme() throws IOException {
+    public VisualisationProgramme()  {
         gui = new Gui(WIDTH, COLUMN);
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args)  {
         new VisualisationProgramme();
     }
 }

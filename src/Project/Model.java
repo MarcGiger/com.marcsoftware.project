@@ -20,22 +20,25 @@ public class Model implements Serializable {
         this.column = column;
         animal = new Animal[width][column];
         rand = new Random();
-        placeAnimal();
-
-
         outFile = new File("Model.ser");
-        //saveModel();
-        //placeAnimal();
+        placeAnimal();
+        tellMeWhatsInside();
+
+
+        saveModel();
+        resetAnimal();
+
+
         //tellMeWhatsInside();
 
-       /* try {
+        try {
             loadModel();
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("it didnt work");
         }
         tellMeWhatsInside();
-        */
+
 
     }
 
@@ -83,6 +86,7 @@ public class Model implements Serializable {
     }
 
     public void resetAnimal() {
+        System.out.println("Reset");
         Fish.reSetSumOfFishSwarms();
         Shark.reSetSumOfSharks();
         for (int i = 0; i < width; i++) {
@@ -138,7 +142,7 @@ public class Model implements Serializable {
         Animal a1;
 
         System.out.println("Tell me whats inside?");
-        for (int i = 0; i < width; i++) {
+        /*for (int i = 0; i < width; i++) {
             for (int j = 0; j < column; j++) {
 
                 a1 = animal[i][j];
@@ -149,9 +153,8 @@ public class Model implements Serializable {
                     System.out.println("rawwwr");
                 else System.out.println("blue water");
             }
-        }
+        }*/
         System.out.println("Fish: " + Fish.getSumOfFishSwarms() + "\nSharks: " + Shark.getNumOfSharks() + "\nBlue Water: " + (16 * 9 - Fish.getSumOfFishSwarms() - Shark.getNumOfSharks()));
-
     }
 
 
