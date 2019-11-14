@@ -14,7 +14,7 @@ public class Gui extends JFrame {
     private Model model;
     private Board board;
     private JButton reset;
-    private JLabel sharksLabel, fishLabel;
+    private JLabel sharksLabel, fishLabel, save;
     private JMenuBar menuBar;
     private JMenu menu;
     private JMenuItem i1, i2, i3, i4, i5;
@@ -46,7 +46,7 @@ public class Gui extends JFrame {
         fishLabel = new JLabel();
 
         //https://www.geeksforgeeks.org/java-swing-jmenubar/
-        //after adding Menu l needed to adapt g.fillRect
+        //after adding Menu l needed to adapt Graphics g
         createMenu();
 
 
@@ -161,10 +161,10 @@ public class Gui extends JFrame {
             switch (menuName) {
                 // Timer http://www.java2s.com/Tutorials/Java/Swing_How_to/JOptionPane/Use_Timer_to_close_JOptionPane_after_few_seconds.htm
                 case "Save current stats":
-                    dialog =  new JDialog();
-                    dialog.setSize(100,80);
-                    JLabel tf = new JLabel("   Saving...");
-                    dialog.add(tf);
+                    dialog = new JDialog();
+                    dialog.setSize(100, 80);
+                    save = new JLabel("   Saving...");
+                    dialog.add(save);
 
                     Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
                     dialog.setLocation(dim.width / 2 - dialog.getSize().width / 2, dim.height / 2 - dialog.getSize().height / 2);
