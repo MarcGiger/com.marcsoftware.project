@@ -10,6 +10,7 @@ public class Gui extends JFrame {
 
     private final int SPACING = 1;
     private final int width, column;
+    private JDialog dialog;
     private Model model;
     private Board board;
     private JButton reset;
@@ -135,13 +136,14 @@ public class Gui extends JFrame {
     private class ResetHandler implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            JOptionPane.showMessageDialog(null, "You clicked Reset!");
+
             model.resetAnimal();
             model.placeAnimal();
             // for testing purposes
             model.tellMeWhatsInside();
 
             board.resetBoard();
+            JOptionPane.showMessageDialog(null, "Initial board Reset!");
 
         }
     }
@@ -157,26 +159,44 @@ public class Gui extends JFrame {
             menuName = event.getActionCommand(); // what's written on the item that was clicked
 
             switch (menuName) {
+                // Timer http://www.java2s.com/Tutorials/Java/Swing_How_to/JOptionPane/Use_Timer_to_close_JOptionPane_after_few_seconds.htm
                 case "Save current stats":
-                    System.out.println("Saving...");
+                    dialog =  new JDialog();
+                    dialog.setSize(100,80);
+                    JLabel tf = new JLabel("   Saving...");
+                    dialog.add(tf);
+
+                    Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+                    dialog.setLocation(dim.width / 2 - dialog.getSize().width / 2, dim.height / 2 - dialog.getSize().height / 2);
+                    dialog.setModal(false);
+                    dialog.setVisible(true);
+
                     model.saveModel(model.getStorageFile());
+
+                    new Timer(2100, new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            dialog.setVisible(false);
+                        }
+                    }).start();
                     break;
                 case "Load stats":
+
                     System.out.println("Loading...");
                     model.loadModel(model.getStorageFile());
                     board.resetBoard();
                     break;
                 case "Dummy 1":
-                    System.out.println("no function implemented");
+                    JOptionPane.showMessageDialog(null, "no function implemented");
                     break;
                 case "Dummy 2":
-                    System.out.println("no function implemented");
+                    JOptionPane.showMessageDialog(null, "no function implemented");
                     break;
                 case "Dummy 3":
-                    System.out.println("no function implemented");
+                    JOptionPane.showMessageDialog(null, "no function implemented");
                     break;
                 default:
-                    System.out.println("An error occured");
+                    JOptionPane.showMessageDialog(null, "an error occured");
                     break;
             }
         }
