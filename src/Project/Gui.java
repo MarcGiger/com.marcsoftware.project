@@ -53,6 +53,8 @@ public class Gui extends JFrame {
         // this.setVisible(true); why position not important
     }
 
+    // https://docs.oracle.com/javase/tutorial/uiswing/components/menu.html helped me to set up the menu
+    //https://www.ntu.edu.sg/home/ehchua/programming/java/J4a_GUI_2.html  helped me to set up the menu
     public void createMenu() {
         menuBar = new JMenuBar();
         menuBar.setBackground(Color.lightGray);
@@ -79,6 +81,7 @@ public class Gui extends JFrame {
 
     private class Board extends JPanel {
 
+        //https://www.youtube.com/watch?v=EMu1cC2Vnis helped me to set up the visualisation of the grid
         @Override
         public void paintComponent(Graphics g) {
             g.setColor(BACKGROUND_COLOR);
@@ -86,7 +89,6 @@ public class Gui extends JFrame {
 
             //Menu
             setJMenuBar(menuBar);
-
 
             //JButton
             add(reset);
@@ -146,6 +148,7 @@ public class Gui extends JFrame {
 
     private class MenuHandler implements ActionListener {
         /**
+         * Help from course notes
          * when an item is clicked, response starts here
          */
         @Override
