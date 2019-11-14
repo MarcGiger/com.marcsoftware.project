@@ -22,6 +22,7 @@ public class Gui extends JFrame {
 
 
     public Gui(int width, int column) {
+        model = new Model(width, column);
         this.setTitle("Visualisation");
         this.setSize(1296, 843);
         this.setDefaultCloseOperation(Gui.EXIT_ON_CLOSE);
@@ -29,11 +30,14 @@ public class Gui extends JFrame {
         this.width = width;
         this.column = column;
 
-        model = new Model(width, column);
+
 
         // https://stackoverflow.com/questions/20680060/location-of-jframe-in-middle-of-the-window causes problems on my laptop but works fine on school pc...
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
+
+        sharksLabel = new JLabel();
+        fishLabel = new JLabel();
 
         this.setVisible(true);
         board = new Board();
@@ -42,12 +46,13 @@ public class Gui extends JFrame {
         reset = new JButton("Reset");
         reset.addActionListener(new ResetHandler());
 
-        sharksLabel = new JLabel();
-        fishLabel = new JLabel();
+
 
         //https://www.geeksforgeeks.org/java-swing-jmenubar/
         //after adding Menu l needed to adapt Graphics g
         createMenu();
+
+        System.out.println(Shark.getNumOfSharks());
 
 
         // redraw.setVisible(true); why redundant
@@ -129,7 +134,7 @@ public class Gui extends JFrame {
             removeAll();
             revalidate();
             repaint();
-            System.out.println("new drawn");
+
         }
     }
 
@@ -160,6 +165,7 @@ public class Gui extends JFrame {
 
             switch (menuName) {
                 // Timer http://www.java2s.com/Tutorials/Java/Swing_How_to/JOptionPane/Use_Timer_to_close_JOptionPane_after_few_seconds.htm
+                // https://docs.oracle.com/javase/8/docs/api/javax/swing/Timer.html
                 case "Save current stats":
                     dialog = new JDialog();
                     dialog.setSize(100, 80);
@@ -172,16 +178,16 @@ public class Gui extends JFrame {
                     dialog.setVisible(true);
 
                     model.saveModel(model.getStorageFile());
+                    //Timer t;
+                    //if (t==null)
+                        Timer t = new Timer(3000, e -> dialog.setVisible(false));//.setRepeats(false);
+                        t.start();
 
-                    new Timer(2100, new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            dialog.setVisible(false);
-                        }
-                    }).start();
+                       // without setRepeats it continues to fire events every time the between-event delay has elapsed, until it is stopped (lesson learned:)
+                        t.setRepeats(false);
+                        //System.gc();
                     break;
                 case "Load stats":
-
                     System.out.println("Loading...");
                     model.loadModel(model.getStorageFile());
                     board.resetBoard();
