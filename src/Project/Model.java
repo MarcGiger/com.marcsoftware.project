@@ -111,6 +111,10 @@ public class Model implements Serializable {
     System.out.println("loaded");
   }
 
+  public File getStorageFile() {
+    return storageFile;
+  }
+
   //This method is for testing purposes. Is the populating of the grid working?
   public void tellMeWhatsInside() {
 
@@ -144,5 +148,7 @@ public class Model implements Serializable {
     }
 
   }
+
+
 
 }

@@ -6,11 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-
 public class Gui extends JFrame {
 
     private final int SPACING = 1;
-    private int width, column;
+    private final int width, column;
     private Model model;
     private Board board;
     private JButton reset;
@@ -47,9 +46,18 @@ public class Gui extends JFrame {
 
         //https://www.geeksforgeeks.org/java-swing-jmenubar/
         //after adding Menu l needed to adapt g.fillRect
+        createMenu();
+
+
+        // redraw.setVisible(true); why redundant
+        // this.setVisible(true); why position not important
+    }
+
+    public void createMenu() {
         menuBar = new JMenuBar();
         menuBar.setBackground(Color.lightGray);
         menu = new JMenu("Menu");
+
         i1 = new JMenuItem("Save current stats");
         i2 = new JMenuItem("Load stats");
         i3 = new JMenuItem("Dummy 1");
@@ -61,8 +69,12 @@ public class Gui extends JFrame {
         menu.add(i3);
         menu.add(i4);
         menu.add(i5);
-        // redraw.setVisible(true); why redundant
-        // this.setVisible(true); why position not important
+
+        i1.addActionListener(new MenuHandler());
+        i2.addActionListener(new MenuHandler());
+        i3.addActionListener(new MenuHandler());
+        i4.addActionListener(new MenuHandler());
+        i5.addActionListener(new MenuHandler());
     }
 
     private class Board extends JPanel {
@@ -119,7 +131,7 @@ public class Gui extends JFrame {
     }
 
     private class ResetHandler implements ActionListener {
-
+        @Override
         public void actionPerformed(ActionEvent e) {
             JOptionPane.showMessageDialog(null, "You clicked Reset!");
             model.resetAnimal();
@@ -129,6 +141,40 @@ public class Gui extends JFrame {
 
             board.resetBoard();
 
+        }
+    }
+
+    private class MenuHandler implements ActionListener {
+        /**
+         * when an item is clicked, response starts here
+         */
+        @Override
+        public void actionPerformed(ActionEvent event) {
+            String menuName;
+            menuName = event.getActionCommand(); // what's written on the item that was clicked
+
+            switch (menuName) {
+                case "Save current stats":
+                    System.out.println("Saving...");
+                    model.saveModel(model.getStorageFile());
+                    break;
+                case "Load stats":
+                    System.out.println("Loading...");
+                    model.loadModel(model.getStorageFile());
+                    break;
+                case "Dummy 1":
+                    System.out.println("no function implemented");
+                    break;
+                case "Dummy 2":
+                    System.out.println("no function implemented");
+                    break;
+                case "Dummy 3":
+                    System.out.println("no function implemented");
+                    break;
+                default:
+                    System.out.println("An error occured");
+                    break;
+            }
         }
     }
 }
