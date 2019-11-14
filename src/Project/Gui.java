@@ -164,6 +164,7 @@ public class Gui extends JFrame {
                 case "Load stats":
                     System.out.println("Loading...");
                     model.loadModel(model.getStorageFile());
+                    board.resetBoard();
                     break;
                 case "Dummy 1":
                     System.out.println("no function implemented");
