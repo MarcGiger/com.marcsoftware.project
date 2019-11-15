@@ -176,11 +176,12 @@ public class Gui extends JFrame {
                     dialog.setLocation(dim.width / 2 - dialog.getSize().width / 2, dim.height / 2 - dialog.getSize().height / 2);
                     dialog.setModal(false);
                     dialog.setVisible(true);
+                    dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
                     model.saveModel(model.getStorageFile());
                     //Timer t;
                     //if (t==null)
-                        Timer t = new Timer(3000, e -> dialog.setVisible(false));//.setRepeats(false);
+                        Timer t = new Timer(2200, e -> dialog.setVisible(false));//.setRepeats(false);
                         t.start();
 
                        // without setRepeats it continues to fire events every time the between-event delay has elapsed, until it is stopped (lesson learned:)
@@ -189,6 +190,7 @@ public class Gui extends JFrame {
                     break;
                 case "Load stats":
                     System.out.println("Loading...");
+                    model.resetAnimal();
                     model.loadModel(model.getStorageFile());
                     board.resetBoard();
                     break;

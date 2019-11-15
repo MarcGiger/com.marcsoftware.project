@@ -17,7 +17,6 @@ public class Fish extends Animal implements Colourful {
      * Creates a Fish swarm.
      */
     public Fish() {
-        super();
         sumOfFishSwarms++;
     }
 
