@@ -52,8 +52,6 @@ public class Gui extends JFrame {
         //after adding Menu l needed to adapt Graphics g
         createMenu();
 
-        System.out.println(Shark.getNumOfSharks());
-
 
         // redraw.setVisible(true); why redundant
         // this.setVisible(true); why position not important
@@ -192,6 +190,7 @@ public class Gui extends JFrame {
                     System.out.println("Loading...");
                     model.resetAnimal();
                     model.loadModel(model.getStorageFile());
+                    model.tellMeWhatsInside();
                     board.resetBoard();
                     break;
                 case "Dummy 1":

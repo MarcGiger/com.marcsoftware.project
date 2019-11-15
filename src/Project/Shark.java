@@ -10,8 +10,12 @@ public class Shark extends Animal implements Colourful {
         sumOfSharks++;
     }
 
-    public static void reSetSumOfSharks() {
+    public static void resetSumOfSharks() {
         sumOfSharks = 0;
+    }
+
+    public static void setSumOfSharks(int sumOfSharks) {
+        Shark.sumOfSharks = sumOfSharks;
     }
 
     public static int getNumOfSharks() {

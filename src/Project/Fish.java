@@ -23,8 +23,12 @@ public class Fish extends Animal implements Colourful {
     /**
      * Sets the amount of Fish swarms to zero.
      */
-    public static void reSetSumOfFishSwarms() {
+    public static void resetSumOfFishSwarms() {
         sumOfFishSwarms = 0;
+    }
+
+    public static void setSumOfFishSwarms(int sumOfFishSwarms) {
+        Fish.sumOfFishSwarms = sumOfFishSwarms;
     }
 
     /**
