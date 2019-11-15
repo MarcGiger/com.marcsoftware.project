@@ -26,14 +26,6 @@ public class Model implements Serializable {
     placeAnimal();
     tellMeWhatsInside();
 
-    saveModel(storageFile);
-    resetAnimal();
-
-    tellMeWhatsInside();
-
-    loadModel(storageFile);
-    tellMeWhatsInside();
-
   }
 
   public void placeAnimal() {
