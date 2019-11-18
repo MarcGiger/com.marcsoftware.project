@@ -2,7 +2,7 @@ package Project;
 
 import java.awt.Color;
 
-public class Shark extends Animal implements Colourful {
+public class Shark extends Animal  {
     private static int sumOfSharks = 0;
 
     public Shark() {
@@ -24,7 +24,7 @@ public class Shark extends Animal implements Colourful {
 
 
     @Override
-    public Color getColor() {
+    public Color getColour() {
         return Color.red;
     }
 }

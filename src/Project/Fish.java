@@ -9,7 +9,7 @@ import java.awt.*;
  * @author Marc Giger
  * @version 0.1
  */
-public class Fish extends Animal implements Colourful {
+public class Fish extends Animal {
     // The amount of Fish swarms.
     private static int sumOfFishSwarms = 0;
 
@@ -40,9 +40,11 @@ public class Fish extends Animal implements Colourful {
         return sumOfFishSwarms;
     }
 
-
+    /**
+     * Gets the colour shown on the grid for Animal-Type Fish.
+     */
     @Override
-    public Color getColor() {
+    public Color getColour() {
         return new Color(0, 100, 0);
     }
 }
