@@ -27,6 +27,11 @@ public class Fish extends Animal {
         sumOfFishSwarms = 0;
     }
 
+    /**
+     * Sets the amount of Fish swarms to inserted num.
+     *
+     * @param sumOfFishSwarms this int is the new value of sumOfFishSwarms.
+     */
     public static void setSumOfFishSwarms(int sumOfFishSwarms) {
         Fish.sumOfFishSwarms = sumOfFishSwarms;
     }
@@ -42,6 +47,8 @@ public class Fish extends Animal {
 
     /**
      * Gets the colour shown on the grid for Animal-Type Fish.
+     *
+     * @return colour of Fish.
      */
     @Override
     public Color getColour() {

@@ -2,13 +2,31 @@ package Project;
 
 import java.awt.Color;
 
-//not actually an animal but maybe like this l can save the Array
-public class Water extends Animal  {
+/**
+ * A simple definition of Water.
+ * <p>
+ * Note: I am not proud on this class yet, as it should run under environment and not under animal.
+ * (But as the program is not developed that far, it has to stick with animal)
+ * Class Water got created due to the fact, that loading Arrays with null in it causes troubles.
+ *
+ * @author Marc Giger
+ * @version 0.1
+ */
 
+
+public class Water extends Animal {
+    /**
+     * Creates a water field. Water is not an animal, therefore is not alive.
+     */
     public Water() {
         alive = false;
     }
 
+    /**
+     * Gets the colour shown on the grid for Animal-Type Water.
+     *
+     * @return colour of Water
+     */
     @Override
     public Color getColour() {
         return Color.blue;
