@@ -7,9 +7,9 @@ package Project;
  * @version 0.1
  */
 public class VisualisationProgramme {
-    // declares the width of the grid
+    // declares the width of the grid (value should not be modified)
     private static final int WIDTH = 16;
-    //declares the amount of columns within the grid
+    //declares the amount of columns within the grid (value should not be modified)
     private static final int COLUMN = 9;
     // nested Object gui
     private Gui gui;

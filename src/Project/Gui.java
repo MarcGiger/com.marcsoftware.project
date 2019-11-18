@@ -5,11 +5,18 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
+/**
+ * A graphical view of the Gui. A Menu and Buttons are implemented.
+ * The view shows for every position a coloured rectangle, which represents the type of Animal.
+ *
+ * @author Marc Giger
+ * @version 0.1
+ */
 public class Gui extends JFrame {
 
     private final int SPACING = 1;
     private final int width, column;
+    // nested objects
     private JDialog dialog;
     private Model model;
     private Board board;
@@ -18,6 +25,8 @@ public class Gui extends JFrame {
     private JMenuBar menuBar;
     private JMenu menu;
     private JMenuItem i1, i2, i3, i4, i5;
+
+    // background colour for Menu and Content
     private static final Color BACKGROUND_COLOR = Color.lightGray;
 
 
@@ -29,7 +38,6 @@ public class Gui extends JFrame {
         this.setResizable(false);
         this.width = width;
         this.column = column;
-
 
 
         // https://stackoverflow.com/questions/20680060/location-of-jframe-in-middle-of-the-window causes problems on my laptop but works fine on school pc...
@@ -47,7 +55,6 @@ public class Gui extends JFrame {
         reset.addActionListener(new ResetHandler());
 
 
-
         //https://www.geeksforgeeks.org/java-swing-jmenubar/
         //after adding Menu l needed to adapt Graphics g
         createMenu();
@@ -61,7 +68,7 @@ public class Gui extends JFrame {
     //https://www.ntu.edu.sg/home/ehchua/programming/java/J4a_GUI_2.html  helped me to set up the menu
     public void createMenu() {
         menuBar = new JMenuBar();
-        menuBar.setBackground(Color.lightGray);
+        menuBar.setBackground(BACKGROUND_COLOR);
         menu = new JMenu("Menu");
 
         i1 = new JMenuItem("Save current stats");
@@ -179,12 +186,12 @@ public class Gui extends JFrame {
                     model.saveModel(model.getStorageFile());
                     //Timer t;
                     //if (t==null)
-                        Timer t = new Timer(2200, e -> dialog.setVisible(false));//.setRepeats(false);
-                        t.start();
+                    Timer t = new Timer(2200, e -> dialog.setVisible(false));//.setRepeats(false);
+                    t.start();
 
-                       // without setRepeats it continues to fire events every time the between-event delay has elapsed, until it is stopped (lesson learned:)
-                        t.setRepeats(false);
-                        //System.gc();
+                    // without setRepeats it continues to fire events every time the between-event delay has elapsed, until it is stopped (lesson learned:)
+                    t.setRepeats(false);
+                    //System.gc();
                     break;
                 case "Load stats":
                     System.out.println("Loading...");
