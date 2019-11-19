@@ -108,7 +108,6 @@ public class Model implements Serializable {
     }
 
     public void updateStats() {
-
     }
 
     //This method is for testing purposes. Is the populating of the grid working?

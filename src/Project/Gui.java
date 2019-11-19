@@ -13,17 +13,16 @@ import java.awt.event.ActionListener;
  * @version 0.1
  */
 public class Gui extends JFrame {
-
     // line between rectangles
     private final int SPACING = 1;
     // values received from driver class
     private final int width, column;
     // nested objects
-    private JDialog dialog;
+    private JDialog dialog, dialog2;
     private Model model;
     private Board board;
     private JButton reset;
-    private JLabel sharksLabel, fishLabel, save;
+    private JLabel sharksLabel, fishLabel, save, load;
     private JMenuBar menuBar;
     private JMenu menu;
     private JMenuItem i1, i2, i3, i4, i5;
@@ -138,7 +137,7 @@ public class Gui extends JFrame {
             fishLabel.setBounds(8, -15, 100, 100);
             fishLabel.setText("Fish: " + Fish.getSumOfFishSwarms());
 
-
+            // gets and sets the colour for the Content Pane
             for (int i = 0; i < width; i++) {
                 for (int j = 0; j < column; j++) {
                     g.getColor();
@@ -151,8 +150,7 @@ public class Gui extends JFrame {
                     if (model.getObject(i, j) instanceof Water) {
                         g.setColor((model.getObject(i, j)).getColour());
                     }
-
-
+                    // paints the Content Pane
                     // SPACING + j * 80 + 60 (60 is for JButton and JLabel)
                     g.fillRect(SPACING + i * 80, SPACING + j * 80 + 60, 80 - 2 * SPACING, 80 - 2 * SPACING);
                 }
@@ -160,7 +158,7 @@ public class Gui extends JFrame {
         }
 
         /**
-         * This method clears the Board class and repaints it.
+         * This method clears the Board class and repaints it. If the grid got changed, it will be illustrated after calling this method.
          */
         public void resetBoard() {
             // source: https://stackoverflow.com/questions/47545250/java-repaint-gridlayout
@@ -188,7 +186,6 @@ public class Gui extends JFrame {
 
             board.resetBoard();
             JOptionPane.showMessageDialog(null, "Initial board Reset!");
-
         }
     }
 
@@ -210,33 +207,50 @@ public class Gui extends JFrame {
                 // source: Timer http://www.java2s.com/Tutorials/Java/Swing_How_to/JOptionPane/Use_Timer_to_close_JOptionPane_after_few_seconds.htm
                 // source: https://docs.oracle.com/javase/8/docs/api/javax/swing/Timer.html
                 case "Save current stats":
+                    // just playing with a timer and visualise it with a dialog window
                     dialog = new JDialog();
                     dialog.setSize(100, 80);
                     save = new JLabel("   Saving...");
                     dialog.add(save);
-
                     Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
                     dialog.setLocation(dim.width / 2 - dialog.getSize().width / 2, dim.height / 2 - dialog.getSize().height / 2);
                     dialog.setModal(false);
                     dialog.setVisible(true);
                     dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-
-                    model.saveModel(model.getStorageFile());
-
-                    Timer t = new Timer(2200, e -> dialog.setVisible(false));
+                    Timer t = new Timer(2000, e -> dialog.setVisible(false));
                     t.start();
-
                     // without setRepeats it continues to fire events every time the between-event delay has elapsed, until it is stopped (lesson learned:)
                     t.setRepeats(false);
+                    // actually what should be done when clicked (save the animal Array)
+                    model.saveModel(model.getStorageFile());
                     break;
 
                 case "Load stats":
-                    System.out.println("Loading...");
+                    // just playing with a timer and visualise it with a dialog window
+                    dialog2 = new JDialog();
+                    dialog2.setSize(100, 80);
+                    load = new JLabel("   Loading...");
+                    dialog2.add(load);
+                    Dimension dim2 = Toolkit.getDefaultToolkit().getScreenSize();
+                    dialog2.setLocation(dim2.width / 2 - dialog2.getSize().width / 2, dim2.height / 2 - dialog2.getSize().height / 2);
+                    dialog2.setModal(false);
+                    dialog2.setVisible(true);
+                    dialog2.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+                    Timer t2 = new Timer(1100, e -> dialog2.setVisible(false));
+                    t2.start();
+                    // without setRepeats it continues to fire events every time the between-event delay has elapsed, until it is stopped (lesson learned:)
+                    t2.setRepeats(false);
+
+
+                    // emptying the actual animal Array (to prevent bugs)
                     model.resetAnimal();
+                    // actually what should be done when clicked (load the animal Array)
                     model.loadModel(model.getStorageFile());
-                    model.tellMeWhatsInside();
+                    // model.tellMeWhatsInside();
+                    // redraw the board
                     board.resetBoard();
                     break;
+
                 case "Dummy 1":
                     JOptionPane.showMessageDialog(null, "no function implemented");
                     break;
