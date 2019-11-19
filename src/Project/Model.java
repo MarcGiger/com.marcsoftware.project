@@ -9,6 +9,9 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Random;
 
+/**
+ * This class sets up the animal grid, which then will be visualised by the Gui class.
+ */
 public class Model implements Serializable {
 
     private final int width;
@@ -24,8 +27,6 @@ public class Model implements Serializable {
         rand = new Random();
         storageFile = new File("Model.ser");
         placeAnimal();
-
-
     }
 
     public void placeAnimal() {
