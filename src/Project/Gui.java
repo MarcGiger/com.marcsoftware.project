@@ -109,10 +109,11 @@ public class Gui extends JFrame {
 
         // source: https://www.youtube.com/watch?v=EMu1cC2Vnis helped me to set up the visualisation of the grid
 // source: https://docs.oracle.com/javase/7/docs/api/javax/swing/JComponent.html#paintComponent(java.awt.Graphics)
+
         /**
-         *Calls the UI delegate's paint method, if the UI delegate is non-null. We pass the delegate a copy of the Graphics object to protect the rest of the paint code from irrevocable changes (for example, Graphics.translate).
+         * Calls the UI delegate's paint method, if the UI delegate is non-null. We pass the delegate a copy of the Graphics object to protect the rest of the paint code from irrevocable changes (for example, Graphics.translate).
          * If you override this in a subclass you should not make permanent changes to the passed in Graphics. For example, you should not alter the clip Rectangle or modify the transform. If you need to do these operations you may find it easier to create a new Graphics from the passed in Graphics and manipulate it. Further, if you do not invoker super's implementation you must honor the opaque property, that is if this component is opaque, you must completely fill in the background in a non-opaque color. If you do not honor the opaque property you will likely see visual artifacts.
-         *
+         * <p>
          * The passed in Graphics object might have a transform other than the identify transform installed on it. In this case, you might get unexpected results if you cumulatively apply another transform.
          *
          * @param g the Graphics object to protect
@@ -142,13 +143,13 @@ public class Gui extends JFrame {
                 for (int j = 0; j < column; j++) {
                     g.getColor();
                     if ((model.getObject(i, j) instanceof Fish)) {
-                        g.setColor(( model.getObject(i, j)).getColour());
+                        g.setColor((model.getObject(i, j)).getColour());
                     }
                     if (model.getObject(i, j) instanceof Shark) {
-                        g.setColor(( model.getObject(i, j)).getColour());
+                        g.setColor((model.getObject(i, j)).getColour());
                     }
                     if (model.getObject(i, j) instanceof Water) {
-                        g.setColor(( model.getObject(i, j)).getColour());
+                        g.setColor((model.getObject(i, j)).getColour());
                     }
 
 
@@ -170,12 +171,12 @@ public class Gui extends JFrame {
     }
 
     /**
-     *
+     * Inner class which handles clicks on a button
+     * Source: Help from course notes
      */
     private class ResetHandler implements ActionListener {
         /**
-         *
-         * @param e
+         * When the button is clicked, response starts here
          */
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -192,11 +193,11 @@ public class Gui extends JFrame {
     }
 
     /**
-     *
+     * Inner class which handles clicks on the menu.
+     * Source: Help from course notes
      */
     private class MenuHandler implements ActionListener {
         /**
-         * Help from course notes
          * When an item is clicked, response starts here
          */
         @Override
@@ -204,6 +205,7 @@ public class Gui extends JFrame {
             String menuName;
             menuName = event.getActionCommand(); // what's written on the item that was clicked
 
+            //other way could have been with if and else, but this seemed more "handy"
             switch (menuName) {
                 // source: Timer http://www.java2s.com/Tutorials/Java/Swing_How_to/JOptionPane/Use_Timer_to_close_JOptionPane_after_few_seconds.htm
                 // source: https://docs.oracle.com/javase/8/docs/api/javax/swing/Timer.html
@@ -226,7 +228,7 @@ public class Gui extends JFrame {
 
                     // without setRepeats it continues to fire events every time the between-event delay has elapsed, until it is stopped (lesson learned:)
                     t.setRepeats(false);
-                     break;
+                    break;
 
                 case "Load stats":
                     System.out.println("Loading...");
