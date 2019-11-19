@@ -83,6 +83,14 @@ public class Model implements Serializable {
         }
     }
 
+    /**
+     * This method saves the Animal Array.
+
+     * Created with help from Persistence notes (Powerpoint) and other sources:
+     * https://stackoverflow.com/questions/1467193/java-serialization-of-multidimensional-array
+     *
+     * @param file is created when constuctor is envoked and gets stored within the running program
+     */
     public void saveModel(File file) {
         try (final ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(file))) {
             (objectOutputStream).writeObject(animal);
@@ -94,6 +102,17 @@ public class Model implements Serializable {
 
     }
 
+    /**
+     * This method loads the Animal Array.
+     * <p>
+     * The loading was challenging, because the 2dArray had sometimes null assigned to it.
+     * Therefore, I added the class Water to never have null assigned within the Array.
+     * <p>
+     * Created with help from Persistence notes (Powerpoint) and other source:
+     * https://stackoverflow.com/questions/1467193/java-serialization-of-multidimensional-array
+     *
+     * @param file is created when constuctor is envoked and gets stored within the running program
+     */
     public void loadModel(File file) {
         try (final ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(file))) {
             animal = (Animal[][]) objectInputStream.readObject();
