@@ -7,14 +7,16 @@ import java.awt.event.ActionListener;
 
 /**
  * A graphical view of the Gui. A Menu and Buttons are implemented.
- * The view shows for every position a coloured rectangle, which represents the type of Animal.
+ * The view shows for every position a coloured rectangle, which represents the type of the placed Animal.
  *
  * @author Marc Giger
  * @version 0.1
  */
 public class Gui extends JFrame {
 
+    // line between rectangles
     private final int SPACING = 1;
+    // values received from driver class
     private final int width, column;
     // nested objects
     private JDialog dialog;
@@ -29,18 +31,25 @@ public class Gui extends JFrame {
     // background colour for Menu and Content
     private static final Color BACKGROUND_COLOR = Color.lightGray;
 
-
+    /**
+     * The Gui class represents the graphical user interface. It visualises what got initialised in the model class
+     * and shows the changes while running the Simulation class. Furthermore, it displays a menu and some buttons.
+     *
+     * @param width  this int gets passed from the driver class and sets the with within grid
+     * @param column this int gets passed from the driver class and sets the amount of columns within the grid
+     */
     public Gui(int width, int column) {
         model = new Model(width, column);
         this.setTitle("Visualisation");
         this.setSize(1296, 843);
         this.setDefaultCloseOperation(Gui.EXIT_ON_CLOSE);
+        //to prevent not ideal frames
         this.setResizable(false);
         this.width = width;
         this.column = column;
 
 
-        // https://stackoverflow.com/questions/20680060/location-of-jframe-in-middle-of-the-window causes problems on my laptop but works fine on school pc...
+        // source: https://stackoverflow.com/questions/20680060/location-of-jframe-in-middle-of-the-window
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
 
@@ -54,18 +63,21 @@ public class Gui extends JFrame {
         reset = new JButton("Reset");
         reset.addActionListener(new ResetHandler());
 
-
-        //https://www.geeksforgeeks.org/java-swing-jmenubar/
-        //after adding Menu l needed to adapt Graphics g
+        // after adding Menu l needed to adapt Graphics g
         createMenu();
 
-
-        // redraw.setVisible(true); why redundant
-        // this.setVisible(true); why position not important
+        // redraw.setVisible(true); why redundant? couldn't find the answer
+        // this.setVisible(true); why position not important? couldn't find the answer
     }
 
-    // https://docs.oracle.com/javase/tutorial/uiswing/components/menu.html helped me to set up the menu
-    //https://www.ntu.edu.sg/home/ehchua/programming/java/J4a_GUI_2.html  helped me to set up the menu
+    // source: https://docs.oracle.com/javase/tutorial/uiswing/components/menu.html helped me to set up the menu
+    // source: https://www.ntu.edu.sg/home/ehchua/programming/java/J4a_GUI_2.html  helped me to set up the menu
+    // source: https://www.geeksforgeeks.org/java-swing-jmenubar/
+
+    /**
+     * This method creates and adds the MenuBar, Menu and MenuItem. This method is created to reduce the code within
+     * the constructor and keep it easier to read.
+     */
     public void createMenu() {
         menuBar = new JMenuBar();
         menuBar.setBackground(BACKGROUND_COLOR);
@@ -90,9 +102,21 @@ public class Gui extends JFrame {
         i5.addActionListener(new MenuHandler());
     }
 
+    /**
+     * The private Board class draws the grid and adds & displays the other features (Buttons, Menu)
+     */
     private class Board extends JPanel {
 
-        //https://www.youtube.com/watch?v=EMu1cC2Vnis helped me to set up the visualisation of the grid
+        // source: https://www.youtube.com/watch?v=EMu1cC2Vnis helped me to set up the visualisation of the grid
+// source: https://docs.oracle.com/javase/7/docs/api/javax/swing/JComponent.html#paintComponent(java.awt.Graphics)
+        /**
+         *Calls the UI delegate's paint method, if the UI delegate is non-null. We pass the delegate a copy of the Graphics object to protect the rest of the paint code from irrevocable changes (for example, Graphics.translate).
+         * If you override this in a subclass you should not make permanent changes to the passed in Graphics. For example, you should not alter the clip Rectangle or modify the transform. If you need to do these operations you may find it easier to create a new Graphics from the passed in Graphics and manipulate it. Further, if you do not invoker super's implementation you must honor the opaque property, that is if this component is opaque, you must completely fill in the background in a non-opaque color. If you do not honor the opaque property you will likely see visual artifacts.
+         *
+         * The passed in Graphics object might have a transform other than the identify transform installed on it. In this case, you might get unexpected results if you cumulatively apply another transform.
+         *
+         * @param g the Graphics object to protect
+         */
         @Override
         public void paintComponent(Graphics g) {
             g.setColor(BACKGROUND_COLOR);
@@ -118,13 +142,13 @@ public class Gui extends JFrame {
                 for (int j = 0; j < column; j++) {
                     g.getColor();
                     if ((model.getObject(i, j) instanceof Fish)) {
-                        g.setColor(((Colourful) model.getObject(i, j)).getColour());
+                        g.setColor(( model.getObject(i, j)).getColour());
                     }
                     if (model.getObject(i, j) instanceof Shark) {
-                        g.setColor(((Colourful) model.getObject(i, j)).getColour());
+                        g.setColor(( model.getObject(i, j)).getColour());
                     }
                     if (model.getObject(i, j) instanceof Water) {
-                        g.setColor(((Colourful) model.getObject(i, j)).getColour());
+                        g.setColor(( model.getObject(i, j)).getColour());
                     }
 
 
@@ -134,16 +158,25 @@ public class Gui extends JFrame {
             }
         }
 
+        /**
+         * This method clears the Board class and repaints it.
+         */
         public void resetBoard() {
-            //https://stackoverflow.com/questions/47545250/java-repaint-gridlayout
+            // source: https://stackoverflow.com/questions/47545250/java-repaint-gridlayout
             removeAll();
             revalidate();
             repaint();
-
         }
     }
 
+    /**
+     *
+     */
     private class ResetHandler implements ActionListener {
+        /**
+         *
+         * @param e
+         */
         @Override
         public void actionPerformed(ActionEvent e) {
 
@@ -158,10 +191,13 @@ public class Gui extends JFrame {
         }
     }
 
+    /**
+     *
+     */
     private class MenuHandler implements ActionListener {
         /**
          * Help from course notes
-         * when an item is clicked, response starts here
+         * When an item is clicked, response starts here
          */
         @Override
         public void actionPerformed(ActionEvent event) {
@@ -169,8 +205,8 @@ public class Gui extends JFrame {
             menuName = event.getActionCommand(); // what's written on the item that was clicked
 
             switch (menuName) {
-                // Timer http://www.java2s.com/Tutorials/Java/Swing_How_to/JOptionPane/Use_Timer_to_close_JOptionPane_after_few_seconds.htm
-                // https://docs.oracle.com/javase/8/docs/api/javax/swing/Timer.html
+                // source: Timer http://www.java2s.com/Tutorials/Java/Swing_How_to/JOptionPane/Use_Timer_to_close_JOptionPane_after_few_seconds.htm
+                // source: https://docs.oracle.com/javase/8/docs/api/javax/swing/Timer.html
                 case "Save current stats":
                     dialog = new JDialog();
                     dialog.setSize(100, 80);
@@ -184,15 +220,14 @@ public class Gui extends JFrame {
                     dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 
                     model.saveModel(model.getStorageFile());
-                    //Timer t;
-                    //if (t==null)
-                    Timer t = new Timer(2200, e -> dialog.setVisible(false));//.setRepeats(false);
+
+                    Timer t = new Timer(2200, e -> dialog.setVisible(false));
                     t.start();
 
                     // without setRepeats it continues to fire events every time the between-event delay has elapsed, until it is stopped (lesson learned:)
                     t.setRepeats(false);
-                    //System.gc();
-                    break;
+                     break;
+
                 case "Load stats":
                     System.out.println("Loading...");
                     model.resetAnimal();
