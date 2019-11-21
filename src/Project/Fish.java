@@ -54,6 +54,10 @@ public class Fish extends Animal {
     public Color getColour() {
         return new Color(0, 100, 0);
     }
+
+@Override
+    public void swim() {
+    }
 }
 
 

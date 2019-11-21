@@ -21,7 +21,7 @@ public class Gui extends JFrame {
     private JDialog dialog, dialog2;
     private Model model;
     private Board board;
-    private JButton reset;
+    private JButton reset,simulate;
     private JLabel sharksLabel, fishLabel, save, load;
     private JMenuBar menuBar;
     private JMenu menu;
@@ -61,9 +61,14 @@ public class Gui extends JFrame {
 
         reset = new JButton("Reset");
         reset.addActionListener(new ResetHandler());
+        simulate = new JButton("Simulate");
+        simulate.addActionListener(new SimulationHandler());
 
         // after adding Menu l needed to adapt Graphics g
         createMenu();
+
+
+
 
         // redraw.setVisible(true); why redundant? couldn't find the answer
         // this.setVisible(true); why position not important? couldn't find the answer
@@ -128,6 +133,8 @@ public class Gui extends JFrame {
             //JButton
             add(reset);
             reset.setBounds(getWidth() / 2 - 50, 10, 95, 35);
+            add(simulate);
+            simulate.setBounds(getWidth()/ 2 + 50, 10, 95, 35);
 
             //JLabel
             add(sharksLabel);
@@ -188,6 +195,20 @@ public class Gui extends JFrame {
             JOptionPane.showMessageDialog(null, "Initial board Reset!");
         }
     }
+
+    private class SimulationHandler implements ActionListener {
+        /**
+         * When the button is clicked, response starts here
+         */
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            model.letSharkSwim();
+            board.resetBoard();
+
+        }
+    }
+
 
     /**
      * Inner class which handles clicks on the menu.

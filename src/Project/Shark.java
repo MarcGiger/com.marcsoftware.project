@@ -54,4 +54,9 @@ public class Shark extends Animal {
     public Color getColour() {
         return Color.red;
     }
+
+    @Override
+    public void swim() {
+
+    }
 }

@@ -167,5 +167,30 @@ public class Model implements Serializable {
 
     }
 
+    public void letSharkSwim(){
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < column; j++) {
+                if (animal[i][j] instanceof Shark) {
+
+
+                    if(0<i){
+
+                        int a,b;
+                        a=i;
+                        b=j;
+                        a--;
+                        if (animal[a][b] instanceof Water){
+                            animal[a][b] = new Shark();
+                            animal[i][j] = null;
+                            animal[i][j] = new Water();
+                            Shark.setSumOfSharks(Shark.getNumOfSharks()-1);
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+
 
 }

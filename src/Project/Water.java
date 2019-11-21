@@ -31,4 +31,10 @@ public class Water extends Animal {
     public Color getColour() {
         return Color.blue;
     }
+
+
+    @Override
+    public void swim() {
+    }
 }
+
