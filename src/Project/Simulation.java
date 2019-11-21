@@ -1,5 +1,7 @@
 package Project;
 
+import java.util.Random;
+
 /**
  * http://www.cburch.com/proj/jett/05/handouts/hunt/
  * A Simulation class for the interaction of animal stock
@@ -10,6 +12,7 @@ package Project;
  * @version 0.1
  */
 public class Simulation {
+    private final Random rand = new Random();
 
         /** The number of directions available (8). */
         public static final int NUM_DIRECTIONS = 8;
@@ -94,28 +97,6 @@ public class Simulation {
             return dy;
         }
 
-        /**
-         * Returns the direction that is clockwise from this direction
-         * on the compass by the specified number of 45-degree steps.
-         * A negative parameter will lead to going counterclockwise.
-         *
-         * @param distance  the number of 45-degree steps clockwise.
-         * @return  the computed direction.
-         */
-        public Simulation rotate(int distance) {
-            if(index < 0) {
-                for(int i = 0; i < VALUES.length; i++) {
-                    if(VALUES[i] == this) { index = i; break; }
-                }
-            }
-            int retIndex = (index + distance) % VALUES.length;
-            if(retIndex < 0) {
-                // negative numerator leads to negative result
-                // for example: -9 % 8 == -1
-                retIndex = VALUES.length + retIndex;
-            }
-            return VALUES[retIndex];
-        }
 
         /**
          * Returns a descriptive name for this direction.
@@ -124,6 +105,11 @@ public class Simulation {
          */
         public String toString() {
             return name;
+        }
+
+        public Simulation random(){
+            int i = rand.nextInt(8);
+            return VALUES[i];
         }
     }
 

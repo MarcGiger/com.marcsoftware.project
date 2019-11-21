@@ -19,6 +19,7 @@ public class Model implements Serializable {
     private final Random rand;
     private final File storageFile;
     private Animal[][] animal;
+    private Simulation s1;
 
     public Model(int width, int column) {
         this.width = width;
@@ -173,19 +174,27 @@ public class Model implements Serializable {
                 if (animal[i][j] instanceof Shark) {
 
 
+s1.random().toString();
+                    s1.random().toString();
+                    s1.random().toString();
+                    s1.random().toString();
+
+
+/*
                     if(0<i){
 
                         int a,b;
                         a=i;
                         b=j;
-                        a--;
-                        if (animal[a][b] instanceof Water){
-                            animal[a][b] = new Shark();
+
+                        if (animal[a+Simulation.WEST.getDeltaX()][b] instanceof Water){
+                            animal[a+Simulation.WEST.getDeltaX()][b] = new Shark();
                             animal[i][j] = null;
                             animal[i][j] = new Water();
                             Shark.setSumOfSharks(Shark.getNumOfSharks()-1);
+
                         }
-                    }
+                    }*/
 
                 }
             }
