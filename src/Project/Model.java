@@ -161,7 +161,7 @@ public class Model implements Serializable {
         if (empty == width * column) {
             System.out.println("all entries are null");
         } else {
-            System.out.println("Fishs:" + numOfFishSwarms + "\nSharks:" + numOfSharks + "\nWater:" + numOfWater);
+            System.out.println("Fish:" + numOfFishSwarms + "\nSharks:" + numOfSharks + "\nWater:" + numOfWater);
         }
 
 
