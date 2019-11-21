@@ -87,7 +87,7 @@ public class Model implements Serializable {
 
     /**
      * This method saves the Animal Array.
-
+     * <p>
      * Created with help from Persistence notes (Powerpoint) and other sources:
      * https://stackoverflow.com/questions/1467193/java-serialization-of-multidimensional-array
      *
@@ -99,9 +99,7 @@ public class Model implements Serializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         System.out.println("saved");
-
     }
 
     /**
@@ -168,17 +166,13 @@ public class Model implements Serializable {
 
     }
 
-    public void letSharkSwim(){
+    public void letSharkSwim() {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < column; j++) {
                 if (animal[i][j] instanceof Shark) {
 
 
-s1.random().toString();
                     s1.random().toString();
-                    s1.random().toString();
-                    s1.random().toString();
-
 
 /*
                     if(0<i){

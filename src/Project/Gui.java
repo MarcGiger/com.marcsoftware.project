@@ -202,10 +202,8 @@ public class Gui extends JFrame {
          */
         @Override
         public void actionPerformed(ActionEvent e) {
-
             model.letSharkSwim();
             board.resetBoard();
-
         }
     }
 
@@ -270,6 +268,7 @@ public class Gui extends JFrame {
                     // model.tellMeWhatsInside();
                     // redraw the board
                     board.resetBoard();
+                    System.out.println(Shark.getNumOfSharks());
                     break;
 
                 case "Dummy 1":
