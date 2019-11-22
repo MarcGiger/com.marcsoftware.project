@@ -47,6 +47,11 @@ public class Fish extends Animal {
         return sumOfFishSwarms;
     }
 
+    @Override
+    public String toString(){
+        return "Fish";
+    }
+
     /**
      * Gets the colour shown on the grid for Animal-Type Fish.
      *

@@ -23,6 +23,11 @@ public class Water extends Animal {
         alive = false;
     }
 
+    @Override
+    public String toString(){
+        return "Water";
+    }
+
     /**
      * Gets the colour shown on the grid for Animal-Type Water.
      *

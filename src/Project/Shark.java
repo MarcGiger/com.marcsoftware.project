@@ -49,6 +49,48 @@ public class Shark extends Animal {
         return sumOfSharks;
     }
 
+    public int getNegativeNeighbourX(){
+        int a;
+        a = getPositionX()-1;
+if (a<0) return -1;
+else return a;
+    }
+    public int getPositiveNeighbourX(){
+        int a;
+        a = getPositionX()+1;
+        if (a>16) return -1;
+        else return a;
+    }
+
+    public int getNegativeNeighbourY(){
+        int a;
+        a = getPositionY()-1;
+        if (a<0) return -1;
+        else return a;
+    }
+    public int getPositiveNeighbourY(){
+        int a;
+        a = getPositionY()+1;
+        if (a>9) return -1;
+        else return a;
+    }
+
+    public int getPositionX() {
+        return positionX;
+    }
+
+    public void setPositionX(int positionX) {
+        this.positionX = positionX;
+    }
+
+    public int getPositionY() {
+        return positionY;
+    }
+
+    public void setPositionY(int positionY) {
+        this.positionY = positionY;
+    }
+
     /**
      * Gets the colour shown on the grid for Animal-Type Shark.
      *
@@ -65,8 +107,7 @@ public class Shark extends Animal {
                 "COLOUR=" + COLOUR +
                 ", positionX=" + positionX +
                 ", positionY=" + positionY +
-                ", alive=" + alive +
-                '}';
+                '}'+"Neighbour: "+getNegativeNeighbourX()+" "+getPositiveNeighbourX();
     }
 
     @Override
