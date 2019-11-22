@@ -172,6 +172,7 @@ public class Gui extends JFrame {
             removeAll();
             revalidate();
             repaint();
+            model.tellMeWhatsInside();
         }
     }
 
@@ -202,7 +203,7 @@ public class Gui extends JFrame {
          */
         @Override
         public void actionPerformed(ActionEvent e) {
-            model.letSharkSwim();
+           // model.letSharkSwim();
             board.resetBoard();
         }
     }

@@ -12,11 +12,15 @@ import java.awt.Color;
 public class Shark extends Animal {
     // The amount of sharks.
     private static int sumOfSharks = 0;
+    private final Color COLOUR = Color.red;
+    private int positionX,positionY;
 
     /**
      * Creates a Shark.
      */
-    public Shark() {
+    public Shark(int x, int y) {
+        positionX = x;
+        positionY = y;
         sumOfSharks++;
     }
 
@@ -52,7 +56,17 @@ public class Shark extends Animal {
      */
     @Override
     public Color getColour() {
-        return Color.red;
+        return COLOUR;
+    }
+
+    @Override
+    public String toString() {
+        return "Shark{" +
+                "COLOUR=" + COLOUR +
+                ", positionX=" + positionX +
+                ", positionY=" + positionY +
+                ", alive=" + alive +
+                '}';
     }
 
     @Override
