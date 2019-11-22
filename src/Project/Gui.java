@@ -16,7 +16,7 @@ public class Gui extends JFrame {
     // line between rectangles
     private final int SPACING = 1;
     // values received from driver class
-    private final int width, column;
+    private final int width, row;
     // nested objects
     private JDialog dialog, dialog2;
     private Model model;
@@ -35,17 +35,17 @@ public class Gui extends JFrame {
      * and shows the changes while running the Simulation class. Furthermore, it displays a menu and some buttons.
      *
      * @param width  this int gets passed from the driver class and sets the with within grid
-     * @param column this int gets passed from the driver class and sets the amount of columns within the grid
+     * @param row this int gets passed from the driver class and sets the amount of columns within the grid
      */
-    public Gui(int width, int column) {
-        model = new Model(width, column);
+    public Gui(int width, int row) {
+        model = new Model(width, row);
         this.setTitle("Visualisation");
         this.setSize(1296, 843);
         this.setDefaultCloseOperation(Gui.EXIT_ON_CLOSE);
         //to prevent not ideal frames
         this.setResizable(false);
         this.width = width;
-        this.column = column;
+        this.row = row;
 
 
         // source: https://stackoverflow.com/questions/20680060/location-of-jframe-in-middle-of-the-window
@@ -146,7 +146,7 @@ public class Gui extends JFrame {
 
             // gets and sets the colour for the Content Pane
             for (int i = 0; i < width; i++) {
-                for (int j = 0; j < column; j++) {
+                for (int j = 0; j < row; j++) {
                     g.getColor();
                     if ((model.getObject(i, j) instanceof Fish)) {
                         g.setColor((model.getObject(i, j)).getColour());

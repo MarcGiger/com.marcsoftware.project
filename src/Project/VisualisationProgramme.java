@@ -10,7 +10,7 @@ public class VisualisationProgramme {
     // declares the width of the grid (value should not be modified)
     private static final int WIDTH = 16;
     //declares the amount of columns within the grid (value should not be modified)
-    private static final int COLUMN = 9;
+    private static final int ROW = 9;
     // nested Object gui
     private Gui gui;
 
@@ -18,7 +18,7 @@ public class VisualisationProgramme {
      * Sets up the programmes interface and displays it.
      */
     public VisualisationProgramme() {
-        gui = new Gui(WIDTH, COLUMN);
+        gui = new Gui(WIDTH, ROW);
     }
 
     /**
