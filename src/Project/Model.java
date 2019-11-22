@@ -30,7 +30,7 @@ public class Model implements Serializable {
         rand = new Random();
         storageFile = new File("Model.ser");
         placeAnimal();
-        letSharkSwim();
+        
 
        /* for(Shark a : storeSharks){
             System.out.println(a.toString());
@@ -187,26 +187,24 @@ public class Model implements Serializable {
             if (north >= 0 && animal[a.getPositionX()][north] instanceof Water) test.add(north);
             if (south >= 0 && animal[a.getPositionX()][south] instanceof Water) test.add(south);
             if (west >= 0 && animal[west][a.getPositionY()] instanceof Water) test.add(west);
-            if (east >= 0 && animal[south][a.getPositionY()]instanceof Water) test.add(east);
+            if (east >= 0 && animal[south][a.getPositionY()] instanceof Water) test.add(east);
 
-            if (test.get(rand.nextInt(test.size() - 1)) == north)
-                animal[a.getPositionX()][a.getPositionY()] = new Water();
-            animal[a.getPositionX()][north] = new Shark(a.getPositionX(),north);
-            a.setPositionX(north);
+            if (!(test == null)) {
+                if (test.get(rand.nextInt(test.size())) == north)
+                    animal[a.getPositionX()][a.getPositionY()] = new Water();
+                animal[a.getPositionX()][north] = new Shark(a.getPositionX(), north);
+                a.setPositionY(north);
 
 
                 if (test.get(rand.nextInt(test.size() - 1)) == south)
 
                     if (test.get(rand.nextInt(test.size() - 1)) == west)
 
-                        if (test.get(rand.nextInt(test.size() - 1)) == east)
+                        if (test.get(rand.nextInt(test.size() - 1)) == east) ;
 
 
-
-
-                            System.out.println(a.toString());
-
-
+            }
+            //System.out.println(a.toString());
         }
     }
    /* public void letSharkSwimLeft() {
