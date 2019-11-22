@@ -52,26 +52,26 @@ public class Shark extends Animal {
     public int getNegativeNeighbourX(){
         int a;
         a = getPositionX()-1;
-if (a<0) return -1;
+if (a<0) return -1000;
 else return a;
     }
     public int getPositiveNeighbourX(){
         int a;
         a = getPositionX()+1;
-        if (a>16) return -1;
+        if (a>15) return -1000;
         else return a;
     }
 
     public int getNegativeNeighbourY(){
         int a;
         a = getPositionY()-1;
-        if (a<0) return -1;
+        if (a<0) return -1000;
         else return a;
     }
     public int getPositiveNeighbourY(){
         int a;
         a = getPositionY()+1;
-        if (a>9) return -1;
+        if (a>8) return -1000;
         else return a;
     }
 
