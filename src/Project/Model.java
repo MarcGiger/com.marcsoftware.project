@@ -30,7 +30,10 @@ public class Model implements Serializable {
         rand = new Random();
         storageFile = new File("Model.ser");
         placeAnimal();
-        System.out.println(storeSharks.get(0).toString());
+
+        for(Shark a : storeSharks){
+            System.out.println(a.toString());
+        }
     }
 
     public void placeAnimal() {
@@ -167,8 +170,15 @@ public class Model implements Serializable {
 
 
     }
+    public void letSharkSwimLeft() {
+        for (Shark a : storeSharks) {
+            System.out.println(a.toString());
 
+            int swimLeft = -1, swimRight = 1,swimDown= 1, swimUp = -1;
 
+            
+        }
+    }
    /* public void letSharkSwimLeft() {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < column; j++) {
