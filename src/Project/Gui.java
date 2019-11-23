@@ -209,18 +209,14 @@ public class Gui extends JFrame {
             for (int a = test; a > 0; a--) {
                 model.letSharkSwim();
                 board.resetBoard();
-                    try {
-                        Thread.sleep(100);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-
-
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
-
             }
         }
-
+    }
 
 
     /**

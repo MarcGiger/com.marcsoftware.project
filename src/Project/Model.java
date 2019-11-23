@@ -143,7 +143,7 @@ public class Model implements Serializable {
     //This method is for testing purposes. Is the populating of the grid working?
     public void tellMeWhatsInside() {
 
-        System.out.println("Tell me whats inside?");
+        //System.out.println("Tell me whats inside?");
         int numOfFishSwarms = 0;
         int numOfSharks = 0;
         int numOfWater = 0;
@@ -171,7 +171,7 @@ public class Model implements Serializable {
         if (empty == width * row) {
             System.out.println("all entries are null");
         } else {
-            System.out.println("Fish:" + numOfFishSwarms + "\nSharks:" + numOfSharks + "\nWater:" + numOfWater);
+            //  System.out.println("Fish:" + numOfFishSwarms + "\nSharks:" + numOfSharks + "\nWater:" + numOfWater);
         }
 
 
@@ -211,17 +211,16 @@ public class Model implements Serializable {
                 }
             }
 
-
             System.out.println(a.getPositionY() + " positiver y Nachbar " + a.getPositiveNeighbourY());
-            randomString = test.get(rand.nextInt(test.size()));
-            if ((test.size() != 0)) {
 
+            if ((test.isEmpty()== false)) {
+                randomString = test.get(rand.nextInt(test.size()));
                 if (randomString == "north") {
                     animal[a.getPositionX()][a.getPositionY()] = null;
                     animal[a.getPositionX()][a.getPositionY()] = new Water();
                     animal[a.getPositionX()][north] = new Shark(a.getPositionX(), north);
                     a.setPositionY(north);
-
+                    Shark.setSumOfSharks(Shark.getNumOfSharks() - 1);
                 }
                 if ((test.size() != 0)) {
                     if (randomString == "south") {
@@ -229,7 +228,7 @@ public class Model implements Serializable {
                         animal[a.getPositionX()][a.getPositionY()] = new Water();
                         animal[a.getPositionX()][south] = new Shark(a.getPositionX(), south);
                         a.setPositionY(south);
-
+                        Shark.setSumOfSharks(Shark.getNumOfSharks() - 1);
                     }
                 }
                 if ((test.size() != 0)) {
@@ -238,7 +237,7 @@ public class Model implements Serializable {
                         animal[a.getPositionX()][a.getPositionY()] = new Water();
                         animal[east][a.getPositionY()] = new Shark(east, a.getPositionY());
                         a.setPositionX(east);
-
+                        Shark.setSumOfSharks(Shark.getNumOfSharks() - 1);
                     }
                 }
                 if ((test.size() != 0)) {
@@ -247,76 +246,14 @@ public class Model implements Serializable {
                         animal[a.getPositionX()][a.getPositionY()] = new Water();
                         animal[west][a.getPositionY()] = new Shark(west, a.getPositionY());
                         a.setPositionX(west);
-
+                        Shark.setSumOfSharks(Shark.getNumOfSharks() - 1);
                     }
                 }
                 //System.out.println(a.toString());
             }
         }
     }
-   /* public void letSharkSwimLeft() {
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < column; j++) {
-                if (animal[i][j] instanceof Shark) {
 
-
-                    //s1.random().toString();
-
-
-                    if(i<16){
-
-                        int a,b;
-                        a=i;
-                        b=j;
-
-                        if (animal[a+Simulation.WEST.getDeltaX()][b] instanceof Water){
-                            animal[a+Simulation.WEST.getDeltaX()][b] = new Shark();
-                            animal[i][j] = null;
-                            animal[i][j] = new Water();
-                            Shark.setSumOfSharks(Shark.getNumOfSharks()-1);
-
-                        }
-                    }
-
-                }
-            }
-        }
-    }
-    public void letSharkSwim() {
-        boolean moved=false;
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < column; j++) {
-                if (animal[i][j] instanceof Shark) {
-
-
-                    //s1.random().toString();
-
-
-                    if(i<width){
-
-                        int a,b;
-                        a=i;
-                        b=j;
-
-                        if (animal[a-Simulation.WEST.getDeltaX()][b] instanceof Water && (a)<16){
-                            animal[a-Simulation.WEST.getDeltaX()][b] = new Shark();
-                            animal[i][j] = null;
-                            animal[i][j] = new Water();
-                            Shark.setSumOfSharks(Shark.getNumOfSharks()-1);
-                            moved=true;
-                            break;
-                        }
-                    }
-
-                }
-            }
-            if (moved==true) break;
-        }
-    }
-
-
-
-*/
 
     public void resetStoreSharksArrayList() {
         storeSharks.clear();
