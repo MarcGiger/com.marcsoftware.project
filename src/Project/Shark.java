@@ -13,7 +13,7 @@ public class Shark extends Animal {
     // The amount of sharks.
     private static int sumOfSharks = 0;
     private final Color COLOUR = Color.red;
-    private int positionX,positionY;
+    private int positionX, positionY;
 
     /**
      * Creates a Shark.
@@ -22,7 +22,7 @@ public class Shark extends Animal {
         positionX = x;
         positionY = y;
         sumOfSharks++;
-        System.out.println("X: "+positionX+" "+positionY);
+        System.out.println("X: " + positionX + " " + positionY);
     }
 
     /**
@@ -50,30 +50,35 @@ public class Shark extends Animal {
         return sumOfSharks;
     }
 
-    public int getNegativeNeighbourX(){
+    public int getNegativeNeighbourX() {
         int a;
-        a = getPositionX()-1;
-if (a<0) return -1000;
-else return a;
-    }
-    public int getPositiveNeighbourX(){
-        int a;
-        a = getPositionX()+1;
-        if (a>15) return -1000;
+        a = getPositionX() - 1;
+        if (a < 0) return -1000;
         else return a;
     }
 
-    public int getNegativeNeighbourY(){
+    public int getPositiveNeighbourX() {
         int a;
-        a = getPositionY()-1;
-        if (a<0) return -1000;
+        a = getPositionX() + 1;
+        if (a > 15) return -1000;
         else return a;
     }
-    public int getPositiveNeighbourY(){
+
+    public int getNegativeNeighbourY() {
         int a;
-        a = getPositionY()+1;
-        if (a>8) return -1000;
+        a = getPositionY() - 1;
+        if (a < 0) return -1000;
         else return a;
+    }
+
+    public int getPositiveNeighbourY() {
+        int a;
+        a = getPositionY() + 1;
+        if (a > 8) {
+            return -1000;
+        } else {
+            return a;
+        }
     }
 
     public int getPositionX() {
@@ -108,7 +113,7 @@ else return a;
                 "COLOUR=" + COLOUR +
                 ", positionX=" + positionX +
                 ", positionY=" + positionY +
-                '}'+"Neighbour: "+getNegativeNeighbourX()+" "+getPositiveNeighbourX();
+                '}' + "Neighbour: " + getNegativeNeighbourX() + " " + getPositiveNeighbourX();
     }
 
     @Override

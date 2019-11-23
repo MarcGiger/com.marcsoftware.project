@@ -187,30 +187,42 @@ public class Model implements Serializable {
             int east = a.getPositiveNeighbourX();
 
             if (north != -1000) {
-                if (animal[a.getPositionX()][north] instanceof Water) test.add(north);
+                if (animal[a.getPositionX()][north] instanceof Water) {
+                    test.add(north);
+                }
             }
-
+/*
             if (south != -1000) {
-                if (animal[a.getPositionX()][south] instanceof Water) test.add(south);
+                if (animal[a.getPositionX()][south] instanceof Water) {
+                    test.add(south);
+                }
             }
 
             if (west != -1000) {
-                if (animal[west][a.getPositionY()] instanceof Water) test.add(west);
+                if (animal[west][a.getPositionY()] instanceof Water) {
+                    test.add(west);
+                }
             }
 
             if (east != -1000) {
-                if (animal[east][a.getPositionY()] instanceof Water) test.add(east);
+                if (animal[east][a.getPositionY()] instanceof Water) {
+                    test.add(east);
+                }
             }
 
+ */
+
+            System.out.println(a.getPositionY() + "positiver y Nachbar" + a.getPositiveNeighbourY());
+
             if ((test.size() != 0)) {
-                if (test.get(rand.nextInt(test.size())) == north)
+                if (test.get(rand.nextInt(test.size())) == north && north > 0) {
                     animal[a.getPositionX()][a.getPositionY()] = null;
-                animal[a.getPositionX()][a.getPositionY()] = new Water();
-                animal[a.getPositionX()][north] = new Shark(a.getPositionX(), north);
-                a.setPositionY(north);
+                    animal[a.getPositionX()][a.getPositionY()] = new Water();
+                    animal[a.getPositionX()][north] = new Shark(a.getPositionX(), north);
+                    a.setPositionY(north);
 
-                System.out.println(a.getPositionY());
-
+                    System.out.println(a.getPositionY());
+                }
 /*
                 if (test.get(rand.nextInt(test.size() - 1)) == south)
 
@@ -288,4 +300,8 @@ public class Model implements Serializable {
 
 
 */
+
+   public void resetStoreSharksArrayList(){
+       storeSharks.clear();
+   }
 }

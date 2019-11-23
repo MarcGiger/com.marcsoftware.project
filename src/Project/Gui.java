@@ -186,7 +186,7 @@ public class Gui extends JFrame {
          */
         @Override
         public void actionPerformed(ActionEvent e) {
-
+model.resetStoreSharksArrayList();
             model.resetAnimal();
             model.placeAnimal();
             // for testing purposes
