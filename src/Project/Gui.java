@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
  * @version 0.1
  */
 public class Gui extends JFrame {
-    boolean redrawn = true;
+
     // line between rectangles
     private final int SPACING = 1;
     // values received from driver class
@@ -170,7 +170,8 @@ public class Gui extends JFrame {
             // source: https://stackoverflow.com/questions/47545250/java-repaint-gridlayout
             removeAll();
             revalidate();
-            repaint();
+            //repaint();
+            paintImmediately(0, 0, 1280, 880);
             model.tellMeWhatsInside();
         }
     }
@@ -207,28 +208,19 @@ public class Gui extends JFrame {
             int test = Integer.parseInt(JOptionPane.showInputDialog(null, "How many steps shall be simulated?", "Please tell me", 1));
             for (int a = test; a > 0; a--) {
                 model.letSharkSwim();
-                redrawn = false;
-                if (redrawn == false) {
-                    board.resetBoard();
+                board.resetBoard();
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
 
-                    Timer t = new Timer(2000, e -> redrawn = true);
-                    t.start();
-                    // without setRepeats it continues to fire events every time the between-event delay has elapsed, until it is stopped (lesson learned:)
-                    t.setRepeats(false);
+
                 }
 
-/*
-                for (int b = test; b > 0; b--) {
-                    Timer t = new Timer(2000, e -> board.resetBoard());
-                    t.start();
-                    // without setRepeats it continues to fire events every time the between-event delay has elapsed, until it is stopped (lesson learned:)
-                    t.setRepeats(false);
-                }
-
- */
             }
         }
-    }
+
 
 
     /**
@@ -291,7 +283,7 @@ public class Gui extends JFrame {
                     // model.tellMeWhatsInside();
                     // redraw the board
                     board.resetBoard();
-                    System.out.println(Shark.getNumOfSharks());
+                    //System.out.println(Shark.getNumOfSharks());
                     break;
 
                 case "Dummy 1":

@@ -212,7 +212,7 @@ public class Model implements Serializable {
             }
 
 
-            System.out.println(a.getPositionY() + "positiver y Nachbar" + a.getPositiveNeighbourY());
+            System.out.println(a.getPositionY() + " positiver y Nachbar " + a.getPositiveNeighbourY());
             randomString = test.get(rand.nextInt(test.size()));
             if ((test.size() != 0)) {
 
