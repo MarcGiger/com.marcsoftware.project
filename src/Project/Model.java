@@ -53,7 +53,9 @@ public class Model implements Serializable {
         }
 
         for (int i = 0; i < width; i++) {
+            System.out.println(i);
             for (int j = 0; j < row; j++) {
+                System.out.println(j);
                 if (rand.nextInt(50) < 1 && !(animal[i][j] instanceof Fish)) {
                     animal[i][j] = new Shark(i, j);// place Shark-Object in animal Array
                     storeSharks.add((Shark) animal[i][j]);
@@ -184,23 +186,23 @@ public class Model implements Serializable {
             int west = a.getNegativeNeighbourX();
             int east = a.getPositiveNeighbourX();
 
-            if (north >= 0) {
+            if (north != -1000) {
                 if (animal[a.getPositionX()][north] instanceof Water) test.add(north);
             }
 
-            if (south >= 0) {
+            if (south != -1000) {
                 if (animal[a.getPositionX()][south] instanceof Water) test.add(south);
             }
 
-            if (west >= 0) {
+            if (west != -1000) {
                 if (animal[west][a.getPositionY()] instanceof Water) test.add(west);
             }
 
-            if (east >= 0) {
-                if (animal[south][a.getPositionY()] instanceof Water) test.add(east);
+            if (east != -1000) {
+                if (animal[east][a.getPositionY()] instanceof Water) test.add(east);
             }
 
-            if (!(test == null)) {
+            if ((test.size() != 0)) {
                 if (test.get(rand.nextInt(test.size())) == north)
                     animal[a.getPositionX()][a.getPositionY()] = null;
                 animal[a.getPositionX()][a.getPositionY()] = new Water();
@@ -209,13 +211,15 @@ public class Model implements Serializable {
 
                 System.out.println(a.getPositionY());
 
-
+/*
                 if (test.get(rand.nextInt(test.size() - 1)) == south)
 
                     if (test.get(rand.nextInt(test.size() - 1)) == west)
 
                         if (test.get(rand.nextInt(test.size() - 1)) == east) ;
 
+
+ */
 
             }
             //System.out.println(a.toString());

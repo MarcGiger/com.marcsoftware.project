@@ -22,6 +22,7 @@ public class Shark extends Animal {
         positionX = x;
         positionY = y;
         sumOfSharks++;
+        System.out.println("X: "+positionX+" "+positionY);
     }
 
     /**
