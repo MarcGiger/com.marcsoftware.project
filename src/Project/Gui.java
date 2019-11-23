@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
  * @version 0.1
  */
 public class Gui extends JFrame {
+    boolean redrawn = true;
     // line between rectangles
     private final int SPACING = 1;
     // values received from driver class
@@ -200,11 +201,31 @@ public class Gui extends JFrame {
          * When the button is clicked, response starts here
          */
         @Override
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(ActionEvent event) {
+// source for multi threading https://dzone.com/articles/java-thread-tutorial-creating-threads-and-multithr
+            // https://www.geeksforgeeks.org/multithreading-in-java/
             int test = Integer.parseInt(JOptionPane.showInputDialog(null, "How many steps shall be simulated?", "Please tell me", 1));
             for (int a = test; a > 0; a--) {
                 model.letSharkSwim();
-                board.resetBoard();
+                redrawn = false;
+                if (redrawn == false){
+                    board.resetBoard();
+
+                    Timer t = new Timer(2000, e -> redrawn = true);
+                    t.start();
+                    // without setRepeats it continues to fire events every time the between-event delay has elapsed, until it is stopped (lesson learned:)
+                    t.setRepeats(false);
+                }
+
+/*
+                for (int b = test; b > 0; b--) {
+                    Timer t = new Timer(2000, e -> board.resetBoard());
+                    t.start();
+                    // without setRepeats it continues to fire events every time the between-event delay has elapsed, until it is stopped (lesson learned:)
+                    t.setRepeats(false);
+                }
+
+ */
             }
         }
     }
@@ -288,4 +309,5 @@ public class Gui extends JFrame {
             }
         }
     }
+
 }
