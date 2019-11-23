@@ -21,7 +21,7 @@ public class Gui extends JFrame {
     private JDialog dialog, dialog2;
     private Model model;
     private Board board;
-    private JButton reset,simulate;
+    private JButton reset, simulate;
     private JLabel sharksLabel, fishLabel, save, load;
     private JMenuBar menuBar;
     private JMenu menu;
@@ -34,8 +34,8 @@ public class Gui extends JFrame {
      * The Gui class represents the graphical user interface. It visualises what got initialised in the model class
      * and shows the changes while running the Simulation class. Furthermore, it displays a menu and some buttons.
      *
-     * @param width  this int gets passed from the driver class and sets the with within grid
-     * @param row this int gets passed from the driver class and sets the amount of columns within the grid
+     * @param width this int gets passed from the driver class and sets the with within grid
+     * @param row   this int gets passed from the driver class and sets the amount of columns within the grid
      */
     public Gui(int width, int row) {
         model = new Model(width, row);
@@ -66,8 +66,6 @@ public class Gui extends JFrame {
 
         // after adding Menu l needed to adapt Graphics g
         createMenu();
-
-
 
 
         // redraw.setVisible(true); why redundant? couldn't find the answer
@@ -134,7 +132,7 @@ public class Gui extends JFrame {
             add(reset);
             reset.setBounds(getWidth() / 2 - 50, 10, 95, 35);
             add(simulate);
-            simulate.setBounds(getWidth()/ 2 + 50, 10, 95, 35);
+            simulate.setBounds(getWidth() / 2 + 50, 10, 95, 35);
 
             //JLabel
             add(sharksLabel);
@@ -186,7 +184,7 @@ public class Gui extends JFrame {
          */
         @Override
         public void actionPerformed(ActionEvent e) {
-model.resetStoreSharksArrayList();
+            model.resetStoreSharksArrayList();
             model.resetAnimal();
             model.placeAnimal();
             // for testing purposes
@@ -203,8 +201,11 @@ model.resetStoreSharksArrayList();
          */
         @Override
         public void actionPerformed(ActionEvent e) {
-           model.letSharkSwim();
-            board.resetBoard();
+            int test = Integer.parseInt(JOptionPane.showInputDialog(null, "How many steps shall be simulated?", "Please tell me", 1));
+            for (int a = test; a > 0; a--) {
+                model.letSharkSwim();
+                board.resetBoard();
+            }
         }
     }
 
