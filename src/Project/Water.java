@@ -16,6 +16,7 @@ import java.awt.Color;
 
 public class Water extends Animal {
     private final Color COLOUR = Color.blue;
+
     /**
      * Creates a water field. Water is not an animal, therefore is not alive.
      */
@@ -24,7 +25,7 @@ public class Water extends Animal {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "Water";
     }
 

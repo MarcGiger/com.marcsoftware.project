@@ -208,7 +208,7 @@ public class Gui extends JFrame {
             for (int a = test; a > 0; a--) {
                 model.letSharkSwim();
                 redrawn = false;
-                if (redrawn == false){
+                if (redrawn == false) {
                     board.resetBoard();
 
                     Timer t = new Timer(2000, e -> redrawn = true);

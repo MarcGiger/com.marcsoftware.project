@@ -212,12 +212,11 @@ public class Model implements Serializable {
             }
 
 
-
             System.out.println(a.getPositionY() + "positiver y Nachbar" + a.getPositiveNeighbourY());
-randomString = test.get(rand.nextInt(test.size()));
+            randomString = test.get(rand.nextInt(test.size()));
             if ((test.size() != 0)) {
 
-                if(randomString=="north"){
+                if (randomString == "north") {
                     animal[a.getPositionX()][a.getPositionY()] = null;
                     animal[a.getPositionX()][a.getPositionY()] = new Water();
                     animal[a.getPositionX()][north] = new Shark(a.getPositionX(), north);
@@ -225,16 +224,16 @@ randomString = test.get(rand.nextInt(test.size()));
 
                 }
                 if ((test.size() != 0)) {
-                    if(randomString=="south"){
+                    if (randomString == "south") {
                         animal[a.getPositionX()][a.getPositionY()] = null;
                         animal[a.getPositionX()][a.getPositionY()] = new Water();
                         animal[a.getPositionX()][south] = new Shark(a.getPositionX(), south);
                         a.setPositionY(south);
 
                     }
-            }
+                }
                 if ((test.size() != 0)) {
-                    if(randomString=="east"){
+                    if (randomString == "east") {
                         animal[a.getPositionX()][a.getPositionY()] = null;
                         animal[a.getPositionX()][a.getPositionY()] = new Water();
                         animal[east][a.getPositionY()] = new Shark(east, a.getPositionY());
@@ -243,7 +242,7 @@ randomString = test.get(rand.nextInt(test.size()));
                     }
                 }
                 if ((test.size() != 0)) {
-                    if(randomString=="west"){
+                    if (randomString == "west") {
                         animal[a.getPositionX()][a.getPositionY()] = null;
                         animal[a.getPositionX()][a.getPositionY()] = new Water();
                         animal[west][a.getPositionY()] = new Shark(west, a.getPositionY());
@@ -251,9 +250,10 @@ randomString = test.get(rand.nextInt(test.size()));
 
                     }
                 }
-            //System.out.println(a.toString());
+                //System.out.println(a.toString());
+            }
         }
-    }}
+    }
    /* public void letSharkSwimLeft() {
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < column; j++) {
@@ -318,7 +318,7 @@ randomString = test.get(rand.nextInt(test.size()));
 
 */
 
-   public void resetStoreSharksArrayList(){
-       storeSharks.clear();
-   }
+    public void resetStoreSharksArrayList() {
+        storeSharks.clear();
+    }
 }
