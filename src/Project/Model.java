@@ -21,7 +21,6 @@ public class Model implements Serializable {
     private final Random rand;
     private final File storageFile;
     private Animal[][] animal;
-    private Simulation s1;
     private ArrayList<Shark> storeSharks = new ArrayList<>();
 
     public Model(int width, int row) {
@@ -173,13 +172,11 @@ public class Model implements Serializable {
         } else {
             //  System.out.println("Fish:" + numOfFishSwarms + "\nSharks:" + numOfSharks + "\nWater:" + numOfWater);
         }
-
-
     }
 
     public void letSharkSwim() {
         for (Shark a : storeSharks) {
-            //a.getNeighbour();
+
             ArrayList<String> test = new ArrayList<>();
 
             int north = a.getPositiveNeighbourY();
