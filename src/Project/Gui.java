@@ -29,7 +29,8 @@ public class Gui extends JFrame {
     private JMenu menu;
     private JMenuItem i1, i2, i3, i4, i5;
     // for JButton
-    private Icon icon;
+    private Image img, img2;
+    private int insertInt;
 
     // background colour for Menu and Content
     private static final Color BACKGROUND_COLOR = Color.lightGray;
@@ -55,7 +56,7 @@ public class Gui extends JFrame {
         // source: https://stackoverflow.com/questions/20680060/location-of-jframe-in-middle-of-the-window
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
-
+        //JLabel
         sharksLabel = new JLabel();
         fishLabel = new JLabel();
 
@@ -63,38 +64,32 @@ public class Gui extends JFrame {
         board = new Board();
         this.setContentPane(board);
 
+        //JButton
         reset = new JButton("Reset");
+        img2 = new ImageIcon(this.getClass().getResource("/Project/pictures/Clear-icon.png")).getImage();
+        reset.setIcon(new ImageIcon(img2));
         reset.addActionListener(new ResetHandler());
-
+        simulate = new JButton("Simulation");
         // Source: https://docs.oracle.com/javase/tutorial/uiswing/components/icon.html#getresource
-        try {
-            icon = new ImageIcon("C:\\Users\\t00210159\\IdeaProjects\\com.marcsoftware.project\\src\\Project\\pictures\\fishButton.png");
-        } catch (NullPointerException e) {
-            board.resetBoard();
-        }
-
-        simulate = new JButton("Simulation", icon);
-        // Text below image
-        simulate.setHorizontalTextPosition(SwingConstants.LEFT);
-        // And centred
-        simulate.setHorizontalTextPosition(SwingConstants.RIGHT);
+        img = new ImageIcon(this.getClass().getResource("/Project/pictures/fishButton.png")).getImage();
+        simulate.setIcon(new ImageIcon(img));
         simulate.addActionListener(new SimulationHandler());
 
         // after adding Menu l needed to adapt Graphics g
         createMenu();
+        board.paintImmediately(0, 0, 1280, 880);
 
-
-        // redraw.setVisible(true); why redundant? couldn't find the answer
-        // this.setVisible(true); why position not important? couldn't find the answer
     }
 
-    // source: https://docs.oracle.com/javase/tutorial/uiswing/components/menu.html helped me to set up the menu
-    // source: https://www.ntu.edu.sg/home/ehchua/programming/java/J4a_GUI_2.html  helped me to set up the menu
-    // source: https://www.geeksforgeeks.org/java-swing-jmenubar/
+    //
 
     /**
      * This method creates and adds the MenuBar, Menu and MenuItem. This method is created to reduce the code within
      * the constructor and keep it easier to read.
+     * <p>
+     * sources: https://docs.oracle.com/javase/tutorial/uiswing/components/menu.html helped me to set up the menu
+     * https://www.ntu.edu.sg/home/ehchua/programming/java/J4a_GUI_2.html  helped me to set up the menu
+     * https://www.geeksforgeeks.org/java-swing-jmenubar/
      */
     public void createMenu() {
         menuBar = new JMenuBar();
@@ -141,23 +136,6 @@ public class Gui extends JFrame {
             g.setColor(BACKGROUND_COLOR);
             g.fillRect(0, 0, 1280, 880);
 
-            //Menu
-            setJMenuBar(menuBar);
-
-            //JButton
-            add(reset);
-            reset.setBounds(getWidth() / 2 - 250, 10, 95, 35);
-            add(simulate);
-            simulate.setBounds(getWidth() / 2 + 50, 10, 150, 60);
-
-            //JLabel
-            add(sharksLabel);
-            sharksLabel.setBounds(8, -30, 100, 100);
-            sharksLabel.setText("Sharks: " + Shark.getNumOfSharks());
-            add(fishLabel);
-            fishLabel.setBounds(8, -15, 100, 100);
-            fishLabel.setText("Fish: " + Fish.getSumOfFishSwarms());
-
             // gets and sets the colour for the Content Pane
             for (int i = 0; i < width; i++) {
                 for (int j = 0; j < row; j++) {
@@ -176,6 +154,22 @@ public class Gui extends JFrame {
                     g.fillRect(SPACING + i * 80, SPACING + j * 80 + 60, 80 - 2 * SPACING, 80 - 2 * SPACING);
                 }
             }
+            //JButton
+            add(reset);
+            reset.setBounds(getWidth() / 2 - 160, 1, 150, 58);
+            add(simulate);
+            simulate.setBounds(getWidth() / 2, 1, 150, 58);
+            //Menu
+            setJMenuBar(menuBar);
+
+            //JLabel
+            add(sharksLabel);
+            sharksLabel.setBounds(8, -30, 100, 100);
+            sharksLabel.setText("Sharks: " + Shark.getNumOfSharks());
+            add(fishLabel);
+            fishLabel.setBounds(8, -15, 100, 100);
+            fishLabel.setText("Fish: " + Fish.getSumOfFishSwarms());
+
         }
 
         /**
@@ -218,11 +212,14 @@ public class Gui extends JFrame {
          */
         @Override
         public void actionPerformed(ActionEvent event) {
+            insertInt = 0;
             // sources for threading https://dzone.com/articles/java-thread-tutorial-creating-threads-and-multithr
             // https://www.geeksforgeeks.org/multithreading-in-java/
-            int test = Integer.parseInt(JOptionPane.showInputDialog(null, "How many steps shall be simulated?", "Please tell me", 1));
-            //  if(test==null){System.out.println("Okay");}
-            for (int a = test; a > 0; a--) {
+            insertInt = Integer.parseInt(JOptionPane.showInputDialog(null, "How many steps shall be simulated?", "Please tell me", 1));
+            while (insertInt == 0) {
+                insertInt = Integer.parseInt(JOptionPane.showInputDialog(null, "How many steps shall be simulated?", "Please tell me", 1));
+            }
+            for (int a = insertInt; a > 0; a--) {
                 model.letSharkSwim();
                 board.resetBoard();
                 try {
