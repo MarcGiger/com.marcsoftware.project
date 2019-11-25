@@ -12,7 +12,7 @@ import java.awt.*;
 public class Fish extends Animal {
     // The amount of Fish swarms.
     private static int sumOfFishSwarms = 0;
-    private final Color COLOUR = new Color(0, 100, 0);
+    //private final Color COLOUR = new Color(0, 100, 0);
 
 
     /**
@@ -59,7 +59,7 @@ public class Fish extends Animal {
      */
     @Override
     public Color getColour() {
-        return COLOUR;
+        return new Color(0, 100, 0);
     }
 
 }

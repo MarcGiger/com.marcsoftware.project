@@ -18,7 +18,7 @@ public class Shark extends Animal {
     private int age;
     // The amount of sharks.
     private static int sumOfSharks = 0;
-    private final Color COLOUR = Color.red;
+    //private final Color COLOUR = Color.red;
     private int positionX, positionY;
 
     /**
@@ -119,13 +119,12 @@ public class Shark extends Animal {
      */
     @Override
     public Color getColour() {
-        return COLOUR;
+        return Color.red;
     }
 
     @Override
     public String toString() {
         return "Shark:" +
-                "COLOUR:" + COLOUR +
                 ", positionX:" + positionX +
                 ", positionY:" + positionY +
                  "Neighbour: " + getNegativeNeighbourX() + " " + getPositiveNeighbourX();

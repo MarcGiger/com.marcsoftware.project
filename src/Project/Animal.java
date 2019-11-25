@@ -1,5 +1,6 @@
 package Project;
 
+import java.awt.*;
 import java.io.Serializable;
 
 /**
@@ -19,5 +20,7 @@ public abstract class Animal implements Serializable, Colourful {
     public Animal() {
         this.alive = true;
     }
+
+    public abstract Color getColour();
 
 }
