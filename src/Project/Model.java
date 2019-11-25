@@ -52,9 +52,9 @@ public class Model implements Serializable {
         }
 
         for (int i = 0; i < width; i++) {
-            System.out.println(i);
+            //System.out.println(i);
             for (int j = 0; j < row; j++) {
-                System.out.println(j);
+               // System.out.println(j);
                 if (rand.nextInt(50) < 1 && !(animal[i][j] instanceof Fish)) {
                     animal[i][j] = new Shark(i, j);// place Shark-Object in animal Array
                     storeSharks.add((Shark) animal[i][j]);

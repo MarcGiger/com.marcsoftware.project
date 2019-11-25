@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.ImageObserver;
 
 /**
  * A graphical view of the Gui. A Menu and Buttons are implemented.
@@ -27,6 +28,8 @@ public class Gui extends JFrame {
     private JMenuBar menuBar;
     private JMenu menu;
     private JMenuItem i1, i2, i3, i4, i5;
+    // for JButton
+    private Icon icon;
 
     // background colour for Menu and Content
     private static final Color BACKGROUND_COLOR = Color.lightGray;
@@ -62,7 +65,19 @@ public class Gui extends JFrame {
 
         reset = new JButton("Reset");
         reset.addActionListener(new ResetHandler());
-        simulate = new JButton("Simulate");
+
+        // Source: https://docs.oracle.com/javase/tutorial/uiswing/components/icon.html#getresource
+        try {
+            icon = new ImageIcon("C:\\Users\\t00210159\\IdeaProjects\\com.marcsoftware.project\\src\\Project\\pictures\\fishButton.png");
+        } catch (NullPointerException e) {
+            board.resetBoard();
+        }
+
+        simulate = new JButton("Simulation", icon);
+        // Text below image
+        simulate.setHorizontalTextPosition(SwingConstants.LEFT);
+        // And centred
+        simulate.setHorizontalTextPosition(SwingConstants.RIGHT);
         simulate.addActionListener(new SimulationHandler());
 
         // after adding Menu l needed to adapt Graphics g
@@ -131,9 +146,9 @@ public class Gui extends JFrame {
 
             //JButton
             add(reset);
-            reset.setBounds(getWidth() / 2 - 50, 10, 95, 35);
+            reset.setBounds(getWidth() / 2 - 250, 10, 95, 35);
             add(simulate);
-            simulate.setBounds(getWidth() / 2 + 50, 10, 95, 35);
+            simulate.setBounds(getWidth() / 2 + 50, 10, 150, 60);
 
             //JLabel
             add(sharksLabel);
@@ -206,6 +221,7 @@ public class Gui extends JFrame {
             // sources for threading https://dzone.com/articles/java-thread-tutorial-creating-threads-and-multithr
             // https://www.geeksforgeeks.org/multithreading-in-java/
             int test = Integer.parseInt(JOptionPane.showInputDialog(null, "How many steps shall be simulated?", "Please tell me", 1));
+            //  if(test==null){System.out.println("Okay");}
             for (int a = test; a > 0; a--) {
                 model.letSharkSwim();
                 board.resetBoard();

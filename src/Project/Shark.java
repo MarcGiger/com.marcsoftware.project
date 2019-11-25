@@ -19,6 +19,7 @@ public class Shark extends Animal {
     // The amount of sharks.
     private static int sumOfSharks = 0;
     //private final Color COLOUR = Color.red;
+    //stores position within grid
     private int positionX, positionY;
 
     /**
