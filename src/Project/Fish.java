@@ -10,6 +10,12 @@ import java.awt.*;
  * @version 0.1
  */
 public class Fish extends Animal {
+    //  The maximum age of a Fish Swarm
+    private static final int MAX_AGE = 90;
+    // The probability a FishSwarm doubles
+    private static final double BIRTH_PROBABILITY = 0.15;
+    // The actual age of the Fish Swarm
+    private int age;
     // The amount of Fish swarms.
     private static int sumOfFishSwarms = 0;
     //private final Color COLOUR = new Color(0, 100, 0);

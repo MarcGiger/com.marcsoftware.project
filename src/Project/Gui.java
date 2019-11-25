@@ -78,7 +78,6 @@ public class Gui extends JFrame {
         simulate.setIcon(new ImageIcon(img));
         simulate.addActionListener(new SimulationHandler());
 
-
         board.paintImmediately(0, 0, 1280, 880);
 
     }
@@ -162,7 +161,7 @@ public class Gui extends JFrame {
             reset.setBounds(getWidth() / 2 - 160, 1, 150, 58);
             add(simulate);
             simulate.setBounds(getWidth() / 2, 1, 150, 58);
-           
+
 
             //JLabel
             add(sharksLabel);
