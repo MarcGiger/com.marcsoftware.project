@@ -64,6 +64,9 @@ public class Gui extends JFrame {
         board = new Board();
         this.setContentPane(board);
 
+        // after adding Menu l needed to adapt Graphics g
+        createMenu();
+
         //JButton
         reset = new JButton("Reset");
         img2 = new ImageIcon(this.getClass().getResource("/Project/pictures/Clear-icon.png")).getImage();
@@ -75,8 +78,7 @@ public class Gui extends JFrame {
         simulate.setIcon(new ImageIcon(img));
         simulate.addActionListener(new SimulationHandler());
 
-        // after adding Menu l needed to adapt Graphics g
-        createMenu();
+
         board.paintImmediately(0, 0, 1280, 880);
 
     }
@@ -107,6 +109,7 @@ public class Gui extends JFrame {
         menu.add(i3);
         menu.add(i4);
         menu.add(i5);
+        setJMenuBar(menuBar);
 
         i1.addActionListener(new MenuHandler());
         i2.addActionListener(new MenuHandler());
@@ -159,8 +162,7 @@ public class Gui extends JFrame {
             reset.setBounds(getWidth() / 2 - 160, 1, 150, 58);
             add(simulate);
             simulate.setBounds(getWidth() / 2, 1, 150, 58);
-            //Menu
-            setJMenuBar(menuBar);
+           
 
             //JLabel
             add(sharksLabel);
