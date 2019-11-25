@@ -20,6 +20,4 @@ public abstract class Animal implements Serializable, Colourful {
         this.alive = true;
     }
 
-    abstract void swim();
-
 }

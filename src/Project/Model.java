@@ -31,7 +31,6 @@ public class Model implements Serializable {
         storageFile = new File("Model.ser");
         placeAnimal();
 
-
        /* for(Shark a : storeSharks){
             System.out.println(a.toString());
         }
@@ -210,7 +209,7 @@ public class Model implements Serializable {
 
             System.out.println(a.getPositionY() + " positiver y Nachbar " + a.getPositiveNeighbourY());
 
-            if ((test.isEmpty()== false)) {
+            if ((test.isEmpty() == false)) {
                 randomString = test.get(rand.nextInt(test.size()));
                 if (randomString == "north") {
                     animal[a.getPositionX()][a.getPositionY()] = null;

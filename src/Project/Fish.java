@@ -62,9 +62,6 @@ public class Fish extends Animal {
         return COLOUR;
     }
 
-    @Override
-    public void swim() {
-    }
 }
 
 

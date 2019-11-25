@@ -10,6 +10,12 @@ import java.awt.Color;
  * @version 0.1
  */
 public class Shark extends Animal {
+    //  The maximum age of a Shark
+    private static final int MAX_AGE = 60;
+    // The probability a Shark gives birth to a new Shark
+    private static final double BIRTH_PROBABILITY = 0.08;
+    // The actual age of the Shark
+    private int age;
     // The amount of sharks.
     private static int sumOfSharks = 0;
     private final Color COLOUR = Color.red;
@@ -22,6 +28,7 @@ public class Shark extends Animal {
         positionX = x;
         positionY = y;
         sumOfSharks++;
+        setAge(0);
         //System.out.println("X: " + positionX + " " + positionY);
     }
 
@@ -97,6 +104,14 @@ public class Shark extends Animal {
         this.positionY = positionY;
     }
 
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
     /**
      * Gets the colour shown on the grid for Animal-Type Shark.
      *
@@ -109,15 +124,12 @@ public class Shark extends Animal {
 
     @Override
     public String toString() {
-        return "Shark{" +
-                "COLOUR=" + COLOUR +
-                ", positionX=" + positionX +
-                ", positionY=" + positionY +
-                '}' + "Neighbour: " + getNegativeNeighbourX() + " " + getPositiveNeighbourX();
+        return "Shark:" +
+                "COLOUR:" + COLOUR +
+                ", positionX:" + positionX +
+                ", positionY:" + positionY +
+                 "Neighbour: " + getNegativeNeighbourX() + " " + getPositiveNeighbourX();
     }
 
-    @Override
-    public void swim() {
 
-    }
 }

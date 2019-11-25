@@ -40,8 +40,5 @@ public class Water extends Animal {
     }
 
 
-    @Override
-    public void swim() {
-    }
 }
 
