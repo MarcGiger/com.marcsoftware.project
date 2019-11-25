@@ -203,7 +203,7 @@ public class Gui extends JFrame {
          */
         @Override
         public void actionPerformed(ActionEvent event) {
-// source for multi threading https://dzone.com/articles/java-thread-tutorial-creating-threads-and-multithr
+            // sources for threading https://dzone.com/articles/java-thread-tutorial-creating-threads-and-multithr
             // https://www.geeksforgeeks.org/multithreading-in-java/
             int test = Integer.parseInt(JOptionPane.showInputDialog(null, "How many steps shall be simulated?", "Please tell me", 1));
             for (int a = test; a > 0; a--) {
