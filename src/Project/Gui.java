@@ -52,20 +52,12 @@ public class Gui extends JFrame {
         this.width = width;
         this.row = row;
 
-
         // source: https://stackoverflow.com/questions/20680060/location-of-jframe-in-middle-of-the-window
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width / 2 - this.getSize().width / 2, dim.height / 2 - this.getSize().height / 2);
         //JLabel
         sharksLabel = new JLabel();
         fishLabel = new JLabel();
-
-        this.setVisible(true);
-        board = new Board();
-        this.setContentPane(board);
-
-        // after adding Menu l needed to adapt Graphics g
-        createMenu();
 
         //JButton
         reset = new JButton("Reset");
@@ -78,7 +70,14 @@ public class Gui extends JFrame {
         simulate.setIcon(new ImageIcon(img));
         simulate.addActionListener(new SimulationHandler());
 
-        board.paintImmediately(0, 0, 1280, 880);
+        this.setVisible(true);
+        board = new Board();
+        this.setContentPane(board);
+
+        // after adding Menu l needed to adapt Graphics g
+        createMenu();
+
+        //board.paintImmediately(0, 0, 1280, 880);
 
     }
 
