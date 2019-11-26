@@ -238,7 +238,7 @@ public class Gui extends JFrame {
                 insertInt = Integer.parseInt(JOptionPane.showInputDialog(null, "How many steps shall be simulated?"));
             }
             for (int a = insertInt; a > 0; a--) {
-                model.letSharkSwim();
+                model.letSharkSwim(model.getNeighbours());
                 board.resetBoard();
                 try {
                     Thread.sleep(100);

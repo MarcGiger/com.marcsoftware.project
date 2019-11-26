@@ -21,8 +21,8 @@ public class Model implements Serializable {
     private final Random rand;
     private final File storageFile;
     private Animal[][] animal;
-    private ArrayList<Shark> storeSharks = new ArrayList<>();
-    private ArrayList<String> possibleDirections = new ArrayList<>();
+    private ArrayList<Shark> storeSharks;
+    private ArrayList<String> possibleDirections;
 
     public Model(int width, int row) {
         this.width = width;
@@ -30,6 +30,8 @@ public class Model implements Serializable {
         animal = new Animal[width][row];
         rand = new Random();
         storageFile = new File("Model.ser");
+        possibleDirections = new ArrayList<>();
+        storeSharks = new ArrayList<>();
         placeAnimal();
 
        /* for(Shark a : storeSharks){
@@ -140,7 +142,6 @@ public class Model implements Serializable {
                 }
             }
         }
-
         System.out.println("loaded");
     }
 
@@ -148,8 +149,161 @@ public class Model implements Serializable {
         return storageFile;
     }
 
-    public void updateStats() {
+
+    public void letSharkSwim(ArrayList test) {
+        possibleDirections = test;
+        for (Shark a : storeSharks) {
+            if (a.isAlive() == true) {
+
+                int north = a.getPositiveNeighbourY();
+                int south = a.getNegativeNeighbourY();
+                int west = a.getNegativeNeighbourX();
+                int east = a.getPositiveNeighbourX();
+/*
+                if (north != -1000) {
+                    if (animal[a.getPositionX()][north] instanceof Water) {
+                        possibleDirections.add("north");
+                    }
+                }
+
+                if (south != -1000) {
+                    if (animal[a.getPositionX()][south] instanceof Water) {
+                        possibleDirections.add("south");
+                    }
+                }
+
+                if (west != -1000) {
+                    if (animal[west][a.getPositionY()] instanceof Water) {
+                        possibleDirections.add("west");
+                    }
+                }
+
+                if (east != -1000) {
+                    if (animal[east][a.getPositionY()] instanceof Water) {
+                        possibleDirections.add("east");
+                    }
+                }
+
+                //System.out.println(a.getPositionY() + " positiver y Nachbar " + a.getPositiveNeighbourY());
+
+
+ */
+                if ((possibleDirections.isEmpty() == false)) {
+                    randomString = possibleDirections.get(rand.nextInt(possibleDirections.size()));
+                    if (randomString == "north") {
+                        animal[a.getPositionX()][a.getPositionY()] = null;
+                        animal[a.getPositionX()][a.getPositionY()] = new Water();
+                        animal[a.getPositionX()][north] = new Shark(a.getPositionX(), north);
+                        a.setPositionY(north);
+                        Shark.setSumOfSharks(Shark.getNumOfSharks() - 1);
+                    }
+                    if ((possibleDirections.size() != 0)) {
+                        if (randomString == "south") {
+                            animal[a.getPositionX()][a.getPositionY()] = null;
+                            animal[a.getPositionX()][a.getPositionY()] = new Water();
+                            animal[a.getPositionX()][south] = new Shark(a.getPositionX(), south);
+                            a.setPositionY(south);
+                            Shark.setSumOfSharks(Shark.getNumOfSharks() - 1);
+                        }
+                    }
+                    if ((possibleDirections.size() != 0)) {
+                        if (randomString == "east") {
+                            animal[a.getPositionX()][a.getPositionY()] = null;
+                            animal[a.getPositionX()][a.getPositionY()] = new Water();
+                            animal[east][a.getPositionY()] = new Shark(east, a.getPositionY());
+                            a.setPositionX(east);
+                            Shark.setSumOfSharks(Shark.getNumOfSharks() - 1);
+                        }
+                    }
+                    if ((possibleDirections.size() != 0)) {
+                        if (randomString == "west") {
+                            animal[a.getPositionX()][a.getPositionY()] = null;
+                            animal[a.getPositionX()][a.getPositionY()] = new Water();
+                            animal[west][a.getPositionY()] = new Shark(west, a.getPositionY());
+                            a.setPositionX(west);
+                            Shark.setSumOfSharks(Shark.getNumOfSharks() - 1);
+
+                        }
+                    }
+                    //System.out.println(a.toString());
+                }
+                a.increaseAge();
+            }
+            possibleDirections.clear();
+        }
+        checkAge();
+        spawnAShark();
     }
+
+    public ArrayList getNeighbours() {
+        for (Shark a : storeSharks) {
+            if (a.isAlive() == true) {
+
+                possibleDirections.clear();
+                int north = a.getPositiveNeighbourY();
+                int south = a.getNegativeNeighbourY();
+                int west = a.getNegativeNeighbourX();
+                int east = a.getPositiveNeighbourX();
+
+                if (north != -1000) {
+                    if (animal[a.getPositionX()][north] instanceof Water) {
+                        possibleDirections.add("north");
+                    }
+                }
+
+                if (south != -1000) {
+                    if (animal[a.getPositionX()][south] instanceof Water) {
+                        possibleDirections.add("south");
+                    }
+                }
+
+                if (west != -1000) {
+                    if (animal[west][a.getPositionY()] instanceof Water) {
+                        possibleDirections.add("west");
+                    }
+                }
+
+                if (east != -1000) {
+                    if (animal[east][a.getPositionY()] instanceof Water) {
+                        possibleDirections.add("east");
+                    }
+                }
+
+            }
+        }
+        return possibleDirections;
+    }
+
+    /**
+     * deletes Sharks that reached age of 60
+     */
+    public void checkAge() {
+
+        for (Shark a : storeSharks) {
+            if (a.isAlive() != true) {
+                animal[a.getPositionX()][a.getPositionY()] = null;
+                animal[a.getPositionX()][a.getPositionY()] = new Water();
+                //Shark.setSumOfSharks(Shark.getNumOfSharks() - 1);
+            }
+        }
+    }
+
+    public void spawnAShark() {
+        for (Shark a : storeSharks) {
+            if (a.isAlive() != true) {
+                animal[a.getPositionX()][a.getPositionY()] = null;
+                animal[a.getPositionX()][a.getPositionY()] = new Water();
+                //Shark.setSumOfSharks(Shark.getNumOfSharks() - 1);
+            }
+        }
+    }
+
+
+    public void resetStoreSharksArrayList() {
+        storeSharks.clear();
+    }
+
+
 
     //This method is for testing purposes. Is the populating of the grid working?
     public void tellMeWhatsInside() {
@@ -186,105 +340,4 @@ public class Model implements Serializable {
         }
     }
 
-    public void letSharkSwim() {
-
-        for (Shark a : storeSharks) {
-
-            possibleDirections = new ArrayList<>();
-
-            int north = a.getPositiveNeighbourY();
-            int south = a.getNegativeNeighbourY();
-            int west = a.getNegativeNeighbourX();
-            int east = a.getPositiveNeighbourX();
-
-            if (north != -1000) {
-                if (animal[a.getPositionX()][north] instanceof Water) {
-                    possibleDirections.add("north");
-                }
-            }
-
-            if (south != -1000) {
-                if (animal[a.getPositionX()][south] instanceof Water) {
-                    possibleDirections.add("south");
-                }
-            }
-
-            if (west != -1000) {
-                if (animal[west][a.getPositionY()] instanceof Water) {
-                    possibleDirections.add("west");
-                }
-            }
-
-            if (east != -1000) {
-                if (animal[east][a.getPositionY()] instanceof Water) {
-                    possibleDirections.add("east");
-                }
-            }
-
-            System.out.println(a.getPositionY() + " positiver y Nachbar " + a.getPositiveNeighbourY());
-
-            if ((possibleDirections.isEmpty() == false)) {
-                randomString = possibleDirections.get(rand.nextInt(possibleDirections.size()));
-                if (randomString == "north") {
-                    animal[a.getPositionX()][a.getPositionY()] = null;
-                    animal[a.getPositionX()][a.getPositionY()] = new Water();
-                    animal[a.getPositionX()][north] = new Shark(a.getPositionX(), north);
-                    a.setPositionY(north);
-                    Shark.setSumOfSharks(Shark.getNumOfSharks() - 1);
-                }
-                if ((possibleDirections.size() != 0)) {
-                    if (randomString == "south") {
-                        animal[a.getPositionX()][a.getPositionY()] = null;
-                        animal[a.getPositionX()][a.getPositionY()] = new Water();
-                        animal[a.getPositionX()][south] = new Shark(a.getPositionX(), south);
-                        a.setPositionY(south);
-                        Shark.setSumOfSharks(Shark.getNumOfSharks() - 1);
-                    }
-                }
-                if ((possibleDirections.size() != 0)) {
-                    if (randomString == "east") {
-                        animal[a.getPositionX()][a.getPositionY()] = null;
-                        animal[a.getPositionX()][a.getPositionY()] = new Water();
-                        animal[east][a.getPositionY()] = new Shark(east, a.getPositionY());
-                        a.setPositionX(east);
-                        Shark.setSumOfSharks(Shark.getNumOfSharks() - 1);
-                    }
-                }
-                if ((possibleDirections.size() != 0)) {
-                    if (randomString == "west") {
-                        animal[a.getPositionX()][a.getPositionY()] = null;
-                        animal[a.getPositionX()][a.getPositionY()] = new Water();
-                        animal[west][a.getPositionY()] = new Shark(west, a.getPositionY());
-                        a.setPositionX(west);
-                        Shark.setSumOfSharks(Shark.getNumOfSharks() - 1);
-                    }
-                }
-                //System.out.println(a.toString());
-            }
-            a.increaseAge();
-            checkAge();
-
-        }
-    }
-    
-
-    /**
-     * deletes Sharks that reached age of 60
-     */
-    public void checkAge() {
-
-        for (Shark a : storeSharks) {
-            if (a.isAlive() != true) {
-                animal[a.getPositionX()][a.getPositionY()] = null;
-                animal[a.getPositionX()][a.getPositionY()] = new Water();
-                //Shark.setSumOfSharks(Shark.getNumOfSharks() - 1);
-                storeSharks.remove(a);
-            }
-
-        }
-    }
-
-    public void resetStoreSharksArrayList() {
-        storeSharks.clear();
-    }
 }
