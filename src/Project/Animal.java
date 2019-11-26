@@ -23,4 +23,7 @@ public abstract class Animal implements Serializable, Colourful {
 
     public abstract Color getColour();
 
+    public boolean isAlive() {
+        return alive;
+    }
 }

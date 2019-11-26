@@ -233,9 +233,9 @@ public class Gui extends JFrame {
             insertInt = 0;
             // sources for threading https://dzone.com/articles/java-thread-tutorial-creating-threads-and-multithr
             // https://www.geeksforgeeks.org/multithreading-in-java/
-            insertInt = Integer.parseInt(JOptionPane.showInputDialog(null, "How many steps shall be simulated?", "Please tell me", 1));
-            while (insertInt == 0) {
-                insertInt = Integer.parseInt(JOptionPane.showInputDialog(null, "How many steps shall be simulated?", "Please tell me", 1));
+            insertInt = Integer.parseInt(JOptionPane.showInputDialog(null, "How many steps shall be simulated?"));
+            while (insertInt == 0||insertInt == JOptionPane.CANCEL_OPTION) {
+                insertInt = Integer.parseInt(JOptionPane.showInputDialog(null, "How many steps shall be simulated?"));
             }
             for (int a = insertInt; a > 0; a--) {
                 model.letSharkSwim();

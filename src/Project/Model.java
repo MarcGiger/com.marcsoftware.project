@@ -260,9 +260,24 @@ public class Model implements Serializable {
                 }
                 //System.out.println(a.toString());
             }
+      a.increaseAge();
+           checkAge();
+
         }
     }
 
+    /**
+     * deletes Sharks that reached age of 60
+     */
+    public void checkAge() {
+        for (Shark a : storeSharks) {
+            if (a.isAlive() != true) {
+                animal[a.getPositionX()][a.getPositionY()] = new Water();
+                Shark.setSumOfSharks(Shark.getNumOfSharks() - 1);
+                storeSharks.remove(a);
+            }
+        }
+    }
 
     public void resetStoreSharksArrayList() {
         storeSharks.clear();

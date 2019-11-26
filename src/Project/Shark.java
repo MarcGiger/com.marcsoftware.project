@@ -109,6 +109,17 @@ public class Shark extends Animal {
         return age;
     }
 
+    /**
+     * Increases the age of the Shark by one.
+     */
+    public void increaseAge(){
+        age++;
+        if (age == MAX_AGE){
+            alive = false;
+        }
+    }
+
+
     public void setAge(int age) {
         this.age = age;
     }
