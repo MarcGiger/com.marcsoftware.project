@@ -187,6 +187,7 @@ public class Model implements Serializable {
     }
 
     public void letSharkSwim() {
+
         for (Shark a : storeSharks) {
 
             possibleDirections = new ArrayList<>();
@@ -260,22 +261,26 @@ public class Model implements Serializable {
                 }
                 //System.out.println(a.toString());
             }
-      a.increaseAge();
-           checkAge();
+            a.increaseAge();
+            checkAge();
 
         }
     }
+    
 
     /**
      * deletes Sharks that reached age of 60
      */
     public void checkAge() {
+
         for (Shark a : storeSharks) {
             if (a.isAlive() != true) {
+                animal[a.getPositionX()][a.getPositionY()] = null;
                 animal[a.getPositionX()][a.getPositionY()] = new Water();
-                Shark.setSumOfSharks(Shark.getNumOfSharks() - 1);
+                //Shark.setSumOfSharks(Shark.getNumOfSharks() - 1);
                 storeSharks.remove(a);
             }
+
         }
     }
 
