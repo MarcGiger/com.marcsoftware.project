@@ -200,42 +200,35 @@ public class Model implements Serializable {
         //if shark is encountert by fish and walls
         if ((possibleDirections.isEmpty() == false)) {
             randomString = possibleDirections.get(rand.nextInt(possibleDirections.size()));
+
+            animal[a.getPositionX()][a.getPositionY()] = null;
+            animal[a.getPositionX()][a.getPositionY()] = new Water();
+            Shark.setSumOfSharks(Shark.getNumOfSharks() - 1);
+
             // place it one more down
             if (randomString == "north") {
-                animal[a.getPositionX()][a.getPositionY()] = null;
-                animal[a.getPositionX()][a.getPositionY()] = new Water();
                 animal[a.getPositionX()][a.getPositiveNeighbourY()] = new Shark(a.getPositionX(), a.getPositiveNeighbourY());
                 a.setPositionY(a.getPositiveNeighbourY());
-                Shark.setSumOfSharks(Shark.getNumOfSharks() - 1);
             }
             // place it one more up
 
             if (randomString == "south") {
-                animal[a.getPositionX()][a.getPositionY()] = null;
-                animal[a.getPositionX()][a.getPositionY()] = new Water();
                 animal[a.getPositionX()][a.getNegativeNeighbourY()] = new Shark(a.getPositionX(), a.getNegativeNeighbourY());
                 a.setPositionY(a.getNegativeNeighbourY());
-                Shark.setSumOfSharks(Shark.getNumOfSharks() - 1);
             }
 
             // place it one more to the right
 
             if (randomString == "east") {
-                animal[a.getPositionX()][a.getPositionY()] = null;
-                animal[a.getPositionX()][a.getPositionY()] = new Water();
                 animal[a.getPositiveNeighbourX()][a.getPositionY()] = new Shark(a.getPositiveNeighbourX(), a.getPositionY());
                 a.setPositionX(a.getPositiveNeighbourX());
-                Shark.setSumOfSharks(Shark.getNumOfSharks() - 1);
             }
 
             // place it one more to the left
 
             if (randomString == "west") {
-                animal[a.getPositionX()][a.getPositionY()] = null;
-                animal[a.getPositionX()][a.getPositionY()] = new Water();
                 animal[a.getNegativeNeighbourX()][a.getPositionY()] = new Shark(a.getNegativeNeighbourX(), a.getPositionY());
                 a.setPositionX(a.getNegativeNeighbourX());
-                Shark.setSumOfSharks(Shark.getNumOfSharks() - 1);
             }
 
             //System.out.println(a.toString());
@@ -249,7 +242,6 @@ public class Model implements Serializable {
      * deletes Sharks that reached age of 60
      */
     public void checkAge(Shark a) {
-
 
         if (a.isAlive() != true) {
             animal[a.getPositionX()][a.getPositionY()] = null;
@@ -312,8 +304,8 @@ public class Model implements Serializable {
         storeSharks.clear();
     }
 
-    public int getSizeOfStoreShark(){
-      return  storeSharks.size();
+    public int getSizeOfStoreShark() {
+        return storeSharks.size();
     }
 
 

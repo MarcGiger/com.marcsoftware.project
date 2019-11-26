@@ -116,9 +116,9 @@ public class Shark extends Animal {
     /**
      * Increases the age of the Shark by one.
      */
-    public void increaseAge(){
+    public void increaseAge() {
         age++;
-        if (age == MAX_AGE){
+        if (age == MAX_AGE) {
             alive = false;
         }
     }
@@ -143,7 +143,7 @@ public class Shark extends Animal {
         return "Shark:" +
                 ", positionX:" + positionX +
                 ", positionY:" + positionY +
-                 "Neighbour: " + getNegativeNeighbourX() + " " + getPositiveNeighbourX();
+                "Neighbour: " + getNegativeNeighbourX() + " " + getPositiveNeighbourX();
     }
 
 
