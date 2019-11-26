@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.ImageObserver;
 
 /**
  * A graphical view of the Gui. A Menu and Buttons are implemented.
@@ -29,7 +28,7 @@ public class Gui extends JFrame {
     private JMenu menu;
     private JMenuItem i1, i2, i3, i4, i5;
     // for JButton
-    private Image img, img2;
+    private Image fishImg, broomStickImg,sharkImg;
     private int insertInt;
 
     // background colour for Menu and Content
@@ -61,15 +60,16 @@ public class Gui extends JFrame {
 
         //JButton
         reset = new JButton("Reset");
-        img2 = new ImageIcon(this.getClass().getResource("/Project/pictures/Clear-icon.png")).getImage();
-        reset.setIcon(new ImageIcon(img2));
+        broomStickImg = new ImageIcon(this.getClass().getResource("/Project/pictures/Clear-icon.png")).getImage();
+        reset.setIcon(new ImageIcon(broomStickImg));
         reset.addActionListener(new ResetHandler());
         simulate = new JButton("Simulation");
         // Source: https://docs.oracle.com/javase/tutorial/uiswing/components/icon.html#getresource
-        img = new ImageIcon(this.getClass().getResource("/Project/pictures/fishButton.png")).getImage();
-        simulate.setIcon(new ImageIcon(img));
+        fishImg = new ImageIcon(this.getClass().getResource("/Project/pictures/fishButton.png")).getImage();
+        simulate.setIcon(new ImageIcon(fishImg));
         simulate.addActionListener(new SimulationHandler());
 
+        sharkImg = new ImageIcon(this.getClass().getResource("/Project/pictures/icons8-shark-96.png")).getImage();
         this.setVisible(true);
         board = new Board();
         this.setContentPane(board);
@@ -143,16 +143,34 @@ public class Gui extends JFrame {
                     g.getColor();
                     if ((model.getObject(i, j) instanceof Fish)) {
                         g.setColor((model.getObject(i, j)).getColour());
+                        // if you want to see the fish img uncomment below aswell
+                        //g.setColor((Color.blue));
                     }
                     if (model.getObject(i, j) instanceof Shark) {
                         g.setColor((model.getObject(i, j)).getColour());
                     }
                     if (model.getObject(i, j) instanceof Water) {
                         g.setColor((model.getObject(i, j)).getColour());
+                        g.drawImage(fishImg, SPACING + i * 80, SPACING + j * 80 + 60, null);
                     }
                     // paints the Content Pane
                     // SPACING + j * 80 + 60 (60 is for JButton and JLabel)
                     g.fillRect(SPACING + i * 80, SPACING + j * 80 + 60, 80 - 2 * SPACING, 80 - 2 * SPACING);
+                }
+            }
+            for (int i = 0; i < width; i++) {
+                for (int j = 0; j < row; j++) {
+                    if (model.getObject(i, j) instanceof Shark) {
+                        //g.setColor((model.getObject(i, j)).getColour());
+                        g.drawImage(sharkImg, SPACING + i * 80, SPACING + j * 80 + 60, null);
+                    }
+                    //add fish img to grid
+                    /*if (model.getObject(i, j) instanceof Fish) {
+                        //g.setColor((model.getObject(i, j)).getColour());
+                        g.drawImage(fishImg, SPACING + i * 80, SPACING + j * 80 + 60, null);
+                    }
+
+                     */
                 }
             }
             //JButton

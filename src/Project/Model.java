@@ -22,6 +22,7 @@ public class Model implements Serializable {
     private final File storageFile;
     private Animal[][] animal;
     private ArrayList<Shark> storeSharks = new ArrayList<>();
+    private ArrayList<String> possibleDirections = new ArrayList<>();
 
     public Model(int width, int row) {
         this.width = width;
@@ -54,7 +55,7 @@ public class Model implements Serializable {
         for (int i = 0; i < width; i++) {
             //System.out.println(i);
             for (int j = 0; j < row; j++) {
-               // System.out.println(j);
+                // System.out.println(j);
                 if (rand.nextInt(50) < 1 && !(animal[i][j] instanceof Fish)) {
                     animal[i][j] = new Shark(i, j);// place Shark-Object in animal Array
                     storeSharks.add((Shark) animal[i][j]);
@@ -128,6 +129,18 @@ public class Model implements Serializable {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+        resetStoreSharksArrayList();
+        //populate ArrayList of Sharks again
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < row; j++) {
+                if (animal[i][j] instanceof Shark) {
+                    storeSharks.add(new Shark(i, j));
+                    //decrease stats per one, that amount of Shark is up to date
+                    Shark.setSumOfSharks(Shark.getNumOfSharks() - 1);
+                }
+            }
+        }
+
         System.out.println("loaded");
     }
 
@@ -176,7 +189,7 @@ public class Model implements Serializable {
     public void letSharkSwim() {
         for (Shark a : storeSharks) {
 
-            ArrayList<String> test = new ArrayList<>();
+            possibleDirections = new ArrayList<>();
 
             int north = a.getPositiveNeighbourY();
             int south = a.getNegativeNeighbourY();
@@ -185,32 +198,32 @@ public class Model implements Serializable {
 
             if (north != -1000) {
                 if (animal[a.getPositionX()][north] instanceof Water) {
-                    test.add("north");
+                    possibleDirections.add("north");
                 }
             }
 
             if (south != -1000) {
                 if (animal[a.getPositionX()][south] instanceof Water) {
-                    test.add("south");
+                    possibleDirections.add("south");
                 }
             }
 
             if (west != -1000) {
                 if (animal[west][a.getPositionY()] instanceof Water) {
-                    test.add("west");
+                    possibleDirections.add("west");
                 }
             }
 
             if (east != -1000) {
                 if (animal[east][a.getPositionY()] instanceof Water) {
-                    test.add("east");
+                    possibleDirections.add("east");
                 }
             }
 
             System.out.println(a.getPositionY() + " positiver y Nachbar " + a.getPositiveNeighbourY());
 
-            if ((test.isEmpty() == false)) {
-                randomString = test.get(rand.nextInt(test.size()));
+            if ((possibleDirections.isEmpty() == false)) {
+                randomString = possibleDirections.get(rand.nextInt(possibleDirections.size()));
                 if (randomString == "north") {
                     animal[a.getPositionX()][a.getPositionY()] = null;
                     animal[a.getPositionX()][a.getPositionY()] = new Water();
@@ -218,7 +231,7 @@ public class Model implements Serializable {
                     a.setPositionY(north);
                     Shark.setSumOfSharks(Shark.getNumOfSharks() - 1);
                 }
-                if ((test.size() != 0)) {
+                if ((possibleDirections.size() != 0)) {
                     if (randomString == "south") {
                         animal[a.getPositionX()][a.getPositionY()] = null;
                         animal[a.getPositionX()][a.getPositionY()] = new Water();
@@ -227,7 +240,7 @@ public class Model implements Serializable {
                         Shark.setSumOfSharks(Shark.getNumOfSharks() - 1);
                     }
                 }
-                if ((test.size() != 0)) {
+                if ((possibleDirections.size() != 0)) {
                     if (randomString == "east") {
                         animal[a.getPositionX()][a.getPositionY()] = null;
                         animal[a.getPositionX()][a.getPositionY()] = new Water();
@@ -236,7 +249,7 @@ public class Model implements Serializable {
                         Shark.setSumOfSharks(Shark.getNumOfSharks() - 1);
                     }
                 }
-                if ((test.size() != 0)) {
+                if ((possibleDirections.size() != 0)) {
                     if (randomString == "west") {
                         animal[a.getPositionX()][a.getPositionY()] = null;
                         animal[a.getPositionX()][a.getPositionY()] = new Water();
