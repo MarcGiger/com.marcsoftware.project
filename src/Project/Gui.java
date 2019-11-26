@@ -68,17 +68,16 @@ public class Gui extends JFrame {
         fishImg = new ImageIcon(this.getClass().getResource("/Project/pictures/fishButton.png")).getImage();
         simulate.setIcon(new ImageIcon(fishImg));
         simulate.addActionListener(new SimulationHandler());
-
+        createMenu();
         sharkImg = new ImageIcon(this.getClass().getResource("/Project/pictures/icons8-shark-96.png")).getImage();
         this.setVisible(true);
         board = new Board();
         this.setContentPane(board);
 
         // after adding Menu l needed to adapt Graphics g
-        createMenu();
+
 
         //board.paintImmediately(0, 0, 1280, 880);
-
     }
 
     //
@@ -107,13 +106,14 @@ public class Gui extends JFrame {
         menu.add(i3);
         menu.add(i4);
         menu.add(i5);
-        setJMenuBar(menuBar);
 
         i1.addActionListener(new MenuHandler());
         i2.addActionListener(new MenuHandler());
         i3.addActionListener(new MenuHandler());
         i4.addActionListener(new MenuHandler());
         i5.addActionListener(new MenuHandler());
+
+        setJMenuBar(menuBar);
     }
 
     /**
@@ -238,13 +238,19 @@ public class Gui extends JFrame {
                 insertInt = Integer.parseInt(JOptionPane.showInputDialog(null, "How many steps shall be simulated?"));
             }
             for (int a = insertInt; a > 0; a--) {
-                model.letSharkSwim(model.getNeighbours());
+                model.letSharkSwim();
+                System.out.println("swim");
+                model.spawnAShark();
+                System.out.println("spawn");
                 board.resetBoard();
                 try {
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+            if(Shark.getNumOfSharks() == 0)
+                JOptionPane.showMessageDialog(null, "Oh no, the Shark extinct!");
+                break;
             }
         }
     }

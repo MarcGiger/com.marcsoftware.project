@@ -13,7 +13,7 @@ public class Shark extends Animal {
     //  The maximum age of a Shark
     private static final int MAX_AGE = 60;
     // The probability a Shark gives birth to a new Shark
-    private static final double BIRTH_PROBABILITY = 0.08;
+    private static final double BIRTH_PROBABILITY = 0.02;
     // The actual age of the Shark
     private int age;
     // The amount of sharks.
@@ -103,6 +103,10 @@ public class Shark extends Animal {
 
     public void setPositionY(int positionY) {
         this.positionY = positionY;
+    }
+
+    public static double getBirthProbability() {
+        return BIRTH_PROBABILITY;
     }
 
     public int getAge() {
