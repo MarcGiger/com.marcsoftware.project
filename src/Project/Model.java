@@ -1,5 +1,6 @@
 package Project;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -23,6 +24,7 @@ public class Model implements Serializable {
     private Animal[][] animal;
     private ArrayList<Shark> storeSharks;
     private ArrayList<String> possibleDirections;
+    private boolean saved;
 
     public Model(int width, int row) {
         this.width = width;
@@ -32,6 +34,7 @@ public class Model implements Serializable {
         storageFile = new File("Model.ser");
         possibleDirections = new ArrayList<>();
         storeSharks = new ArrayList<>();
+        saved = false;
         placeAnimal();
 
        /* for(Shark a : storeSharks){
@@ -108,6 +111,7 @@ public class Model implements Serializable {
     public void saveModel(File file) {
         try (final ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(file))) {
             (objectOutputStream).writeObject(animal);
+            saved = true;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -126,23 +130,27 @@ public class Model implements Serializable {
      * @param file is created when constuctor is envoked and gets stored within the running program
      */
     public void loadModel(File file) {
-        try (final ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(file))) {
-            animal = (Animal[][]) objectInputStream.readObject();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        resetStoreSharksArrayList();
-        //populate ArrayList of Sharks again
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < row; j++) {
-                if (animal[i][j] instanceof Shark) {
-                    storeSharks.add(new Shark(i, j));
-                    //decrease stats per one, that amount of Shark is up to date
-                    Shark.setSumOfSharks(Shark.getNumOfSharks() - 1);
+        if (saved == true) {
+            try (final ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(file))) {
+                animal = (Animal[][]) objectInputStream.readObject();
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            resetStoreSharksArrayList();
+            //populate ArrayList of Sharks again
+            for (int i = 0; i < width; i++) {
+                for (int j = 0; j < row; j++) {
+                    if (animal[i][j] instanceof Shark) {
+                        storeSharks.add(new Shark(i, j));
+                        //decrease stats per one, that amount of Shark is up to date
+                        Shark.setSumOfSharks(Shark.getNumOfSharks() - 1);
+                    }
                 }
             }
+            System.out.println("loaded");
+        } else {
+            JOptionPane.showMessageDialog(null, "nothing saved yet");
         }
-        System.out.println("loaded");
     }
 
     public File getStorageFile() {
