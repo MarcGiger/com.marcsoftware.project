@@ -238,13 +238,16 @@ public class Gui extends JFrame {
                     insertInt = Integer.parseInt(JOptionPane.showInputDialog(null, "How many steps shall be simulated? (max. 2000)"));
                 }
                 // forces the user to insert a number between 0 and 2001
-                catch (Exception e) { insertInt = 0;}
+                catch (Exception e) {
+                    insertInt = 0;
+                }
             }
             for (int a = insertInt; a > 0; a--) {
+                // replaces the shark on the grid to a neighbour position if possible
                 model.letSharkSwim();
-                System.out.println("swim");
+                // spawns a shark at a neighbour position if the probability strikes and if possible
                 model.spawnAShark();
-                System.out.println("spawn");
+                // redraw board show the new positions and new spawns on the board
                 board.resetBoard();
                 try {
                     Thread.sleep(100);
@@ -270,15 +273,19 @@ public class Gui extends JFrame {
          */
         @Override
         public void actionPerformed(ActionEvent event) {
+
             String menuName;
+            //stores the pressed MenuItem name
             menuName = event.getActionCommand(); // what's written on the item that was clicked
 
             //other way could have been with if and else, but this seemed more "handy"
             switch (menuName) {
-                // source: Timer http://www.java2s.com/Tutorials/Java/Swing_How_to/JOptionPane/Use_Timer_to_close_JOptionPane_after_few_seconds.htm
+                // source: http://www.java2s.com/Tutorials/Java/Swing_How_to/JOptionPane/Use_Timer_to_close_JOptionPane_after_few_seconds.htm
                 // source: https://docs.oracle.com/javase/8/docs/api/javax/swing/Timer.html
                 case "Save current stats":
-                    // just playing with a timer and visualise it with a dialog window
+                    /*just playing with a timer and visualise it with a dialog window (help and source below)
+                    http://www.java2s.com/Tutorials/Java/Swing_How_to/JOptionPane/Use_Timer_to_close_JOptionPane_after_few_seconds.htm
+                    https://docs.oracle.com/javase/8/docs/api/javax/swing/Timer.html */
                     dialog = new JDialog();
                     dialog.setSize(100, 80);
                     save = new JLabel("   Saving...");
@@ -288,6 +295,7 @@ public class Gui extends JFrame {
                     dialog.setModal(false);
                     dialog.setVisible(true);
                     dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+                   // dialog shall be shown 2 seconds
                     Timer t = new Timer(2000, e -> dialog.setVisible(false));
                     t.start();
                     // without setRepeats it continues to fire events every time the between-event delay has elapsed, until it is stopped (lesson learned:)
@@ -307,20 +315,18 @@ public class Gui extends JFrame {
                     dialog2.setModal(false);
                     dialog2.setVisible(true);
                     dialog2.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+                    // dialog shall be shown 1.1 seconds
                     Timer t2 = new Timer(1100, e -> dialog2.setVisible(false));
                     t2.start();
                     // without setRepeats it continues to fire events every time the between-event delay has elapsed, until it is stopped (lesson learned:)
                     t2.setRepeats(false);
 
-
                     // emptying the actual animal Array (to prevent bugs)
                     model.resetAnimal();
                     // actually what should be done when clicked (load the animal Array)
                     model.loadModel(model.getStorageFile());
-                    // model.tellMeWhatsInside();
                     // redraw the board
                     board.resetBoard();
-                    //System.out.println(Shark.getNumOfSharks());
                     break;
 
                 case "Dummy 1":
@@ -333,7 +339,7 @@ public class Gui extends JFrame {
                     JOptionPane.showMessageDialog(null, "no function implemented");
                     break;
                 default:
-                    JOptionPane.showMessageDialog(null, "an error occured");
+                    JOptionPane.showMessageDialog(null, "an error occurred");
                     break;
             }
         }
