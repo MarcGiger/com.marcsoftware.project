@@ -233,9 +233,12 @@ public class Gui extends JFrame {
             insertInt = 0;
             // sources for threading https://dzone.com/articles/java-thread-tutorial-creating-threads-and-multithr
             // https://www.geeksforgeeks.org/multithreading-in-java/
-            insertInt = Integer.parseInt(JOptionPane.showInputDialog(null, "How many steps shall be simulated?"));
-            while (insertInt == 0 || insertInt == JOptionPane.CANCEL_OPTION) {
-                insertInt = Integer.parseInt(JOptionPane.showInputDialog(null, "How many steps shall be simulated?"));
+            while (insertInt == 0 || insertInt > 2000) {
+                try {
+                    insertInt = Integer.parseInt(JOptionPane.showInputDialog(null, "How many steps shall be simulated? (max. 2000)"));
+                }
+                // forces the user to insert a number between 0 and 2001
+                catch (Exception e) { insertInt = 0;}
             }
             for (int a = insertInt; a > 0; a--) {
                 model.letSharkSwim();
@@ -248,9 +251,10 @@ public class Gui extends JFrame {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                if (Shark.getNumOfSharks() == 0)
+                if (Shark.getNumOfSharks() == 0) {
                     JOptionPane.showMessageDialog(null, "Oh no, the Shark extinct!");
-                break;
+                    break;
+                }
             }
         }
     }

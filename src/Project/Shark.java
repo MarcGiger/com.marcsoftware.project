@@ -135,7 +135,7 @@ public class Shark extends Animal {
      */
     @Override
     public Color getColour() {
-        return Color.red;
+        return new Color(0, 0, 210);
     }
 
     @Override
