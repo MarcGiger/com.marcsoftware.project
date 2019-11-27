@@ -65,7 +65,7 @@ public class Fish extends Animal {
      */
     @Override
     public Color getColour() {
-        return new Color(0, 100, 0);
+        return new Color(0, 80, 240);
     }
 
 }

@@ -12,7 +12,7 @@ import java.awt.Color;
 
 public interface Colourful {
     /**
-     * This method gets the colour shown on the grid in respect of the animal-type
+     * This method gets the colour shown on the grid in respect of the animal-type. To ease differentiation animal background colours vary.
      */
     Color getColour();
 }

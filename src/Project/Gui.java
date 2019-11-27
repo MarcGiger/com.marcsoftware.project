@@ -74,13 +74,8 @@ public class Gui extends JFrame {
         board = new Board();
         this.setContentPane(board);
 
-        // after adding Menu l needed to adapt Graphics g
-
-
-        //board.paintImmediately(0, 0, 1280, 880);
     }
 
-    //
 
     /**
      * This method creates and adds the MenuBar, Menu and MenuItem. This method is created to reduce the code within
@@ -143,9 +138,7 @@ public class Gui extends JFrame {
                     g.getColor();
                     if ((model.getObject(i, j) instanceof Fish)) {
                         g.setColor((model.getObject(i, j)).getColour());
-                        // if you want to see the fish img uncomment below aswell
-                        //g.setColor((Color.blue));
-                    }
+                                            }
                     if (model.getObject(i, j) instanceof Shark) {
                         g.setColor((model.getObject(i, j)).getColour());
                     }
@@ -164,13 +157,13 @@ public class Gui extends JFrame {
                         //g.setColor((model.getObject(i, j)).getColour());
                         g.drawImage(sharkImg, SPACING + i * 80, SPACING + j * 80 + 60, null);
                     }
-                    //add fish img to grid
-                    /*if (model.getObject(i, j) instanceof Fish) {
+                    //add fish img to the grid
+                    if (model.getObject(i, j) instanceof Fish) {
                         //g.setColor((model.getObject(i, j)).getColour());
-                        g.drawImage(fishImg, SPACING + i * 80, SPACING + j * 80 + 60, null);
+                        g.drawImage(fishImg, SPACING+14 + i * 80, SPACING+14 + j * 80 + 60, null);
                     }
 
-                     */
+
                 }
             }
             //JButton
