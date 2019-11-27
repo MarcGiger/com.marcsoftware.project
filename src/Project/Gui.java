@@ -295,7 +295,7 @@ public class Gui extends JFrame {
                     dialog.setModal(false);
                     dialog.setVisible(true);
                     dialog.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-                   // dialog shall be shown 2 seconds
+                    // dialog shall be shown 2 seconds
                     Timer t = new Timer(2000, e -> dialog.setVisible(false));
                     t.start();
                     // without setRepeats it continues to fire events every time the between-event delay has elapsed, until it is stopped (lesson learned:)
@@ -305,29 +305,34 @@ public class Gui extends JFrame {
                     break;
 
                 case "Load stats":
-                    // just playing with a timer and visualise it with a dialog window
-                    dialog2 = new JDialog();
-                    dialog2.setSize(100, 80);
-                    load = new JLabel("   Loading...");
-                    dialog2.add(load);
-                    Dimension dim2 = Toolkit.getDefaultToolkit().getScreenSize();
-                    dialog2.setLocation(dim2.width / 2 - dialog2.getSize().width / 2, dim2.height / 2 - dialog2.getSize().height / 2);
-                    dialog2.setModal(false);
-                    dialog2.setVisible(true);
-                    dialog2.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-                    // dialog shall be shown 1.1 seconds
-                    Timer t2 = new Timer(1100, e -> dialog2.setVisible(false));
-                    t2.start();
-                    // without setRepeats it continues to fire events every time the between-event delay has elapsed, until it is stopped (lesson learned:)
-                    t2.setRepeats(false);
+                    if (model.isSaved() == true) {
+                        // just playing with a timer and visualise it with a dialog window
+                        dialog2 = new JDialog();
+                        dialog2.setSize(100, 80);
+                        load = new JLabel("   Loading...");
+                        dialog2.add(load);
+                        Dimension dim2 = Toolkit.getDefaultToolkit().getScreenSize();
+                        dialog2.setLocation(dim2.width / 2 - dialog2.getSize().width / 2, dim2.height / 2 - dialog2.getSize().height / 2);
+                        dialog2.setModal(false);
+                        dialog2.setVisible(true);
+                        dialog2.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+                        // dialog shall be shown 1.1 seconds
+                        Timer t2 = new Timer(1100, e -> dialog2.setVisible(false));
+                        t2.start();
+                        // without setRepeats it continues to fire events every time the between-event delay has elapsed, until it is stopped (lesson learned:)
+                        t2.setRepeats(false);
 
-                    // emptying the actual animal Array (to prevent bugs)
-                    model.resetAnimal();
-                    // actually what should be done when clicked (load the animal Array)
-                    model.loadModel(model.getStorageFile());
-                    // redraw the board
-                    board.resetBoard();
-                    break;
+                        // emptying the actual animal Array (to prevent bugs)
+                        model.resetAnimal();
+                        // actually what should be done when clicked (load the animal Array)
+                        model.loadModel(model.getStorageFile());
+                        // redraw the board
+                        board.resetBoard();
+                        break;
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Nothing has been saved yet");
+                        break;
+                    }
 
                 case "Dummy 1":
                     JOptionPane.showMessageDialog(null, "no function implemented");

@@ -130,27 +130,25 @@ public class Model implements Serializable {
      * @param file is created when constuctor is envoked and gets stored within the running program
      */
     public void loadModel(File file) {
-        if (saved == true) {
-            try (final ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(file))) {
-                animal = (Animal[][]) objectInputStream.readObject();
-            } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-            resetStoreSharksArrayList();
-            //populate ArrayList of Sharks again
-            for (int i = 0; i < width; i++) {
-                for (int j = 0; j < row; j++) {
-                    if (animal[i][j] instanceof Shark) {
-                        storeSharks.add(new Shark(i, j));
-                        //decrease stats per one, that amount of Shark is up to date
-                        Shark.setSumOfSharks(Shark.getNumOfSharks() - 1);
-                    }
+
+        try (final ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(file))) {
+            animal = (Animal[][]) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        resetStoreSharksArrayList();
+        //populate ArrayList of Sharks again
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < row; j++) {
+                if (animal[i][j] instanceof Shark) {
+                    storeSharks.add(new Shark(i, j));
+                    //decrease stats per one, that amount of Shark is up to date
+                    Shark.setSumOfSharks(Shark.getNumOfSharks() - 1);
                 }
             }
-            System.out.println("loaded");
-        } else {
-            JOptionPane.showMessageDialog(null, "nothing saved yet");
         }
+        System.out.println("loaded");
+
     }
 
     public File getStorageFile() {
@@ -316,6 +314,13 @@ public class Model implements Serializable {
         return storeSharks.size();
     }
 
+    public boolean isSaved() {
+        return saved;
+    }
+
+    public void setSaved(boolean saved) {
+        this.saved = saved;
+    }
 
     //This method is for testing purposes. Is the populating of the grid working?
     public void tellMeWhatsInside() {
