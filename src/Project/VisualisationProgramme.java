@@ -28,7 +28,5 @@ public class VisualisationProgramme {
      */
     public static void main(String[] args) {
         new VisualisationProgramme();
-        //Music m1 = new Music();
-        //m1.playMusic();
     }
 }

@@ -249,10 +249,7 @@ public class Gui extends JFrame {
                     insertInt = 0;
                 }
             }
-
             sharkMusic.playMusic();
-
-
             for (int a = insertInt; a > 0; a--) {
 
 
@@ -275,11 +272,8 @@ public class Gui extends JFrame {
                     break;
                 }
             }
-            try {
-                sharkMusic.setPlay(false);
-            } catch (MusicShallStop musicShallStop) {
-                musicShallStop.printStackTrace();
-            }
+
+            sharkMusic.stopMusic();
         }
     }
 
