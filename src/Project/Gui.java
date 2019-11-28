@@ -27,8 +27,8 @@ public class Gui extends JFrame {
     private JMenuBar menuBar;
     private JMenu menu;
     private JMenuItem i1, i2, i3, i4, i5;
-    // for JButton
     private Image fishImg, broomStickImg, sharkImg;
+    // user sets the amount of iteration of the simulation
     private int insertInt;
 
     // background colour for Menu and Content
@@ -136,14 +136,14 @@ public class Gui extends JFrame {
             for (int i = 0; i < width; i++) {
                 for (int j = 0; j < row; j++) {
                     g.getColor();
-                    if ((model.getObject(i, j) instanceof Fish)) {
-                        g.setColor((model.getObject(i, j)).getColour());
+                    if ((model.getAnimal(i, j) instanceof Fish)) {
+                        g.setColor((model.getAnimal(i, j)).getColour());
                                             }
-                    if (model.getObject(i, j) instanceof Shark) {
-                        g.setColor((model.getObject(i, j)).getColour());
+                    if (model.getAnimal(i, j) instanceof Shark) {
+                        g.setColor((model.getAnimal(i, j)).getColour());
                     }
-                    if (model.getObject(i, j) instanceof Water) {
-                        g.setColor((model.getObject(i, j)).getColour());
+                    if (model.getAnimal(i, j) instanceof Water) {
+                        g.setColor((model.getAnimal(i, j)).getColour());
                         g.drawImage(fishImg, SPACING + i * 80, SPACING + j * 80 + 60, null);
                     }
                     // paints the Content Pane
@@ -153,12 +153,12 @@ public class Gui extends JFrame {
             }
             for (int i = 0; i < width; i++) {
                 for (int j = 0; j < row; j++) {
-                    if (model.getObject(i, j) instanceof Shark) {
+                    if (model.getAnimal(i, j) instanceof Shark) {
                         //g.setColor((model.getObject(i, j)).getColour());
                         g.drawImage(sharkImg, SPACING + i * 80, SPACING + j * 80 + 60, null);
                     }
                     //add fish img to the grid
-                    if (model.getObject(i, j) instanceof Fish) {
+                    if (model.getAnimal(i, j) instanceof Fish) {
                         //g.setColor((model.getObject(i, j)).getColour());
                         g.drawImage(fishImg, SPACING+14 + i * 80, SPACING+14 + j * 80 + 60, null);
                     }
@@ -207,7 +207,7 @@ public class Gui extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             model.resetStoreSharksArrayList();
-            model.resetAnimal();
+            model.resetAllAnimal();
             model.placeAnimal();
             // for testing purposes
             model.tellMeWhatsInside();
@@ -316,7 +316,7 @@ public class Gui extends JFrame {
                         t2.setRepeats(false);
 
                         // emptying the actual animal Array (to prevent bugs)
-                        model.resetAnimal();
+                        model.resetAllAnimal();
                         // actually what should be done when clicked (load the animal Array)
                         model.loadModel(model.getStorageFile());
                         // redraw the board

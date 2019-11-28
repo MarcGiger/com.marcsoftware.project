@@ -16,9 +16,10 @@ import java.util.Random;
  */
 public class Model implements Serializable {
 
+    // for random movement (north, south, west, east)
     private String randomString;
-    private final int width;
-    private final int row;
+    // values received from driver class
+    private final int width, row;
     private Random rand;
     private final File storageFile;
     private Animal[][] animal;
@@ -83,13 +84,17 @@ public class Model implements Serializable {
         }
     }
 
-
-    public Animal getObject(int i, int j) {
-        Animal a1;
-        return a1 = animal[i][j];
+    /**
+     * Returns the Animal which is placed in the 2d Animal Array
+     * @param positionX
+     * @param positionY
+     * @return
+     */
+    public Animal getAnimal(int positionX, int positionY) {
+        return animal[positionX][positionY];
     }
 
-    public void resetAnimal() {
+    public void resetAllAnimal() {
         System.out.println("Reset");
         Fish.resetSumOfFishSwarms();
         Shark.resetSumOfSharks();
@@ -148,7 +153,6 @@ public class Model implements Serializable {
             }
         }
         System.out.println("loaded");
-
     }
 
     public File getStorageFile() {
@@ -199,7 +203,6 @@ public class Model implements Serializable {
         }
         return possibleDirections;
     }
-
 
     public void moveShark(ArrayList list, Shark a) {
         possibleDirections = list;
@@ -310,16 +313,8 @@ public class Model implements Serializable {
         storeSharks.clear();
     }
 
-    public int getSizeOfStoreShark() {
-        return storeSharks.size();
-    }
-
     public boolean isSaved() {
         return saved;
-    }
-
-    public void setSaved(boolean saved) {
-        this.saved = saved;
     }
 
     //This method is for testing purposes. Is the populating of the grid working?

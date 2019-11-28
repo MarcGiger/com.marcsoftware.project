@@ -18,19 +18,15 @@ public class Water extends Animal {
     //private final Color COLOUR = Color.blue;
 
     /**
-     * Creates a water field. Water is not an animal, therefore is not alive.
+     * Create a water field. Water is not an animal, therefore is not alive.
      */
     public Water() {
         alive = false;
     }
 
-    @Override
-    public String toString() {
-        return "Water";
-    }
 
     /**
-     * Gets the colour shown on the grid for Animal-Type Water.
+     * Get the colour shown on the grid for Animal-Type Water.
      *
      * @return colour of Water
      */
@@ -39,6 +35,8 @@ public class Water extends Animal {
         return Color.blue;
     }
 
-
+    @Override
+    public String toString() {
+        return "Water";
+    }
 }
-

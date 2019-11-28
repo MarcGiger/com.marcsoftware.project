@@ -4,7 +4,7 @@ import java.awt.Color;
 
 /**
  * A simple definition of a Shark.
- * A Shark can die, (can get eaten, give birth to new Fish swarms.)
+ * A Shark can die, give birth.
  *
  * @author Marc Giger
  * @version 0.1
@@ -23,25 +23,27 @@ public class Shark extends Animal {
     private int positionX, positionY;
 
     /**
-     * Creates a Shark.
+     * Create a Shark.
+     *
+     * @param positionX giving the position on the x-axis.
+     * @param positionY giving the position on the y-axis.
      */
-    public Shark(int x, int y) {
-        positionX = x;
-        positionY = y;
+    public Shark(int positionX, int positionY) {
+        this.positionX = positionX;
+        this.positionY = positionY;
         sumOfSharks++;
         setAge(0);
-        //System.out.println("X: " + positionX + " " + positionY);
     }
 
     /**
-     * Sets the amount of Sharks to zero.
+     * Set the amount of Sharks to zero.
      */
     public static void resetSumOfSharks() {
         sumOfSharks = 0;
     }
 
     /**
-     * Sets the amount of Sharks to inserted num.
+     * Set the amount of Sharks to inserted num.
      *
      * @param sumOfSharks this int is the new value of sumOfSharks.
      */
@@ -50,7 +52,7 @@ public class Shark extends Animal {
     }
 
     /**
-     * Shows the amount of created Sharks. Increases with every new Shark-Object.
+     * Get the amount of created Sharks. Increases with every new Shark-Object.
      *
      * @return Amount of Sharks
      */
@@ -58,63 +60,97 @@ public class Shark extends Animal {
         return sumOfSharks;
     }
 
+    /**
+     * Get the value of the field on the left if it exists. Otherwise, it returns -1000.
+     *
+     * @return a value of 0 - 14 or -1000
+     */
     public int getNegativeNeighbourX() {
-        int a;
-        a = getPositionX() - 1;
-        if (a < 0) return -1000;
-        else return a;
+        if (getPositionX() - 1 < 0) return -1000;
+        else return getPositionX() - 1;
     }
 
+    /**
+     * Get the value of the field on the right if it exists. Otherwise, it returns -1000.
+     *
+     * @return a value of 1 - 15 or -1000
+     */
     public int getPositiveNeighbourX() {
-        int a;
-        a = getPositionX() + 1;
-        if (a > 15) return -1000;
-        else return a;
+        if (getPositionX() + 1 > 15) return -1000;
+        else return getPositionX() + 1;
     }
 
+    /**
+     * Get the value of the field above if it exists. Otherwise, it returns -1000.
+     *
+     * @return a value of 0 - 7
+     */
     public int getNegativeNeighbourY() {
-        int a;
-        a = getPositionY() - 1;
-        if (a < 0) return -1000;
-        else return a;
+        if (getPositionY() - 1 < 0) return -1000;
+        else return getPositionY() - 1;
     }
 
+    /**
+     * Get the value of the field below if it exists. Otherwise, it returns -1000.
+     *
+     * @return a value of 1 - 8
+     */
     public int getPositiveNeighbourY() {
-        int a;
-        a = getPositionY() + 1;
-        if (a > 8) {
+        if (getPositionY() + 1 > 8) {
             return -1000;
         } else {
-            return a;
+            return getPositionY() + 1;
         }
     }
 
+    /**
+     * Get the position on which the shark is placed on the x-axis.
+     *
+     * @return the position on the x-axis (width)
+     */
     public int getPositionX() {
         return positionX;
     }
 
+    /**
+     * Set the position on the x-axis.
+     *
+     * @param positionX the number of the position within the grid. (width)
+     */
     public void setPositionX(int positionX) {
         this.positionX = positionX;
     }
 
+    /**
+     * Get the position on which the shark is placed on the y-axis.
+     *
+     * @return the position on the y-axis (row)
+     */
     public int getPositionY() {
         return positionY;
     }
 
+    /**
+     * Set the position on the x-axis.
+     *
+     * @param positionY the number of the position within the grid. (row)
+     */
     public void setPositionY(int positionY) {
         this.positionY = positionY;
     }
 
+    /**
+     * Get the birth probability.
+     *
+     * @return the constant defined birth probability
+     */
     public static double getBirthProbability() {
         return BIRTH_PROBABILITY;
     }
 
-    public int getAge() {
-        return age;
-    }
 
     /**
-     * Increases the age of the Shark by one.
+     * Increase the age of the Shark by one.
      */
     public void increaseAge() {
         age++;
@@ -123,13 +159,17 @@ public class Shark extends Animal {
         }
     }
 
-
+    /**
+     * Set the age of the Shark.
+     *
+     * @param age an int 0<
+     */
     public void setAge(int age) {
         this.age = age;
     }
 
     /**
-     * Gets the colour shown on the grid for Animal-Type Shark.
+     * Get the colour shown on the grid for Animal-Type Shark.
      *
      * @return colour of Shark
      */
