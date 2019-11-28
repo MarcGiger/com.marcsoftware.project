@@ -22,7 +22,7 @@ public class Gui extends JFrame {
     private JDialog dialog, dialog2;
     private Model model;
     private Board board;
-    private JButton reset, simulate;
+    private JButton resetButton, simulateButton;
     private JLabel sharksLabel, fishLabel, save, load;
     private JMenuBar menuBar;
     private JMenu menu;
@@ -59,15 +59,15 @@ public class Gui extends JFrame {
         fishLabel = new JLabel();
 
         //JButton
-        reset = new JButton("Reset");
+        resetButton = new JButton("Reset");
         broomStickImg = new ImageIcon(this.getClass().getResource("/Project/pictures/Clear-icon.png")).getImage();
-        reset.setIcon(new ImageIcon(broomStickImg));
-        reset.addActionListener(new ResetHandler());
-        simulate = new JButton("Simulation");
+        resetButton.setIcon(new ImageIcon(broomStickImg));
+        resetButton.addActionListener(new ResetHandler());
+        simulateButton = new JButton("Simulation");
         // Source: https://docs.oracle.com/javase/tutorial/uiswing/components/icon.html#getresource
         fishImg = new ImageIcon(this.getClass().getResource("/Project/pictures/fishButton.png")).getImage();
-        simulate.setIcon(new ImageIcon(fishImg));
-        simulate.addActionListener(new SimulationHandler());
+        simulateButton.setIcon(new ImageIcon(fishImg));
+        simulateButton.addActionListener(new SimulationHandler());
         createMenu();
         sharkImg = new ImageIcon(this.getClass().getResource("/Project/pictures/icons8-shark-96.png")).getImage();
         this.setVisible(true);
@@ -80,9 +80,9 @@ public class Gui extends JFrame {
     /**
      * This method creates and adds the MenuBar, Menu and MenuItem. This method is created to reduce the code within
      * the constructor and keep it easier to read.
-     * <p>
-     * sources: https://docs.oracle.com/javase/tutorial/uiswing/components/menu.html helped me to set up the menu
-     * https://www.ntu.edu.sg/home/ehchua/programming/java/J4a_GUI_2.html  helped me to set up the menu
+     * sources:
+     * https://docs.oracle.com/javase/tutorial/uiswing/components/menu.html
+     * https://www.ntu.edu.sg/home/ehchua/programming/java/J4a_GUI_2.html
      * https://www.geeksforgeeks.org/java-swing-jmenubar/
      */
     public void createMenu() {
@@ -138,7 +138,7 @@ public class Gui extends JFrame {
                     g.getColor();
                     if ((model.getAnimal(i, j) instanceof Fish)) {
                         g.setColor((model.getAnimal(i, j)).getColour());
-                                            }
+                    }
                     if (model.getAnimal(i, j) instanceof Shark) {
                         g.setColor((model.getAnimal(i, j)).getColour());
                     }
@@ -151,27 +151,24 @@ public class Gui extends JFrame {
                     g.fillRect(SPACING + i * 80, SPACING + j * 80 + 60, 80 - 2 * SPACING, 80 - 2 * SPACING);
                 }
             }
+
             for (int i = 0; i < width; i++) {
                 for (int j = 0; j < row; j++) {
+                    //over paint sharkColourRect with shark img
                     if (model.getAnimal(i, j) instanceof Shark) {
-                        //g.setColor((model.getObject(i, j)).getColour());
                         g.drawImage(sharkImg, SPACING + i * 80, SPACING + j * 80 + 60, null);
                     }
-                    //add fish img to the grid
+                    //over paint fishColourRect with fish img
                     if (model.getAnimal(i, j) instanceof Fish) {
-                        //g.setColor((model.getObject(i, j)).getColour());
-                        g.drawImage(fishImg, SPACING+14 + i * 80, SPACING+14 + j * 80 + 60, null);
+                        g.drawImage(fishImg, SPACING + 14 + i * 80, SPACING + 14 + j * 80 + 60, null);
                     }
-
-
                 }
             }
             //JButton
-            add(reset);
-            reset.setBounds(getWidth() / 2 - 160, 1, 150, 58);
-            add(simulate);
-            simulate.setBounds(getWidth() / 2, 1, 150, 58);
-
+            add(resetButton);
+            resetButton.setBounds(getWidth() / 2 - 160, 1, 150, 58);
+            add(simulateButton);
+            simulateButton.setBounds(getWidth() / 2, 1, 150, 58);
 
             //JLabel
             add(sharksLabel);
@@ -217,6 +214,10 @@ public class Gui extends JFrame {
         }
     }
 
+    /**
+     * Inner class which handles clicks on a button
+     * Source: Help from course notes
+     */
     private class SimulationHandler implements ActionListener {
         /**
          * When the button is clicked, response starts here
@@ -224,8 +225,7 @@ public class Gui extends JFrame {
         @Override
         public void actionPerformed(ActionEvent event) {
             insertInt = 0;
-            // sources for threading https://dzone.com/articles/java-thread-tutorial-creating-threads-and-multithr
-            // https://www.geeksforgeeks.org/multithreading-in-java/
+
             while (insertInt == 0 || insertInt > 2000) {
                 try {
                     insertInt = Integer.parseInt(JOptionPane.showInputDialog(null, "How many steps shall be simulated? (max. 2000)"));
@@ -242,6 +242,8 @@ public class Gui extends JFrame {
                 model.spawnAShark();
                 // redraw board show the new positions and new spawns on the board
                 board.resetBoard();
+                // sources for threading https://dzone.com/articles/java-thread-tutorial-creating-threads-and-multithr
+                // https://www.wideskills.com/java-tutorial/java-threads-tutorial
                 try {
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
@@ -273,8 +275,6 @@ public class Gui extends JFrame {
 
             //other way could have been with if and else, but this seemed more "handy"
             switch (menuName) {
-                // source: http://www.java2s.com/Tutorials/Java/Swing_How_to/JOptionPane/Use_Timer_to_close_JOptionPane_after_few_seconds.htm
-                // source: https://docs.oracle.com/javase/8/docs/api/javax/swing/Timer.html
                 case "Save current stats":
                     /*just playing with a timer and visualise it with a dialog window (help and source below)
                     http://www.java2s.com/Tutorials/Java/Swing_How_to/JOptionPane/Use_Timer_to_close_JOptionPane_after_few_seconds.htm

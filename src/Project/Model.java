@@ -16,17 +16,26 @@ import java.util.Random;
  */
 public class Model implements Serializable {
 
-    // for random movement (north, south, west, east)
-    private String randomString;
+
     // values received from driver class
     private final int width, row;
-    private Random rand;
+    private final Random rand;
     private final File storageFile;
+    private boolean saved;
+    //used for visualisation
     private Animal[][] animal;
     private ArrayList<Shark> storeSharks;
+    // possible directions are north, south, west and east
     private ArrayList<String> possibleDirections;
-    private boolean saved;
+    // for random movement (north, south, west, east)
+    private String randomString;
 
+    /**
+     * Create a Model to handle storing, moving, replacing animals.
+     *
+     * @param width this int gets passed from the driver class and sets the with within grid
+     * @param row   this int gets passed from the driver class and sets the amount of columns within the grid
+     */
     public Model(int width, int row) {
         this.width = width;
         this.row = row;
@@ -37,14 +46,11 @@ public class Model implements Serializable {
         storeSharks = new ArrayList<>();
         saved = false;
         placeAnimal();
-
-       /* for(Shark a : storeSharks){
-            System.out.println(a.toString());
-        }
-
-        */
     }
 
+    /**
+     * Places the Animal in the 2d grid.
+     */
     public void placeAnimal() {
         if (animal == null) {
             animal = new Animal[width][row];
@@ -86,14 +92,18 @@ public class Model implements Serializable {
 
     /**
      * Returns the Animal which is placed in the 2d Animal Array
-     * @param positionX
-     * @param positionY
-     * @return
+     *
+     * @param positionX the number of the position within the grid. (width)
+     * @param positionY the number of the position within the grid. (row)
+     * @return the animal object which was placed within the 2d array
      */
     public Animal getAnimal(int positionX, int positionY) {
         return animal[positionX][positionY];
     }
 
+    /**
+     * Clears the 2d Array. All positions set to null.
+     */
     public void resetAllAnimal() {
         System.out.println("Reset");
         Fish.resetSumOfFishSwarms();
@@ -155,111 +165,135 @@ public class Model implements Serializable {
         System.out.println("loaded");
     }
 
+    /**
+     * Get the save file.
+     *
+     * @return the file which was saved
+     */
     public File getStorageFile() {
         return storageFile;
     }
 
+    /**
+     * This method iterates through the storeSharks ArrayList and will call the moveShark method when the shark is alive.
+     */
     public void letSharkSwim() {
-        for (Shark a : storeSharks) {
-            if (a.isAlive() == true) {
-                moveShark(getNeighbours(a), a);
+        for (Shark shark : storeSharks) {
+            if (shark.isAlive() == true) {
+                moveShark(getNeighbours(shark), shark);
             }
         }
     }
 
-    public ArrayList getNeighbours(Shark a) {
+    /**
+     * This method stores possible directions the shark can swim.
+     *
+     * @param shark this object shall be moved
+     * @return an ArrayList filled with free neighbour fields.
+     */
+    public ArrayList getNeighbours(Shark shark) {
 
         //clear it, it might has previous data in it
         possibleDirections.clear();
 
         //neighbour fields
-        int north = a.getPositiveNeighbourY();
-        int south = a.getNegativeNeighbourY();
-        int west = a.getNegativeNeighbourX();
-        int east = a.getPositiveNeighbourX();
+        int north = shark.getPositiveNeighbourY();
+        int south = shark.getNegativeNeighbourY();
+        int west = shark.getNegativeNeighbourX();
+        int east = shark.getPositiveNeighbourX();
 
         if (north != -1000) {
-            if (animal[a.getPositionX()][north] instanceof Water) {
+            if (animal[shark.getPositionX()][north] instanceof Water) {
                 possibleDirections.add("north");
             }
         }
 
         if (south != -1000) {
-            if (animal[a.getPositionX()][south] instanceof Water) {
+            if (animal[shark.getPositionX()][south] instanceof Water) {
                 possibleDirections.add("south");
             }
         }
 
         if (west != -1000) {
-            if (animal[west][a.getPositionY()] instanceof Water) {
+            if (animal[west][shark.getPositionY()] instanceof Water) {
                 possibleDirections.add("west");
             }
         }
 
         if (east != -1000) {
-            if (animal[east][a.getPositionY()] instanceof Water) {
+            if (animal[east][shark.getPositionY()] instanceof Water) {
                 possibleDirections.add("east");
             }
         }
         return possibleDirections;
     }
 
-    public void moveShark(ArrayList list, Shark a) {
-        possibleDirections = list;
-        //if shark is encountert by fish and walls
+    /**
+     * This method will place the shark at a neighbour position, if there are any possible directions passed. Furthermore, will it call the aging process.
+     *
+     * @param whereToSwim the list contains possible directions or can be null
+     * @param shark       the object that shall be moved
+     */
+    public void moveShark(ArrayList whereToSwim, Shark shark) {
+        possibleDirections = whereToSwim;
+        //if shark is encountered by fish and walls
         if ((possibleDirections.isEmpty() == false)) {
             randomString = possibleDirections.get(rand.nextInt(possibleDirections.size()));
 
-            animal[a.getPositionX()][a.getPositionY()] = null;
-            animal[a.getPositionX()][a.getPositionY()] = new Water();
+            //the actual position gets replaced with water
+            animal[shark.getPositionX()][shark.getPositionY()] = null;
+            animal[shark.getPositionX()][shark.getPositionY()] = new Water();
             Shark.setSumOfSharks(Shark.getNumOfSharks() - 1);
 
             // place it one more down
             if (randomString == "north") {
-                animal[a.getPositionX()][a.getPositiveNeighbourY()] = new Shark(a.getPositionX(), a.getPositiveNeighbourY());
-                a.setPositionY(a.getPositiveNeighbourY());
+                animal[shark.getPositionX()][shark.getPositiveNeighbourY()] = new Shark(shark.getPositionX(), shark.getPositiveNeighbourY());
+                shark.setPositionY(shark.getPositiveNeighbourY());
             }
             // place it one more up
 
             if (randomString == "south") {
-                animal[a.getPositionX()][a.getNegativeNeighbourY()] = new Shark(a.getPositionX(), a.getNegativeNeighbourY());
-                a.setPositionY(a.getNegativeNeighbourY());
+                animal[shark.getPositionX()][shark.getNegativeNeighbourY()] = new Shark(shark.getPositionX(), shark.getNegativeNeighbourY());
+                shark.setPositionY(shark.getNegativeNeighbourY());
             }
 
             // place it one more to the right
 
             if (randomString == "east") {
-                animal[a.getPositiveNeighbourX()][a.getPositionY()] = new Shark(a.getPositiveNeighbourX(), a.getPositionY());
-                a.setPositionX(a.getPositiveNeighbourX());
+                animal[shark.getPositiveNeighbourX()][shark.getPositionY()] = new Shark(shark.getPositiveNeighbourX(), shark.getPositionY());
+                shark.setPositionX(shark.getPositiveNeighbourX());
             }
 
             // place it one more to the left
 
             if (randomString == "west") {
-                animal[a.getNegativeNeighbourX()][a.getPositionY()] = new Shark(a.getNegativeNeighbourX(), a.getPositionY());
-                a.setPositionX(a.getNegativeNeighbourX());
+                animal[shark.getNegativeNeighbourX()][shark.getPositionY()] = new Shark(shark.getNegativeNeighbourX(), shark.getPositionY());
+                shark.setPositionX(shark.getNegativeNeighbourX());
             }
-
             //System.out.println(a.toString());
         }
-        a.increaseAge();
-        checkAge(a);
+        shark.increaseAge();
+        checkAge(shark);
     }
 
 
     /**
      * deletes Sharks that reached age of 60
+     *
+     * @param shark the object which age needs to be checked
      */
-    public void checkAge(Shark a) {
+    public void checkAge(Shark shark) {
 
-        if (a.isAlive() != true) {
-            animal[a.getPositionX()][a.getPositionY()] = null;
-            animal[a.getPositionX()][a.getPositionY()] = new Water();
+        if (shark.isAlive() != true) {
+            animal[shark.getPositionX()][shark.getPositionY()] = null;
+            animal[shark.getPositionX()][shark.getPositionY()] = new Water();
             //Shark.setSumOfSharks(Shark.getNumOfSharks() - 1);
         }
     }
 
-
+    /**
+     * This method will increase the amount of sharks (create a new object) if the probability strikes.
+     */
     public void spawnAShark() {
         int originalSize = storeSharks.size();
 
@@ -308,16 +342,25 @@ public class Model implements Serializable {
         }
     }
 
-
+    /**
+     * This method clears the ArrayList storeSharks.
+     */
     public void resetStoreSharksArrayList() {
         storeSharks.clear();
     }
 
+    /**
+     * This method is to check if the storageFile was safed, otherwise it will not load.
+     *
+     * @return a value true or false
+     */
     public boolean isSaved() {
         return saved;
     }
 
-    //This method is for testing purposes. Is the populating of the grid working?
+    /**
+     * This method is for testing purposes. Is the populating of the grid working?
+     */
     public void tellMeWhatsInside() {
 
         //System.out.println("Tell me whats inside?");
