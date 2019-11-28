@@ -30,6 +30,7 @@ public class Gui extends JFrame {
     private Image fishImg, broomStickImg, sharkImg;
     // user sets the amount of iteration of the simulation
     private int insertInt, stepCount;
+    private Music sharkMusic;
 
     // background colour for Menu and Content
     private static final Color BACKGROUND_COLOR = Color.lightGray;
@@ -50,6 +51,9 @@ public class Gui extends JFrame {
         this.setResizable(false);
         this.width = width;
         this.row = row;
+
+        //for music while simulating
+        sharkMusic = new Music();
 
         // source: https://stackoverflow.com/questions/20680060/location-of-jframe-in-middle-of-the-window
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -187,7 +191,7 @@ public class Gui extends JFrame {
             // source: https://stackoverflow.com/questions/19990038/how-to-get-windows-username-in-java
             // source: https://stackoverflow.com/questions/19990038/how-to-get-windows-username-in-java
             userLabel.setText("User: " + System.getProperty("user.name").substring(0, Math.min(9, System.getProperty("user.name").length())));
-            userLabel.setForeground(Color.red);
+            userLabel.setForeground(new Color(75, 0, 130));
         }
 
         /**
@@ -245,7 +249,13 @@ public class Gui extends JFrame {
                     insertInt = 0;
                 }
             }
+
+            sharkMusic.playMusic();
+
+
             for (int a = insertInt; a > 0; a--) {
+
+
                 // replaces the shark on the grid to a neighbour position if possible
                 model.letSharkSwim();
                 // spawns a shark at a neighbour position if the probability strikes and if possible
@@ -264,6 +274,11 @@ public class Gui extends JFrame {
                     JOptionPane.showMessageDialog(null, "Oh no, the Shark extinct!");
                     break;
                 }
+            }
+            try {
+                sharkMusic.setPlay(false);
+            } catch (MusicShallStop musicShallStop) {
+                musicShallStop.printStackTrace();
             }
         }
     }

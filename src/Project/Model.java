@@ -30,6 +30,7 @@ public class Model implements Serializable {
     // for random movement (north, south, west, east)
     private String randomString;
 
+
     /**
      * Create a Model to handle storing, moving, replacing animals.
      *
