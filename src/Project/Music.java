@@ -30,7 +30,7 @@ public class Music {
         try {
 
             // mp3 not supported
-            audioInput = AudioSystem.getAudioInputStream(getClass().getResource("/Project/sound/Great White Shark (Jaws Music).wav"));
+            audioInput = AudioSystem.getAudioInputStream(getClass().getResource("/Project/Sound/Great White Shark (Jaws Music).wav"));
             // Clip gives us a lot of functionality
             // creates an extra thread
             this.clip = AudioSystem.getClip();

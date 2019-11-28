@@ -66,16 +66,16 @@ public class Gui extends JFrame {
 
         //JButton
         resetButton = new JButton("Reset");
-        broomStickImg = new ImageIcon(this.getClass().getResource("/Project/pictures/Clear-icon.png")).getImage();
+        broomStickImg = new ImageIcon(this.getClass().getResource("/Project/Pictures/Clear-icon.png")).getImage();
         resetButton.setIcon(new ImageIcon(broomStickImg));
         resetButton.addActionListener(new ResetHandler());
         simulateButton = new JButton("Simulation");
         // Source: https://docs.oracle.com/javase/tutorial/uiswing/components/icon.html#getresource
-        fishImg = new ImageIcon(this.getClass().getResource("/Project/pictures/fishButton.png")).getImage();
+        fishImg = new ImageIcon(this.getClass().getResource("/Project/Pictures/fishButton.png")).getImage();
         simulateButton.setIcon(new ImageIcon(fishImg));
         simulateButton.addActionListener(new SimulationHandler());
         createMenu();
-        sharkImg = new ImageIcon(this.getClass().getResource("/Project/pictures/icons8-shark-96.png")).getImage();
+        sharkImg = new ImageIcon(this.getClass().getResource("/Project/Pictures/icons8-shark-96.png")).getImage();
         this.setVisible(true);
         board = new Board();
         this.setContentPane(board);
