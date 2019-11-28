@@ -23,13 +23,13 @@ public class Gui extends JFrame {
     private Model model;
     private Board board;
     private JButton resetButton, simulateButton;
-    private JLabel sharksLabel, fishLabel, save, load;
+    private JLabel sharksLabel, fishLabel, userLabel, stepsLabel, save, load;
     private JMenuBar menuBar;
     private JMenu menu;
     private JMenuItem i1, i2, i3, i4, i5;
     private Image fishImg, broomStickImg, sharkImg;
     // user sets the amount of iteration of the simulation
-    private int insertInt;
+    private int insertInt, stepCount;
 
     // background colour for Menu and Content
     private static final Color BACKGROUND_COLOR = Color.lightGray;
@@ -57,6 +57,8 @@ public class Gui extends JFrame {
         //JLabel
         sharksLabel = new JLabel();
         fishLabel = new JLabel();
+        userLabel = new JLabel();
+        stepsLabel = new JLabel();
 
         //JButton
         resetButton = new JButton("Reset");
@@ -177,7 +179,15 @@ public class Gui extends JFrame {
             add(fishLabel);
             fishLabel.setBounds(8, -15, 100, 100);
             fishLabel.setText("Fish: " + Fish.getSumOfFishSwarms());
-
+            add(stepsLabel);
+            stepsLabel.setBounds(8, 0, 100, 100);
+            stepsLabel.setText("Steps: " + stepCount);
+            add(userLabel);
+            userLabel.setBounds(1180, -30, 100, 100);
+            // source: https://stackoverflow.com/questions/19990038/how-to-get-windows-username-in-java
+            // source: https://stackoverflow.com/questions/19990038/how-to-get-windows-username-in-java
+            userLabel.setText("User: " + System.getProperty("user.name").substring(0, Math.min(9, System.getProperty("user.name").length())));
+            userLabel.setForeground(Color.red);
         }
 
         /**
@@ -208,8 +218,8 @@ public class Gui extends JFrame {
             model.placeAnimal();
             // for testing purposes
             model.tellMeWhatsInside();
-
             board.resetBoard();
+            stepCount = 0;
             JOptionPane.showMessageDialog(null, "Initial board Reset!");
         }
     }
@@ -242,6 +252,7 @@ public class Gui extends JFrame {
                 model.spawnAShark();
                 // redraw board show the new positions and new spawns on the board
                 board.resetBoard();
+                stepCount++;
                 // sources for threading https://dzone.com/articles/java-thread-tutorial-creating-threads-and-multithr
                 // https://www.wideskills.com/java-tutorial/java-threads-tutorial
                 try {
