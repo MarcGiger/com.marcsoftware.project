@@ -7,7 +7,7 @@ import javax.sound.sampled.Clip;
 
 /**
  * This class demonstrates the power of the Shark by playing the white Shark music.
- *
+ * <p>
  * help: https://www.youtube.com/watch?v=TErboGLHZGA
  */
 public class Music {
